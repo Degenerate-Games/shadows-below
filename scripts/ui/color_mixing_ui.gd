@@ -55,23 +55,18 @@ func handle_input():
 		current_panel.add_theme_stylebox_override("panel", no_highlight_box)
 		current_panel = next_panel
 	
+	var delta = 0
 	if mixing_ui_up:
-		if delay_timer.is_stopped():
-			match current_panel:
-				red_panel:
-					red_value += 1
-				green_panel:
-					green_value += 1
-				blue_panel:
-					blue_value += 1
-			delay_timer.start()
+		delta = 1
 	elif mixing_ui_down:
-		if delay_timer.is_stopped():
-			match current_panel:
-				red_panel:
-					red_value -= 1
-				green_panel:
-					green_value -= 1
-				blue_panel:
-					blue_value -= 1
-			delay_timer.start()
+		delta = -1
+	
+	if delta != 0 && delay_timer.is_stopped():
+		match current_panel:
+			red_panel:
+				red_value = clamp(red_value + delta, 0, 255)
+			green_panel:
+				green_value = clamp(green_value + delta, 0, 255)
+			blue_panel:
+				blue_value = clamp(blue_value + delta, 0, 255)
+		delay_timer.start()
