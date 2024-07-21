@@ -14,13 +14,16 @@ var current_panel: PanelContainer
 @export_category("Other")
 @export var delay_timer: Timer
 
-var red_value: int = 20
-var green_value: int = 20
-var blue_value: int = 20
+signal color_changed
+
+var red_value: ColorValue = ColorValue.new(20)
+var green_value: ColorValue = ColorValue.new(20)
+var blue_value: ColorValue = ColorValue.new(20)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_panel = red_panel
+	color_changed.emit(get_color())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -28,10 +31,9 @@ func _process(_delta):
 	handle_input()
 
 func update_ui():
-	red_panel.get_node("./Container/Value").set_text(str(red_value))
-	green_panel.get_node("./Container/Value").set_text(str(green_value))
-	blue_panel.get_node("./Container/Value").set_text(str(blue_value))
-	pass
+	red_panel.get_node("./Container/Value").set_text(str(red_value.value))
+	green_panel.get_node("./Container/Value").set_text(str(green_value.value))
+	blue_panel.get_node("./Container/Value").set_text(str(blue_value.value))
 
 func handle_input():
 	var mixing_ui_left = Input.is_action_just_pressed("mixing_ui_left")
@@ -64,9 +66,18 @@ func handle_input():
 	if delta != 0 && delay_timer.is_stopped():
 		match current_panel:
 			red_panel:
-				red_value = clamp(red_value + delta, 0, 255)
+				red_value.add(delta)
 			green_panel:
-				green_value = clamp(green_value + delta, 0, 255)
+				green_value.add(delta)
 			blue_panel:
-				blue_value = clamp(blue_value + delta, 0, 255)
+				blue_value.add(delta)
 		delay_timer.start()
+		color_changed.emit(get_color())
+
+func get_color() -> Color:
+	var cmax = max(red_value.value, green_value.value, blue_value.value)
+
+	return Color(red_value.normalize_with_max(cmax), green_value.normalize_with_max(cmax), blue_value.normalize_with_max(cmax))
+
+func get_inverse_color() -> Color:
+	return Color(red_value.invert().normalize(), green_value.invert().normalize(), blue_value.invert().normalize())
