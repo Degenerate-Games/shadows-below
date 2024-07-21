@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b0u655oc16fjh" path="res://assets/sprites/light1_idle.png" id="2_ju20j"]
 [ext_resource type="Texture2D" uid="uid://bsg68icdrfnn5" path="res://assets/sprites/light2_idle.png" id="3_2oxgm"]
 [ext_resource type="Texture2D" uid="uid://cngkh8xs6yovm" path="res://assets/levels/dirt/dirtLevel_Tilemap.png" id="4_01l63"]
-[ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/color_mixing_uI.tscn" id="5_3bj74"]
+[ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/color_mixing_ui.tscn" id="5_3bj74"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j87w6"]
 atlas = ExtResource("1_g7wa0")
