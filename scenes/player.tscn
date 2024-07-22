@@ -94,6 +94,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_2ygnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
