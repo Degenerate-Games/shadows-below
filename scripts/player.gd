@@ -19,7 +19,6 @@ func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_dir:
 		velocity = (velocity * 1) + (input_dir * speed * delta)
-		# animation_controller.play("walk")
 		move_and_slide()
 
 func handle_color_change(color):
