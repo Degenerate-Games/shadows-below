@@ -28,3 +28,27 @@ func handle_color_change(color):
 
 func _on_color_mixing_ui_color_changed(color):
 	handle_color_change(color)
+
+func take_damage(damage: int):
+	var red = aura.color.r
+	var green = aura.color.g
+	var blue = aura.color.b
+	var power_remaining = red.value + green.value + blue.value
+	# If damage would kill the player, destroy it
+	if damage > power_remaining:
+		queue_free()
+		return
+	# Otherwise, subtract the damage from a random color
+	var damage_remaining = damage
+	var colors = [red, green, blue]
+	colors.shuffle()
+	for color in colors:
+		if damage_remaining > color.value:
+			damage_remaining -= color.value
+			color.value = 0
+		else:
+			color.value -= damage_remaining
+			damage_remaining = 0
+			break
+	handle_color_change(Color(red.value, green.value, blue.value))
+	# TODO:Update the UI to reflect the new color
