@@ -1,138 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://1vullgdq6euv"]
+[gd_scene load_steps=12 format=3 uid="uid://1vullgdq6euv"]
 
-[ext_resource type="Texture2D" uid="uid://b0u655oc16fjh" path="res://assets/sprites/light1_idle.png" id="2_ju20j"]
-[ext_resource type="Texture2D" uid="uid://bsg68icdrfnn5" path="res://assets/sprites/light2_idle.png" id="3_2oxgm"]
+[ext_resource type="PackedScene" uid="uid://b1wood0fcmyu4" path="res://scenes/enemies/enemy_a.tscn" id="4_0s3pa"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="4_kv3r2"]
-[ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/color_mixing_ui.tscn" id="5_3bj74"]
+[ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/ui/color_mixing_ui.tscn" id="5_3bj74"]
+[ext_resource type="PackedScene" uid="uid://wnst66l3ja5k" path="res://scenes/enemies/enemy_b.tscn" id="5_d8xwa"]
 [ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="6_oc0o4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wwx5"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hfxen"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_18cpy"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yxsuf"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xlhhv"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e0ywx"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7jjeq"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vcexk"]
-atlas = ExtResource("2_ju20j")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nbbwc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2wwx5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hfxen")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_18cpy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yxsuf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xlhhv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e0ywx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7jjeq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vcexk")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 8.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rtrui"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0rgog"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tm14l"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fqrmt"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sfw0t"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vyw7t"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1wyjy"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ssrq"]
-atlas = ExtResource("3_2oxgm")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_gpdm4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rtrui")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0rgog")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tm14l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fqrmt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sfw0t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vyw7t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1wyjy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1ssrq")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 8.0
-}]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jm2gm"]
 polygon = PackedVector2Array(414, 182, 482, 182, 488, 185, 490, 190, 490, 194, 488, 199, 482, 202, 414, 202, 408, 199, 406, 194, 406, 189, 408, 185)
@@ -161,30 +33,6 @@ polygon = PackedVector2Array(13, 343, 11, 341, 9, 338, 9, 13, 10, 10, 13, 9, 627
 
 [node name="Player" parent="." instance=ExtResource("6_oc0o4")]
 position = Vector2(124, 210)
-
-[node name="Light1" type="Node2D" parent="."]
-z_index = 1
-position = Vector2(258, 83)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Light1"]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_nbbwc")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.985002
-metadata/_edit_lock_ = true
-
-[node name="Light2" type="Node2D" parent="."]
-z_index = 1
-position = Vector2(229, 126)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Light2"]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_gpdm4")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.383035
-metadata/_edit_lock_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -245,5 +93,11 @@ occluder = SubResource("OccluderPolygon2D_iff75")
 position = Vector2(320, 300)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_6shi8")
+
+[node name="EnemyA" parent="." instance=ExtResource("4_0s3pa")]
+position = Vector2(149, 126)
+
+[node name="EnemyB" parent="." instance=ExtResource("5_d8xwa")]
+position = Vector2(381, 149)
 
 [connection signal="color_changed" from="UI/ColorMixingUI" to="Player" method="_on_color_mixing_ui_color_changed"]
