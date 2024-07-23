@@ -19,14 +19,9 @@ func _physics_process(delta):
 func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_dir:
-		print("input_dir ", input_dir)
-		print("max_speed ", max_speed)
-		print("acceleration * delta ", acceleration*delta)
 		velocity = velocity.move_toward(input_dir.normalized() * max_speed, acceleration * delta)
-		print("true ", velocity)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-		print("false ", velocity)
 	move_and_slide()
 
 func handle_color_change(color):
