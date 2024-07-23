@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://1vullgdq6euv"]
 
+[ext_resource type="PackedScene" uid="uid://dwa1q74mmrncc" path="res://scenes/ui/hud.tscn" id="3_gdakj"]
 [ext_resource type="PackedScene" uid="uid://b1wood0fcmyu4" path="res://scenes/enemies/enemy_a.tscn" id="4_0s3pa"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="4_kv3r2"]
-[ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/ui/color_mixing_ui.tscn" id="5_3bj74"]
 [ext_resource type="PackedScene" uid="uid://wnst66l3ja5k" path="res://scenes/enemies/enemy_b.tscn" id="5_d8xwa"]
 [ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="6_oc0o4"]
 [ext_resource type="PackedScene" uid="uid://cjni8qecs1cia" path="res://scenes/menus/pause_menu.tscn" id="6_ofyws"]
@@ -26,19 +26,9 @@ layer_2/tile_data = PackedInt32Array()
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.678944, 0.678944, 0.678944, 1)
 
-[node name="UI" type="Control" parent="."]
-custom_minimum_size = Vector2(640, 360)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="UI" parent="." instance=ExtResource("3_gdakj")]
 offset_right = 640.0
 offset_bottom = 360.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorMixingUI" parent="UI" groups=["UI"] instance=ExtResource("5_3bj74")]
-layout_mode = 1
 
 [node name="EnemyA" parent="." instance=ExtResource("4_0s3pa")]
 position = Vector2(149, 126)
@@ -47,5 +37,3 @@ position = Vector2(149, 126)
 position = Vector2(381, 149)
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_ofyws")]
-
-[connection signal="color_changed" from="UI/ColorMixingUI" to="Player" method="_on_color_mixing_ui_color_changed"]
