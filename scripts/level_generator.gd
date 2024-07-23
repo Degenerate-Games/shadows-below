@@ -81,6 +81,11 @@ func generate_room(difficulty: int) -> TileMap:
 	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	room.add_child(player)
 
+	# Add pause menu
+	print("Adding Pause Menu")
+	var pause_menu = load("res://scenes/menus/pause_menu.tscn").instantiate()
+	room.add_child(pause_menu)
+	
 	return room
 
 func get_obstacle_rect(position: Vector2, half_pattern_size: Vector2) -> Rect2i:
