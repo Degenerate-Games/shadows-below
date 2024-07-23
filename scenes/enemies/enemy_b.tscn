@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://wnst66l3ja5k"]
 
-[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_csrvn"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_h4t6v"]
 [ext_resource type="Texture2D" uid="uid://bsg68icdrfnn5" path="res://assets/sprites/light2_idle.png" id="2_r6enf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtrui"]
@@ -82,7 +82,7 @@ fill_from = Vector2(0.5, 0.5)
 size = Vector2(15.0943, 15.0943)
 
 [node name="EnemyB" type="StaticBody2D"]
-script = ExtResource("1_csrvn")
+script = ExtResource("1_h4t6v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

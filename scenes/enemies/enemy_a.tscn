@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b1wood0fcmyu4"]
 
-[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_1n2g1"]
 [ext_resource type="Texture2D" uid="uid://b0u655oc16fjh" path="res://assets/sprites/light1_idle.png" id="1_o4fy0"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_o7fok"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wwx5"]
 atlas = ExtResource("1_o4fy0")
@@ -83,7 +83,7 @@ radius = 4.71698
 height = 13.2075
 
 [node name="EnemyA" type="StaticBody2D"]
-script = ExtResource("1_1n2g1")
+script = ExtResource("1_o7fok")
 total_power = 175
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
