@@ -7,12 +7,12 @@ func _ready():
 
 func _on_start_button_pressed():
 	var mode_select = load("res://scenes/menus/mode_select.tscn").instantiate()
-	get_tree().current_scene.add_child(mode_select)
+	add_child(mode_select)
 
 
 func _on_options_button_pressed():
 	var options = load("res://scenes/menus/options.tscn").instantiate()
-	get_tree().current_scene.add_child(options)
+	add_child(options)
 
 
 func _on_quit_button_pressed():
