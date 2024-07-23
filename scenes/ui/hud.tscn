@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwa1q74mmrncc"]
+
+[ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/ui/color_mixing_ui.tscn" id="1_eg67d"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_6wdcc"]
+
+[node name="HUD" type="Control"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorMixingUI" parent="." groups=["UI"] instance=ExtResource("1_eg67d")]
+layout_mode = 1
+
+[node name="Virtual joystick left" parent="." instance=ExtResource("2_6wdcc")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 25.0
+offset_top = 290.0
+offset_right = 200.0
+offset_bottom = 465.0
+grow_vertical = 1
+scale = Vector2(0.3, 0.3)
+joystick_mode = 1
+visibility_mode = 1
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
+
+[node name="Virtual joystick right" parent="." instance=ExtResource("2_6wdcc")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 565.0
+offset_top = 290.0
+offset_right = 740.0
+offset_bottom = 465.0
+grow_vertical = 1
+scale = Vector2(0.3, 0.3)
+visibility_mode = 1
+action_left = "mixing_ui_left"
+action_right = "mixing_ui_right"
+action_up = "mixing_ui_up"
+action_down = "mixing_ui_down"
