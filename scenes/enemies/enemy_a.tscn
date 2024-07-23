@@ -1,0 +1,103 @@
+[gd_scene load_steps=15 format=3 uid="uid://b1wood0fcmyu4"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_1n2g1"]
+[ext_resource type="Texture2D" uid="uid://b0u655oc16fjh" path="res://assets/sprites/light1_idle.png" id="1_o4fy0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wwx5"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfxen"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18cpy"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxsuf"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlhhv"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0ywx"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jjeq"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcexk"]
+atlas = ExtResource("1_o4fy0")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pcy64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wwx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfxen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18cpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxsuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlhhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0ywx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jjeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcexk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_xy3b6"]
+offsets = PackedFloat32Array(0.506494, 0.688312)
+colors = PackedColorArray(1, 1, 1, 1, 0.329412, 0.329412, 0.329412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h6rlm"]
+gradient = SubResource("Gradient_xy3b6")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rr0c4"]
+radius = 4.71698
+height = 13.2075
+
+[node name="EnemyA" type="StaticBody2D"]
+script = ExtResource("1_1n2g1")
+total_power = 175
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_pcy64")
+animation = &"idle"
+autoplay = "idle"
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.3
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_h6rlm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.06, 1.06)
+shape = SubResource("CapsuleShape2D_rr0c4")
