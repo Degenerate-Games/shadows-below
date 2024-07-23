@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://1vullgdq6euv"]
+[gd_scene load_steps=7 format=3 uid="uid://1vullgdq6euv"]
 
 [ext_resource type="PackedScene" uid="uid://b1wood0fcmyu4" path="res://scenes/enemies/enemy_a.tscn" id="4_0s3pa"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="4_kv3r2"]
 [ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/ui/color_mixing_ui.tscn" id="5_3bj74"]
 [ext_resource type="PackedScene" uid="uid://wnst66l3ja5k" path="res://scenes/enemies/enemy_b.tscn" id="5_d8xwa"]
 [ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="6_oc0o4"]
+[ext_resource type="PackedScene" uid="uid://cjni8qecs1cia" path="res://scenes/menus/pause_menu.tscn" id="6_ofyws"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -44,5 +45,7 @@ position = Vector2(149, 126)
 
 [node name="EnemyB" parent="." instance=ExtResource("5_d8xwa")]
 position = Vector2(381, 149)
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_ofyws")]
 
 [connection signal="color_changed" from="UI/ColorMixingUI" to="Player" method="_on_color_mixing_ui_color_changed"]
