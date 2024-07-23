@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @export_category("Player Variables")
-@export var speed: int = 100
-@export var velocity_decay: float = 0.8
+@export var max_speed: float = 250
+@export var acceleration: float = 1500
+@export var friction: float = 600
 
 var animation_controller: AnimatedSprite2D
 var aura: PointLight2D
@@ -18,8 +19,15 @@ func _physics_process(delta):
 func handle_movement(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_dir:
-		velocity = (velocity * 1) + (input_dir * speed * delta)
-		move_and_slide()
+		print("input_dir ", input_dir)
+		print("max_speed ", max_speed)
+		print("acceleration * delta ", acceleration*delta)
+		velocity = velocity.move_toward(input_dir.normalized() * max_speed, acceleration * delta)
+		print("true ", velocity)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		print("false ", velocity)
+	move_and_slide()
 
 func handle_color_change(color):
 	aura.energy = remap(color.r + color.g + color.b, 0.75, 3.0, 4.0, 0.25)
