@@ -34,6 +34,13 @@ func generate_room(difficulty: int) -> TileMap:
 	var room = tile_map
 	room.name = "Generated Room: " + str(randi())
 	room.set_script(load("res://scripts/room.gd"))
+
+	# Add UI to scene
+	print("Adding UI")
+	var hud = load("res://scenes/ui/hud.tscn").instantiate()
+	hud.name = "HUD"
+	hud.position = Vector2(0, 0)
+	room.add_child(hud)
 	
 	# Fill the room with background tiles
 	print("Drawing Background")
@@ -80,12 +87,13 @@ func generate_room(difficulty: int) -> TileMap:
 	var player = load("res://scenes/player.tscn").instantiate()
 	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	room.add_child(player)
+	room.get_node("HUD/ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
 
 	# Add pause menu
 	print("Adding Pause Menu")
 	var pause_menu = load("res://scenes/menus/pause_menu.tscn").instantiate()
 	room.add_child(pause_menu)
-	
+
 	return room
 
 func get_obstacle_rect(position: Vector2, half_pattern_size: Vector2) -> Rect2i:
