@@ -25,9 +25,10 @@ func handle_movement(delta):
 	move_and_slide()
 
 func handle_color_change(color):
+	if not aura or not color:
+		return
 	aura.energy = remap(color.r + color.g + color.b, 0.75, 3.0, 4.0, 0.25)
 	aura.color = color
-	print(aura.color, aura.energy)
 
 func _on_color_mixing_ui_color_changed(color):
 	handle_color_change(color)
