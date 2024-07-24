@@ -81,8 +81,10 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6igf"]
 size = Vector2(15.0943, 15.0943)
 
-[node name="EnemyB" type="StaticBody2D"]
+[node name="EnemyB" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_h4t6v")
+max_speed = 75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -100,3 +102,14 @@ texture = SubResource("GradientTexture2D_h6rlm")
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(1.06, 1.06)
 shape = SubResource("RectangleShape2D_f6igf")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
