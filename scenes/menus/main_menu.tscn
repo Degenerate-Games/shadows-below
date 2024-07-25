@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds5ca02qkhnxp"]
+[gd_scene load_steps=11 format=3 uid="uid://ds5ca02qkhnxp"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_8icis"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="2_1sqsw"]
+[ext_resource type="Texture2D" uid="uid://dtiyf3oe0n07g" path="res://assets/sprites/Menu/Start_up.png" id="3_4nw3c"]
+[ext_resource type="Texture2D" uid="uid://dkji83lrhgtu5" path="res://assets/sprites/Menu/start_Hover.png" id="4_lqbj3"]
+[ext_resource type="Texture2D" uid="uid://csx4ipr2e1xr7" path="res://assets/sprites/Menu/Options_up.png" id="5_p6jty"]
+[ext_resource type="Texture2D" uid="uid://ck13dp5yia7rg" path="res://assets/sprites/Menu/options_Down.png" id="6_jdut4"]
+[ext_resource type="Texture2D" uid="uid://c6ied4t7jcjdc" path="res://assets/sprites/Menu/options_Hover.png" id="7_rg0o4"]
+[ext_resource type="Texture2D" uid="uid://lxsi1s65a6bm" path="res://assets/sprites/Menu/quit_Up.png" id="8_l7vld"]
+[ext_resource type="Texture2D" uid="uid://dug7vqwetllpg" path="res://assets/sprites/Menu/Quit_Down.png" id="9_vsrb5"]
+[ext_resource type="Texture2D" uid="uid://dkylj0ss43wmg" path="res://assets/sprites/Menu/quit_Hover.png" id="10_x5duk"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -50,19 +58,30 @@ offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="StartButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
-text = "Start"
+texture_normal = ExtResource("3_4nw3c")
+texture_hover = ExtResource("4_lqbj3")
+stretch_mode = 0
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Options"
+size_flags_vertical = 3
+texture_normal = ExtResource("5_p6jty")
+texture_pressed = ExtResource("6_jdut4")
+texture_hover = ExtResource("7_rg0o4")
+stretch_mode = 0
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../StartButton")
-text = "Quit"
+texture_normal = ExtResource("8_l7vld")
+texture_pressed = ExtResource("9_vsrb5")
+texture_hover = ExtResource("10_x5duk")
+stretch_mode = 0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
