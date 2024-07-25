@@ -63,6 +63,7 @@ func generate_room(difficulty: int) -> TileMap:
 	# Place some obstacles
 	print("Placing Obstacles")
 	var obstacles: Array[Rect2i] = []
+	var key_tiles: Array[Vector2i] = []
 	var iterations = 0
 	while obstacles.size() < difficulty && iterations < 1000:
 		for x in range(x_tiles):
@@ -74,6 +75,9 @@ func generate_room(difficulty: int) -> TileMap:
 					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 						continue
 					room.set_pattern(1, obstacle.position, pattern)
+					if pattern.has_cell(Vector2i(3, 3)):
+						if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
+							key_tiles.append(Vector2i(x, y))
 					obstacles.append(obstacle)
 		iterations += 1
 	
@@ -91,6 +95,14 @@ func generate_room(difficulty: int) -> TileMap:
 		room.add_child(enemy)
 		if enemy.has_method("set_target"):
 			enemy.call_deferred("set_target", player)
+	
+	# Place Keys
+	print("Placing Keys")
+	for key_tile in key_tiles:
+		var key = load("res://scenes/items/key_light.tscn").instantiate()
+		key.position = key_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+		print ("Key Tile: ", key_tile, "Key Position: ", key.position)
+		room.add_child(key)
 
 	# Add pause menu
 	print("Adding Pause Menu")
