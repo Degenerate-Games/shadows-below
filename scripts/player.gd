@@ -71,16 +71,20 @@ func take_damage(damage: int):
 	handle_color_change(Color(red.value, green.value, blue.value))
 	# TODO:Update the UI to reflect the new color
 
-
 func _on_area_2d_body_entered(body):
 	if body.has_method("take_damage"):
 		affected_enemies.append(body)
 	elif body.has_method("interact"):
 		affected_interactables.append(body)
 
-
 func _on_area_2d_body_exited(body):
 	if body in affected_enemies:
 		affected_enemies.erase(body)
-	elif body in affected_interactables:
-		affected_interactables.erase(body)
+
+func _on_area_2d_area_entered(area):
+	if area.has_method("interact"):
+		affected_interactables.append(area)
+
+func _on_area_2d_area_exited(area):
+	if area in affected_interactables:
+		affected_interactables.erase(area)
