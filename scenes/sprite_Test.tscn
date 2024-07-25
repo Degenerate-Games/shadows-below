@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1vullgdq6euv"]
+[gd_scene load_steps=8 format=3 uid="uid://1vullgdq6euv"]
 
 [ext_resource type="PackedScene" uid="uid://dwa1q74mmrncc" path="res://scenes/ui/hud.tscn" id="3_gdakj"]
 [ext_resource type="PackedScene" uid="uid://b1wood0fcmyu4" path="res://scenes/enemies/enemy_a.tscn" id="4_0s3pa"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://wnst66l3ja5k" path="res://scenes/enemies/enemy_b.tscn" id="5_d8xwa"]
 [ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="6_oc0o4"]
 [ext_resource type="PackedScene" uid="uid://cjni8qecs1cia" path="res://scenes/menus/pause_menu.tscn" id="6_ofyws"]
+[ext_resource type="PackedScene" uid="uid://c6lexs8ov1w1b" path="res://scenes/items/key_light.tscn" id="7_7ma4y"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("6_oc0o4")]
-position = Vector2(96, 281)
+position = Vector2(447, 56)
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -37,3 +38,6 @@ position = Vector2(149, 126)
 position = Vector2(381, 149)
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_ofyws")]
+
+[node name="KeyLight" parent="." instance=ExtResource("7_7ma4y")]
+position = Vector2(455, 88)
