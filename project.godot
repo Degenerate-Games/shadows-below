@@ -29,6 +29,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Shadows Below"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/virtual_joystick/plugin.cfg")
+
 [input]
 
 mixing_ui_left={
@@ -89,6 +93,14 @@ pause={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Powerups"
+2d_physics/layer_4="Interactables"
+2d_physics/layer_5="Terrain"
 
 [rendering]
 
