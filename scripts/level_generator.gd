@@ -55,11 +55,10 @@ func generate_room(difficulty: int) -> TileMap:
 
 	# Place the player
 	print("Placing Player")
-	var player = load("res://scenes/player.tscn").instantiate()
+	var player = get_node("/root/Endless/Player")
 	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	room.add_child(player)
-	room.get_node("HUD/ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
-
+	get_node("/root/Endless/HUD/ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
+	
 	# Place some obstacles
 	print("Placing Obstacles")
 	var obstacles: Array[Rect2i] = []
