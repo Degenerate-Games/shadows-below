@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var max_speed: int = 100
 @export var acceleration: int = 500
-@export var total_power: int = 375
+@export_range(0, 8) var total_power: int = 8
 var target: Node2D
 var red: ColorValue
 var green: ColorValue
@@ -18,16 +18,15 @@ func _ready():
 	animation_controller = $AnimatedSprite2D
 	navigation_agent = $NavigationAgent2D
 	var power_remaining = total_power
+	
 	# Initialize the color values
-	red = ColorValue.new(floor(randf_range(0, power_remaining)))
+	red = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
 	power_remaining -= red.value
-	green = ColorValue.new(floor(randf_range(0, power_remaining)))
+	green = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
 	power_remaining -= green.value
-	blue = ColorValue.new(power_remaining)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+	blue = ColorValue.new(min(power_remaining, 3), 3)
+	
+	# Set the color of the point light
 	var color = Color(red.normalize(), green.normalize(), blue.normalize())
 	point_light.color = color
 	animation_controller.self_modulate = color
@@ -45,13 +44,9 @@ func take_damage(damage: int):
 		return
 	# Otherwise, subtract the damage from a random color
 	var damage_remaining = damage
-	var cmax = max(red.value, green.value, blue.value)
 	var colors = [red, green, blue]
 	colors.shuffle()
 	for color in colors:
-		# If this is our highest color skip it unless it is the only color remaining
-		if color.value == cmax && color.value != power_remaining:
-			break
 		if damage_remaining > color.value:
 			damage_remaining -= color.value
 			color.value = 0
@@ -71,6 +66,9 @@ func create_path():
 	if not target:
 		return
 	navigation_agent.target_position = target.global_position
+
+func get_color() -> Color:
+	return point_light.color
 
 func _on_timer_timeout():
 	create_path()
