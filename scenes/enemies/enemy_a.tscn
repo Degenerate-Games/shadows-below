@@ -83,6 +83,8 @@ radius = 4.71698
 height = 13.2075
 
 [node name="EnemyA" type="CharacterBody2D"]
+collision_layer = 18
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_o7fok")
 max_speed = 50
