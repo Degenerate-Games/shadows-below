@@ -16,9 +16,9 @@ var current_panel: PanelContainer
 
 signal color_changed
 
-var red_value: ColorValue = ColorValue.new(20)
-var green_value: ColorValue = ColorValue.new(20)
-var blue_value: ColorValue = ColorValue.new(20)
+var red_value: ColorValue = ColorValue.new(1, 3)
+var green_value: ColorValue = ColorValue.new(1, 3)
+var blue_value: ColorValue = ColorValue.new(1, 3)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,9 +75,7 @@ func handle_input():
 		color_changed.emit(get_color())
 
 func get_color() -> Color:
-	var cmax = max(red_value.value, green_value.value, blue_value.value)
-
-	return Color(red_value.normalize_with_max(cmax), green_value.normalize_with_max(cmax), blue_value.normalize_with_max(cmax))
+	return Color(red_value.normalize(), green_value.normalize(), blue_value.normalize())
 
 func get_inverse_color() -> Color:
 	return Color(red_value.invert().normalize(), green_value.invert().normalize(), blue_value.invert().normalize())

@@ -4,9 +4,11 @@ var value: int:
   get:
     return value
   set(val):
-    value = clamp(val, 0, 255)
+    value = clamp(val, 0, steps)
+var steps: int
 
-func _init(val: int):
+func _init(val: int, num_steps: int = 255):
+  self.steps = num_steps
   self.value = val
 
 func increment():
@@ -25,7 +27,4 @@ func invert():
   return ColorValue.new(255 - self.value)
 
 func normalize():
-  return remap(self.value, 0.0, 255.0, 0.25, 1.0)
-
-func normalize_with_max(cmax: int):
-  return remap(self.value, 0.0, cmax, 0.25, 1.0)
+  return remap(self.value, 0, steps, 0.25, 1.0)
