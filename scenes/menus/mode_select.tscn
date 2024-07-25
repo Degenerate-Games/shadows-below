@@ -68,6 +68,12 @@ layout_mode = 2
 [node name="Spacer3" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="Sprite Test" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StoryButton")
+focus_neighbor_bottom = NodePath("../BackButton")
+text = "Sprite Test"
+
 [node name="Spacer4" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -113,4 +119,5 @@ flat = true
 
 [connection signal="pressed" from="VBoxContainer/StoryButton" to="." method="_on_story_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/EndlessButton" to="." method="_on_endless_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Sprite Test" to="." method="_on_sprite_test_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

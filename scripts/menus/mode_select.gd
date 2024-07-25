@@ -10,9 +10,13 @@ func _on_story_button_pressed():
 
 
 func _on_endless_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/sprite_Test.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/endless.tscn")
 
+
+func _on_sprite_test_pressed():
+	get_tree().change_scene_to_file("res://scenes/levels/sprite_Test.tscn")
 
 func _on_back_button_pressed():
 	get_parent().get_node("VBoxContainer").get_node("StartButton").grab_focus()
 	queue_free()
+
