@@ -71,11 +71,16 @@ func take_damage(damage: int):
 	handle_color_change(Color(red.value, green.value, blue.value))
 	# TODO:Update the UI to reflect the new color
 
+func _on_interactable_timer_timeout(interactable):
+	if interactable.has_method("get_color"):
+		var interactable_color = interactable.get_color()
+		if interactable_color.r > aura.color.r or interactable_color.g > aura.color.g or interactable_color.b > aura.color.b:
+			return
+	interactable.interact()
+
 func _on_area_2d_body_entered(body):
 	if body.has_method("take_damage"):
 		affected_enemies.append(body)
-	elif body.has_method("interact"):
-		affected_interactables.append(body)
 
 func _on_area_2d_body_exited(body):
 	if body in affected_enemies:
@@ -83,8 +88,12 @@ func _on_area_2d_body_exited(body):
 
 func _on_area_2d_area_entered(area):
 	if area.has_method("interact"):
+		area.get_interact_timer().connect("timeout", _on_interactable_timer_timeout.bind(area))
+		area.get_interact_timer().start()
 		affected_interactables.append(area)
 
 func _on_area_2d_area_exited(area):
 	if area in affected_interactables:
+		area.get_interact_timer().disconnect("timeout", _on_interactable_timer_timeout.bind(area))
+		area.get_interact_timer().stop()
 		affected_interactables.erase(area)
