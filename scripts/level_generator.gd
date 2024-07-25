@@ -27,6 +27,7 @@ func _ready():
 	room_borders.append(Rect2i(x_tiles - 1, 0, x_tiles, y_tiles)) # Right
 	room_borders.append(Rect2i(0, y_tiles - 2, x_tiles, y_tiles)) # Bottom
 	room_borders.append(Rect2i(15, 17, 24, 21)) # Color UI
+	room_borders.append(Rect2i(17, 13, 22, 17)) # Player spawn
 	
 
 
