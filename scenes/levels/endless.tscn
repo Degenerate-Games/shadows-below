@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://srhlqfih48tp"]
+
+[ext_resource type="Script" path="res://scripts/levels/endless.gd" id="1_11s4i"]
+[ext_resource type="PackedScene" uid="uid://dwa1q74mmrncc" path="res://scenes/ui/hud.tscn" id="1_n18p7"]
+[ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="2_vx6l0"]
+
+[node name="Endless" type="Node2D"]
+script = ExtResource("1_11s4i")
+
+[node name="HUD" parent="." instance=ExtResource("1_n18p7")]
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Player" parent="." instance=ExtResource("2_vx6l0")]
