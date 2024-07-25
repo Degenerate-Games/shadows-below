@@ -8,10 +8,22 @@ extends CharacterBody2D
 var animation_controller: AnimatedSprite2D
 var aura: PointLight2D
 
+var affected_enemies: Array[Node2D]
+var affected_interactables: Array[Node2D]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animation_controller = $AnimatedSprite2D
 	aura = $PointLight2D
+	affected_enemies = []
+	affected_interactables = []
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	for enemy in affected_enemies:
+		var enemy_color = enemy.get_color()
+		if enemy_color.r <= aura.color.r and enemy_color.g <= aura.color.g and enemy_color.b <= aura.color.b:
+			enemy.take_damage(1)
 
 func _physics_process(delta):
 	handle_movement(delta)
@@ -34,6 +46,8 @@ func _on_color_mixing_ui_color_changed(color):
 	handle_color_change(color)
 
 func take_damage(damage: int):
+	if not aura:
+		return
 	var red = aura.color.r
 	var green = aura.color.g
 	var blue = aura.color.b
@@ -56,3 +70,17 @@ func take_damage(damage: int):
 			break
 	handle_color_change(Color(red.value, green.value, blue.value))
 	# TODO:Update the UI to reflect the new color
+
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("take_damage"):
+		affected_enemies.append(body)
+	elif body.has_method("interact"):
+		affected_interactables.append(body)
+
+
+func _on_area_2d_body_exited(body):
+	if body in affected_enemies:
+		affected_enemies.erase(body)
+	elif body in affected_interactables:
+		affected_interactables.erase(body)
