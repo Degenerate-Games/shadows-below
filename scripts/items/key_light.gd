@@ -37,5 +37,5 @@ func interact():
 		unlocked = true
 		return
 
-func get_interact_timer() -> Timer:
-	return $Timer
+func get_color() -> Color:
+	return Color(red.normalize(), green.normalize(), blue.normalize())
