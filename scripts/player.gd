@@ -53,7 +53,7 @@ func handle_aura_pulse():
 	if not aura:
 		return
 	var timer_percentage = aura_pulse_timer.time_left / aura_pulse_timer.wait_time
-	var pulse = 1 + aura_pulse_speed * sin(timer_percentage * 2 * PI)
+	var pulse = 1 + aura_pulse_speed * cos(timer_percentage * 2 * PI)
 	aura.energy = base_aura_energy * pulse
 
 func damage_enemies():
