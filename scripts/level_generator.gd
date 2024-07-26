@@ -76,22 +76,17 @@ func generate_room(difficulty: int) -> TileMap:
 	var key_tiles: Array[Vector2i] = []
 	var iterations = 0
 	var objective_max = max(1, round(difficulty *.25))
-	while obstacles.size() < objective_max && iterations < 1000:
-		for x in range(x_tiles):
-			for y in range(y_tiles):
-				if obstacles.size() == objective_max:
-					break
-				if randf() < 0.01:
-					var pattern = tile_map.tile_set.get_pattern(objective_idxs.pick_random())
-					var half_pattern_size = pattern.get_size() / 2.0
-					var obstacle = get_pattern_rect(Vector2(x, y), half_pattern_size)
-					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
-						continue
-					room.set_pattern(1, obstacle.position + Vector2i(1, 1), pattern)
-					if pattern.has_cell(Vector2i(3, 3)):
-						if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
-							key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 4)))
-					obstacles.append(obstacle)
+	while obstacles.size() < objective_max && iterations < 10000:
+		var pattern = tile_map.tile_set.get_pattern(objective_idxs.pick_random())
+		var half_pattern_size = pattern.get_size() / 2.0
+		var obstacle = get_pattern_rect(Vector2(randi_range(0, x_tiles), randi_range(0, y_tiles)), half_pattern_size)
+		if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
+			continue
+		room.set_pattern(1, obstacle.position + Vector2i(1, 1), pattern)
+		if pattern.has_cell(Vector2i(3, 3)):
+			if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
+				key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 4)))
+		obstacles.append(obstacle)
 		iterations += 1
 
 	# Place some obstacles
