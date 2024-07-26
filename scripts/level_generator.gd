@@ -87,7 +87,7 @@ func generate_room(difficulty: int) -> TileMap:
 					var obstacle = get_pattern_rect(Vector2(x, y), half_pattern_size)
 					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 						continue
-					room.set_pattern(1, obstacle.position + Vector2(1, 1), pattern)
+					room.set_pattern(1, obstacle.position + Vector2i(1, 1), pattern)
 					if pattern.has_cell(Vector2i(3, 3)):
 						if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
 							key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 4)))
@@ -106,7 +106,7 @@ func generate_room(difficulty: int) -> TileMap:
 					var obstacle = get_pattern_rect(Vector2(x, y), half_pattern_size)
 					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 						continue
-					room.set_pattern(1, obstacle.position + Vector2(1, 1), pattern)
+					room.set_pattern(1, obstacle.position + Vector2i(1, 1), pattern)
 					obstacles.append(obstacle)
 		iterations += 1
 	
