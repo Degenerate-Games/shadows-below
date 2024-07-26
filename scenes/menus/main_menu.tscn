@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds5ca02qkhnxp"]
+[gd_scene load_steps=12 format=3 uid="uid://ds5ca02qkhnxp"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_8icis"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="2_1sqsw"]
 [ext_resource type="Texture2D" uid="uid://dtiyf3oe0n07g" path="res://assets/sprites/Menu/Start_up.png" id="3_4nw3c"]
+[ext_resource type="Texture2D" uid="uid://bcve2dimi3ybh" path="res://assets/sprites/Menu/Start_down.png" id="4_2m472"]
 [ext_resource type="Texture2D" uid="uid://dkji83lrhgtu5" path="res://assets/sprites/Menu/start_Hover.png" id="4_lqbj3"]
 [ext_resource type="Texture2D" uid="uid://csx4ipr2e1xr7" path="res://assets/sprites/Menu/Options_up.png" id="5_p6jty"]
 [ext_resource type="Texture2D" uid="uid://ck13dp5yia7rg" path="res://assets/sprites/Menu/options_Down.png" id="6_jdut4"]
@@ -64,6 +65,7 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
 texture_normal = ExtResource("3_4nw3c")
+texture_pressed = ExtResource("4_2m472")
 texture_hover = ExtResource("4_lqbj3")
 stretch_mode = 0
 
