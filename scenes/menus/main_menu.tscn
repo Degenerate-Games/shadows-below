@@ -59,6 +59,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="StartButton" type="TextureButton" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
@@ -67,6 +68,7 @@ texture_hover = ExtResource("4_lqbj3")
 stretch_mode = 0
 
 [node name="OptionsButton" type="TextureButton" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("5_p6jty")
@@ -75,6 +77,7 @@ texture_hover = ExtResource("7_rg0o4")
 stretch_mode = 0
 
 [node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../StartButton")
