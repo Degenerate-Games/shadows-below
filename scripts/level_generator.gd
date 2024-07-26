@@ -5,6 +5,8 @@ var x_tiles: int
 var y_tiles: int
 var enemies: Array[PackedScene]
 var room_borders: Array[Rect2i]
+var obstacle_idxs: Array[int]
+var objective_idxs: Array[int]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +30,14 @@ func _ready():
 	room_borders.append(Rect2i(0, y_tiles - 2, x_tiles, y_tiles)) # Bottom
 	room_borders.append(Rect2i(15, 17, 24, 21)) # Color UI
 	room_borders.append(Rect2i(17, 13, 22, 17)) # Player spawn
+
+	obstacle_idxs = []
+	obstacle_idxs.append(1)
+	obstacle_idxs.append(2)
+	obstacle_idxs.append(3)
+
+	objective_idxs = []
+	objective_idxs.append(4)
 	
 
 
@@ -60,24 +70,43 @@ func generate_room(difficulty: int) -> TileMap:
 	get_node("/root/Endless/HUD/ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
 	player.handle_color_change(get_node("/root/Endless/HUD/ColorMixingUI").get_color())
 	
-	# Place some obstacles
-	print("Placing Obstacles")
+  # Place objectives
+	print("Placing Objectives")
 	var obstacles: Array[Rect2i] = []
 	var key_tiles: Array[Vector2i] = []
 	var iterations = 0
+	var objective_max = max(1, round(difficulty *.25))
+	while obstacles.size() < objective_max && iterations < 1000:
+		for x in range(x_tiles):
+			for y in range(y_tiles):
+				if obstacles.size() == objective_max:
+					break
+				if randf() < 0.01:
+					var pattern = tile_map.tile_set.get_pattern(objective_idxs.pick_random())
+					var half_pattern_size = pattern.get_size() / 2.0
+					var obstacle = get_pattern_rect(Vector2(x, y), half_pattern_size)
+					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
+						continue
+					room.set_pattern(1, obstacle.position + Vector2(1, 1), pattern)
+					if pattern.has_cell(Vector2i(3, 3)):
+						if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
+							key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 4)))
+					obstacles.append(obstacle)
+		iterations += 1
+
+	# Place some obstacles
+	print("Placing Obstacles")
+	iterations = 0
 	while obstacles.size() < difficulty && iterations < 1000:
 		for x in range(x_tiles):
 			for y in range(y_tiles):
 				if randf() < 0.01:
-					var pattern = tile_map.tile_set.get_pattern(randi_range(1, tile_map.tile_set.get_patterns_count() - 1))
+					var pattern = tile_map.tile_set.get_pattern(obstacle_idxs.pick_random())
 					var half_pattern_size = pattern.get_size() / 2.0
-					var obstacle = get_obstacle_rect(Vector2(x, y), half_pattern_size)
+					var obstacle = get_pattern_rect(Vector2(x, y), half_pattern_size)
 					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 						continue
-					room.set_pattern(1, obstacle.position, pattern)
-					if pattern.has_cell(Vector2i(3, 3)):
-						if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
-							key_tiles.append(Vector2i(obstacle.position + Vector2i(3, 3)))
+					room.set_pattern(1, obstacle.position + Vector2(1, 1), pattern)
 					obstacles.append(obstacle)
 		iterations += 1
 	
@@ -111,16 +140,14 @@ func generate_room(difficulty: int) -> TileMap:
 
 	return room
 
-func get_obstacle_rect(position: Vector2, half_pattern_size: Vector2) -> Rect2i:
-	var obstacle = Rect2i(floor(position - half_pattern_size), half_pattern_size * 2)
+func get_pattern_rect(position: Vector2, half_pattern_size: Vector2) -> Rect2i:
+	var obstacle = Rect2i(floor(position - half_pattern_size - Vector2(1, 1)), half_pattern_size * 2 + Vector2(1, 1))
 	
 	# Make sure the obstacle is within the room
 	if obstacle.position.x < 0:
 		obstacle.position.x = abs(obstacle.position.x)
-		obstacle.size.x += obstacle.position.x * 2
 	
 	if obstacle.position.y < 0:
 		obstacle.position.y = abs(obstacle.position.y)
-		obstacle.size.y += obstacle.position.y * 2
 
 	return obstacle
