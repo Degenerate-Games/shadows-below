@@ -70,7 +70,7 @@ text = "Red"
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_sxyn4")
-text = "20"
+text = "1"
 horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="MainContainer"]
@@ -100,7 +100,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_sxyn4")
 theme_override_colors/font_color = Color(0, 0.811765, 0, 1)
-text = "20"
+text = "1"
 horizontal_alignment = 1
 
 [node name="Spacer3" type="Control" parent="MainContainer"]
@@ -130,7 +130,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_sxyn4")
 theme_override_colors/font_color = Color(0, 0, 0.811765, 1)
-text = "20"
+text = "1"
 horizontal_alignment = 1
 
 [node name="Spacer4" type="Control" parent="MainContainer"]
