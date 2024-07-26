@@ -32,7 +32,7 @@ func _ready():
 
 
 func generate_room(difficulty: int) -> TileMap:
-	var room = tile_map
+	var room = tile_map.duplicate()
 	room.name = "Generated Room: " + str(randi())
 	room.set_script(load("res://scripts/room.gd"))
 
