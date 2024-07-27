@@ -107,6 +107,10 @@ reload={
 2d_physics/layer_4="Interactables"
 2d_physics/layer_5="Terrain"
 
+[physics]
+
+2d/default_gravity=0.0
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
