@@ -8,6 +8,8 @@ var blue: ColorValue
 
 var unlocked = false
 
+signal key_unlocked
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var power_remaining = key_power
@@ -35,6 +37,7 @@ func interact():
 	if power_remaining == 0:
 		$PointLight2D.enabled = false
 		unlocked = true
+		emit_signal("key_unlocked")
 		return
 
 func get_color() -> Color:
