@@ -1,5 +1,11 @@
 extends RigidBody2D
 
+@export var collectible_type: Global.COLLECTIBLE_TYPE = Global.COLLECTIBLE_TYPE.SHADOW
+
+func _ready():
+	contact_monitor = true
+	max_contacts_reported = 5
+
 func _on_body_entered(body):
 	if body.has_method("collect"):
 		body.collect(self)
