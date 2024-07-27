@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://xfj8qwsm1lwe"]
+
+[ext_resource type="Texture2D" uid="uid://c8wyfkb3pqfp6" path="res://assets/sprites/particle_Square.png" id="1_k1sh1"]
+
+[sub_resource type="Curve" id="Curve_6vmoh"]
+_data = [Vector2(0, 0), 0.0, 13.4374, 0, 0, Vector2(0.187279, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.29881, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_shwlh"]
+curve = SubResource("Curve_6vmoh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0xp0l"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = -50.0
+initial_velocity_max = 50.0
+radial_velocity_min = 10.0
+radial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -20.0
+linear_accel_max = -20.0
+scale_curve = SubResource("CurveTexture_shwlh")
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+
+[node name="explosiveParticle" type="GPUParticles2D"]
+z_index = 1
+texture_filter = 1
+position = Vector2(297, 174)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_0xp0l")
+texture = ExtResource("1_k1sh1")
+lifetime = 0.75
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 24
+interpolate = false
