@@ -38,7 +38,7 @@ func _physics_process(delta):
 	
 func take_damage(damage: int):
 	var power_remaining = red.value + green.value + blue.value
-	# If damage would kill this enemy, destroy it
+	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
 		var shadow = load("res://scenes/items/shadow.tscn").instantiate()
 		shadow.global_position = global_position
