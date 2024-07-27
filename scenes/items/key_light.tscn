@@ -31,3 +31,8 @@ shape = SubResource("CircleShape2D_5nr2v")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_lo4f1")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

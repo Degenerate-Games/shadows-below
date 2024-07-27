@@ -7,6 +7,7 @@ var green: ColorValue
 var blue: ColorValue
 
 var unlocked = false
+var spawn_count = 0
 
 signal key_unlocked
 
@@ -42,3 +43,21 @@ func interact():
 
 func get_color() -> Color:
 	return Color(red.normalize(), green.normalize(), blue.normalize())
+
+func _on_timer_timeout():
+	if unlocked:
+		return
+	spawn_enemy(randi_range(1, min(2, round(spawn_count / 2.0))))
+	spawn_count += 1
+func spawn_enemy(level: int):
+	var enemy: Node2D
+	match level:
+		1:
+			enemy = load("res://scenes/enemies/enemy_a.tscn").instantiate()
+		2:
+			enemy = load("res://scenes/enemies/enemy_b.tscn").instantiate()
+	enemy.global_position = global_position - Vector2(16, 16)
+	enemy.max_speed = 25 * (level + 1)
+	enemy.acceleration = 500
+	enemy.total_power = 2 + ((level - 1) * 3)
+	get_parent().add_child(enemy)
