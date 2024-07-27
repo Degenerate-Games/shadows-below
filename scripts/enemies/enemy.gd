@@ -40,6 +40,9 @@ func take_damage(damage: int):
 	var power_remaining = red.value + green.value + blue.value
 	# If damage would kill this enemy, destroy it
 	if damage > power_remaining:
+		var shadow = load("res://scenes/items/shadow.tscn").instantiate()
+		shadow.global_position = global_position
+		get_parent().add_child(shadow)
 		queue_free()
 		return
 	# Otherwise, subtract the damage from a random color
