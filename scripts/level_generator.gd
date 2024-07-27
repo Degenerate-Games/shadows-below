@@ -70,6 +70,11 @@ func generate_room(difficulty: int) -> TileMap:
 	get_node("/root/Endless/HUD/ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
 	player.handle_color_change(get_node("/root/Endless/HUD/ColorMixingUI").get_color())
 	
+	var key = load("res://scenes/items/key_light.tscn").instantiate()
+	key.position = Vector2i(17, 13) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	# print ("Key Tile: ", key_tile, "Key Position: ", key.position)
+	room.add_key(key)
+	
   # Place objectives
 	print("Placing Objectives")
 	var obstacles: Array[Rect2i] = []
@@ -123,10 +128,10 @@ func generate_room(difficulty: int) -> TileMap:
 	# Place Keys
 	print("Placing Keys")
 	for key_tile in key_tiles:
-		var key = load("res://scenes/items/key_light.tscn").instantiate()
+		key = load("res://scenes/items/key_light.tscn").instantiate()
 		key.position = key_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 		print ("Key Tile: ", key_tile, "Key Position: ", key.position)
-		room.add_child(key)
+		room.add_key(key)
 
 	# Add pause menu
 	print("Adding Pause Menu")
