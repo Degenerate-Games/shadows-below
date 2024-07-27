@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1vullgdq6euv"]
+[gd_scene load_steps=9 format=3 uid="uid://1vullgdq6euv"]
 
 [ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="1_jpdwe"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="2_5qsv4"]
@@ -7,14 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://wnst66l3ja5k" path="res://scenes/enemies/enemy_b.tscn" id="5_s72b8"]
 [ext_resource type="PackedScene" uid="uid://cjni8qecs1cia" path="res://scenes/menus/pause_menu.tscn" id="6_fixc8"]
 [ext_resource type="PackedScene" uid="uid://c6lexs8ov1w1b" path="res://scenes/items/key_light.tscn" id="7_lr16h"]
+[ext_resource type="PackedScene" uid="uid://dwkxmxf0odygy" path="res://scenes/items/shadow.tscn" id="8_1uttc"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_jpdwe")]
-position = Vector2(447, 56)
+position = Vector2(217, 249)
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="Player"]
 texture_filter = 1
+position = Vector2(-217, -249)
 tile_set = ExtResource("2_5qsv4")
 format = 2
 layer_0/name = "Background"
@@ -41,3 +43,9 @@ position = Vector2(381, 149)
 
 [node name="KeyLight" parent="." instance=ExtResource("7_lr16h")]
 position = Vector2(455, 88)
+
+[node name="Shadow" parent="." instance=ExtResource("8_1uttc")]
+position = Vector2(192, 166)
+
+[node name="Shadow2" parent="." instance=ExtResource("8_1uttc")]
+position = Vector2(526, 106)
