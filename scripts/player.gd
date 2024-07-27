@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var acceleration: float = 1500 ## The rate at which the player can speed up
 @export var friction: float = 600 ## The rate at which the player slows down
 @export var aura_pulse_speed: float = .5 ## How many times per second the aura will pulse
+@export var max_health: float = 3 ## The maximum health the player can have
 
 var animation_controller: AnimatedSprite2D
 var aura: PointLight2D
@@ -13,6 +14,9 @@ var aura_pulse_timer: Timer
 var affected_enemies: Array[Node2D]
 var affected_interactables: Array[Node2D]
 var base_aura_energy: float
+var health: float
+
+signal shadow_collected
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +28,7 @@ func _ready():
 	base_aura_energy = aura.energy
 	affected_enemies = []
 	affected_interactables = []
+	health = max_health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -68,31 +73,27 @@ func interact():
 		if interactable_color.r <= aura.color.r and interactable_color.g <= aura.color.g and interactable_color.b <= aura.color.b:
 			interactable.interact()
 
-func take_damage(damage: int):
-	if not aura:
-		return
-	var red = aura.color.r
-	var green = aura.color.g
-	var blue = aura.color.b
-	var power_remaining = red.value + green.value + blue.value
-	# If damage would kill the player, destroy it
-	if damage > power_remaining:
-		queue_free()
-		return
-	# Otherwise, subtract the damage from a random color
-	var damage_remaining = damage
-	var colors = [red, green, blue]
-	colors.shuffle()
-	for color in colors:
-		if damage_remaining > color.value:
-			damage_remaining -= color.value
-			color.value = 0
-		else:
-			color.value -= damage_remaining
-			damage_remaining = 0
-			break
-	handle_color_change(Color(red.value, green.value, blue.value))
-	# TODO:Update the UI to reflect the new color
+func take_damage(damage: float):
+	health -= damage
+
+func collect(item):
+	match item.collectible_type:
+		Global.COLLECTIBLE_TYPE.SHADOW:
+			handle_shadow_collected(item)
+		Global.COLLECTIBLE_TYPE.HEALTH:
+			handle_health_collected(item)
+		Global.COLLECTIBLE_TYPE.POWERUP:
+			handle_powerup_collected(item)
+
+func handle_shadow_collected(_item):
+	shadow_collected.emit()
+	pass
+
+func handle_health_collected(_item):
+	pass
+
+func handle_powerup_collected(_item):
+	pass
 
 func _on_area_2d_body_entered(body):
 	if body.has_method("take_damage"):
