@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwa1q74mmrncc"]
+[gd_scene load_steps=7 format=3 uid="uid://dwa1q74mmrncc"]
 
 [ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/ui/color_mixing_ui.tscn" id="1_eg67d"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_6wdcc"]
+[ext_resource type="Texture2D" uid="uid://sxr8ba6ubd4s" path="res://assets/ui/pause_button.png" id="3_my16k"]
+[ext_resource type="Texture2D" uid="uid://kbgg37vs570l" path="res://assets/ui/pause_button_pressed.png" id="4_5o5eb"]
+[ext_resource type="Texture2D" uid="uid://bkr2ona3y1u2k" path="res://assets/ui/d-pad.png" id="4_73twt"]
+[ext_resource type="Texture2D" uid="uid://cj1kt0i4s66jn" path="res://assets/ui/d-pad_pressed.png" id="5_ubflk"]
 
 [node name="HUD" type="Control"]
 custom_minimum_size = Vector2(640, 360)
@@ -20,10 +24,10 @@ layout_mode = 0
 anchors_preset = 0
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = 25.0
-offset_top = 290.0
-offset_right = 200.0
-offset_bottom = 465.0
+offset_left = 50.0
+offset_top = 265.0
+offset_right = 225.0
+offset_bottom = 440.0
 grow_vertical = 1
 scale = Vector2(0.3, 0.3)
 joystick_mode = 1
@@ -34,14 +38,15 @@ action_up = "move_up"
 action_down = "move_down"
 
 [node name="Virtual joystick right" parent="." instance=ExtResource("2_6wdcc")]
+visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = 565.0
-offset_top = 290.0
-offset_right = 740.0
-offset_bottom = 465.0
+offset_left = 540.0
+offset_top = 265.0
+offset_right = 715.0
+offset_bottom = 440.0
 grow_vertical = 1
 scale = Vector2(0.3, 0.3)
 visibility_mode = 1
@@ -49,3 +54,46 @@ action_left = "mixing_ui_left"
 action_right = "mixing_ui_right"
 action_up = "mixing_ui_up"
 action_down = "mixing_ui_down"
+
+[node name="PauseButton" type="TouchScreenButton" parent="."]
+position = Vector2(600, 25)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_my16k")
+texture_pressed = ExtResource("4_5o5eb")
+action = "pause"
+visibility_mode = 1
+
+[node name="DPad" type="Node2D" parent="."]
+position = Vector2(542, 282)
+scale = Vector2(1.2, 1.2)
+
+[node name="Left" type="TouchScreenButton" parent="DPad"]
+position = Vector2(-4, 0)
+texture_normal = ExtResource("4_73twt")
+texture_pressed = ExtResource("5_ubflk")
+action = "mixing_ui_left"
+visibility_mode = 1
+
+[node name="Up" type="TouchScreenButton" parent="DPad"]
+position = Vector2(28, -16)
+rotation = 1.5708
+texture_normal = ExtResource("4_73twt")
+texture_pressed = ExtResource("5_ubflk")
+action = "mixing_ui_up"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="DPad"]
+position = Vector2(44, 16)
+rotation = 3.14159
+texture_normal = ExtResource("4_73twt")
+texture_pressed = ExtResource("5_ubflk")
+action = "mixing_ui_right"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="DPad"]
+position = Vector2(12, 32)
+rotation = -1.5708
+texture_normal = ExtResource("4_73twt")
+texture_pressed = ExtResource("5_ubflk")
+action = "mixing_ui_down"
+visibility_mode = 1
