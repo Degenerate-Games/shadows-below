@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwkxmxf0odygy"]
+[gd_scene load_steps=15 format=3 uid="uid://dwkxmxf0odygy"]
 
+[ext_resource type="Script" path="res://scripts/items/shadow.gd" id="1_d6vme"]
 [ext_resource type="Texture2D" uid="uid://xrpmda817ort" path="res://assets/sprites/Shadow_drop.png" id="1_vmjte"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_af3q2"]
@@ -86,13 +87,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o8vl2"]
+radius = 1.0
 
-[node name="Shadow" type="CharacterBody2D"]
-motion_mode = 1
+[node name="Shadow" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 17
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_d6vme")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = -1
-texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sh30f")
 animation = &"death"
 autoplay = "death"
