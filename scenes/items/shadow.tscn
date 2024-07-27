@@ -35,13 +35,13 @@ region = Rect2(96, 0, 16, 16)
 atlas = ExtResource("1_vmjte")
 region = Rect2(112, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vxtkh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsvjc"]
 atlas = ExtResource("1_vmjte")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(96, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_73vr3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmop5"]
 atlas = ExtResource("1_vmjte")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sh30f"]
 animations = [{
@@ -76,14 +76,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vxtkh")
+"texture": SubResource("AtlasTexture_wsvjc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_73vr3")
+"texture": SubResource("AtlasTexture_2ouhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsvjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmop5")
 }],
 "loop": true,
-"name": &"default",
-"speed": 0.5
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o8vl2"]
@@ -98,8 +104,12 @@ script = ExtResource("1_d6vme")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh30f")
-animation = &"death"
+animation = &"idle"
 autoplay = "death"
+frame_progress = 0.918708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o8vl2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
