@@ -13,6 +13,7 @@ var current_panel: PanelContainer
 
 @export_category("Other")
 @export var delay_timer: Timer
+@export var available_charges: int
 
 signal color_changed
 
@@ -24,6 +25,7 @@ var blue_value: ColorValue = ColorValue.new(1, 3)
 func _ready():
 	current_panel = red_panel
 	color_changed.emit(get_color())
+	available_charges = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -58,9 +60,11 @@ func handle_input():
 		current_panel = next_panel
 	
 	var delta = 0
-	if mixing_ui_up:
+	if mixing_ui_up && available_charges > 0:
+		available_charges -= 1
 		delta = 1
 	elif mixing_ui_down:
+		available_charges += 1
 		delta = -1
 	
 	if delta != 0 && delay_timer.is_stopped():
@@ -79,3 +83,6 @@ func get_color() -> Color:
 
 func get_inverse_color() -> Color:
 	return Color(red_value.invert().normalize(), green_value.invert().normalize(), blue_value.invert().normalize())
+
+func _on_shadow_collected():
+	available_charges += 1

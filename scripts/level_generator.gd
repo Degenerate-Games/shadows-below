@@ -67,8 +67,9 @@ func generate_room(difficulty: int) -> TileMap:
 	print("Placing Player")
 	var player = get_node("/root/Endless/Player")
 	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	get_node("/root/Endless/HUD/ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
+	hud.get_node("ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
 	player.handle_color_change(get_node("/root/Endless/HUD/ColorMixingUI").get_color())
+	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
 	
 	var key = load("res://scenes/items/key_light.tscn").instantiate()
 	key.position = Vector2i(17, 13) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
