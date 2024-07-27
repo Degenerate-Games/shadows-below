@@ -82,7 +82,7 @@ fill_from = Vector2(0.5, 0.5)
 size = Vector2(15.0943, 15.0943)
 
 [node name="EnemyB" type="CharacterBody2D"]
-collision_layer = 18
+collision_layer = 2
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_h4t6v")
@@ -107,7 +107,7 @@ scale = Vector2(1.06, 1.06)
 shape = SubResource("RectangleShape2D_f6igf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
+target_desired_distance = 50.0
 debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
