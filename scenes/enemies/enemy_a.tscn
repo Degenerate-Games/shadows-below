@@ -175,6 +175,7 @@ max_speed = 50
 total_power = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_pcy64")
 animation = &"idle"
@@ -201,12 +202,8 @@ wait_time = 0.5
 autostart = true
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
-z_index = -1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_pt4hq")
-animation = &"death"
 autoplay = "default"
-frame = 7
-frame_progress = 1.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
