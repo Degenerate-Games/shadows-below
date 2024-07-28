@@ -1,0 +1,9 @@
+[gd_resource type="NavigationPolygon" format=3 uid="uid://kpetbg52dupg"]
+
+[resource]
+vertices = PackedVector2Array(612, 28, 612, 324, 508, 203, 508, 181, 395, 260, 355, 260, 364, 251, 405, 220, 276, 251, 285, 260, 245, 260, 204, 235, 412, 324, 491, 220, 412, 277, 492, 28, 492, 140, 491, 164, 452, 83, 444, 85, 444, 84, 228, 277, 187, 252, 276, 213, 204, 197, 388, 140, 405, 164, 364, 213, 388, 203, 444, 76, 444, 60, 452, 60, 404, 76, 404, 84, 404, 100, 388, 100, 28, 28, 187, 180, 172, 180, 172, 165, 101, 220, 116, 220, 116, 235, 28, 324, 228, 324, 133, 252, 404, 28, 388, 181, 347, 196, 293, 196, 84, 203, 84, 165, 101, 148, 155, 148)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(2, 1, 12, 13), PackedInt32Array(13, 12, 14), PackedInt32Array(7, 13, 14, 4), PackedInt32Array(15, 0, 3, 16), PackedInt32Array(16, 3, 17), PackedInt32Array(18, 19, 20), PackedInt32Array(11, 10, 21, 22), PackedInt32Array(23, 8, 11, 24), PackedInt32Array(25, 16, 17, 26), PackedInt32Array(7, 6, 27, 28), PackedInt32Array(29, 30, 31, 18), PackedInt32Array(32, 29, 18, 20, 33), PackedInt32Array(33, 34, 35, 36), PackedInt32Array(37, 38, 39, 35), PackedInt32Array(40, 41, 42, 43), PackedInt32Array(22, 21, 44, 43, 45), PackedInt32Array(42, 45, 43), PackedInt32Array(36, 46, 32), PackedInt32Array(36, 32, 33), PackedInt32Array(25, 26, 47, 48, 49), PackedInt32Array(50, 40, 43), PackedInt32Array(50, 43, 36, 51), PackedInt32Array(52, 51, 36), PackedInt32Array(52, 36, 35, 53), PackedInt32Array(39, 53, 35), PackedInt32Array(23, 24, 37, 35, 49), PackedInt32Array(49, 35, 25), PackedInt32Array(27, 48, 47, 28)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(8, 6, 8, 344, 246, 344, 248, 284, 390, 283, 392, 344, 631, 344, 631, 7)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+agent_radius = 16.0
