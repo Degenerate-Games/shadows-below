@@ -16,9 +16,9 @@ func _ready():
 	var power_remaining = key_power
 	
 	# Initialize the color values
-	red = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
+	red = ColorValue.new(randi_range(0, min(power_remaining, 3)), 3)
 	power_remaining -= red.value
-	green = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
+	green = ColorValue.new(randi_range(0, min(power_remaining, 3)), 3)
 	power_remaining -= green.value
 	blue = ColorValue.new(min(power_remaining, 3), 3)
 	
@@ -28,14 +28,8 @@ func _ready():
 	$Sprite2D.self_modulate = color
 
 func interact():
-	var colors = [red, green, blue]
-	colors.shuffle()
-	for color in colors:
-		if color.value > 0:
-			color.value -= 1
-			break
-	var power_remaining = red.value + green.value + blue.value
-	if power_remaining == 0:
+	key_power -= 1
+	if key_power == 0:
 		$PointLight2D.enabled = false
 		unlocked = true
 		emit_signal("key_unlocked")
@@ -47,8 +41,12 @@ func get_color() -> Color:
 func _on_timer_timeout():
 	if unlocked:
 		return
-	spawn_enemy(randi_range(1, min(2, round(spawn_count / 2.0))))
+	if spawn_count < 3:
+		spawn_enemy(1)
+	else:
+		spawn_enemy(randi_range(1, 2))
 	spawn_count += 1
+
 func spawn_enemy(level: int):
 	var enemy: Node2D
 	match level:
@@ -61,3 +59,6 @@ func spawn_enemy(level: int):
 	enemy.acceleration = 500
 	enemy.total_power = 2 + ((level - 1) * 3)
 	get_parent().add_child(enemy)
+	enemy.call_deferred("set_color", red, green, blue)
+	if enemy.has_method("set_target"):
+		enemy.call_deferred("set_target", get_parent().get_parent().get_node("Player"))
