@@ -32,6 +32,9 @@ func _ready():
 	animation_controller.self_modulate = color
 
 func _physics_process(delta):
+	if navigation_agent.is_navigation_finished():
+		return
+
 	var direction = to_local(navigation_agent.get_next_path_position()).normalized()
 	velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
 	move_and_slide()
@@ -72,6 +75,13 @@ func create_path():
 
 func get_color() -> Color:
 	return point_light.color
+
+func set_color(r: ColorValue, g: ColorValue, b: ColorValue):
+	red = r
+	green = g
+	blue = b
+	point_light.color = Color(red.normalize(), green.normalize(), blue.normalize())
+	animation_controller.self_modulate = point_light.color
 
 func _on_timer_timeout():
 	create_path()
