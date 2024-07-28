@@ -24,4 +24,8 @@ func _on_key_unlocked():
   else:
     var locked_keys = keys.filter(func (key: Node2D) : return not key.unlocked)
     var locked_ratio = locked_keys.size() / keys.size()
-    # set door graphics based on locked_ratio 
+    # set door graphics based on locked_ratio
+
+func bake_after(frames: int):
+  await get_tree().create_timer(frames / Engine.max_fps).timeout
+  get_child(3).bake_navigation_polygon()
