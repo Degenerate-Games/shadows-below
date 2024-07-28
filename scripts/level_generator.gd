@@ -11,8 +11,6 @@ var objective_idxs: Array[int]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tile_map = TileMap.new()
-	tile_map.add_layer(1)
-	tile_map.add_layer(2)
 	tile_map.tile_set = load("res://assets/levels/dirt/dirt_tileset.tres")
 	x_tiles = ceili(get_viewport().get_visible_rect().size.x / tile_map.tile_set.tile_size.x)
 	y_tiles = ceili(get_viewport().get_visible_rect().size.y / tile_map.tile_set.tile_size.y)
@@ -40,10 +38,10 @@ func _ready():
 	objective_idxs.append(4)
 	
 
-
 func generate_room(difficulty: int) -> TileMap:
 	var room = tile_map.duplicate()
 	room.name = "Generated Room: " + str(randi())
+	room.add_to_group("navigation", true)
 	room.set_script(load("res://scripts/room.gd"))
 
 	# Add UI to scene
@@ -61,20 +59,15 @@ func generate_room(difficulty: int) -> TileMap:
 	
 	# Draw room frame
 	print("Drawing Room Frame")
-	room.set_pattern(1, Vector2i(0, 0), tile_map.tile_set.get_pattern(0))
+	room.set_pattern(0, Vector2i(0, 0), tile_map.tile_set.get_pattern(0))
 
 	# Place the player
 	print("Placing Player")
 	var player = get_node("/root/Endless/Player")
 	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	hud.get_node("ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
-	player.handle_color_change(get_node("/root/Endless/HUD/ColorMixingUI").get_color())
+	player.handle_color_change(hud.get_node("ColorMixingUI").get_color())
 	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
-	
-	var key = load("res://scenes/items/key_light.tscn").instantiate()
-	key.position = Vector2i(17, 13) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	# print ("Key Tile: ", key_tile, "Key Position: ", key.position)
-	room.add_key(key)
 	
   # Place objectives
 	print("Placing Objectives")
@@ -88,10 +81,10 @@ func generate_room(difficulty: int) -> TileMap:
 		var obstacle = get_pattern_rect(Vector2(randi_range(0, x_tiles), randi_range(0, y_tiles)), half_pattern_size)
 		if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 			continue
-		room.set_pattern(1, obstacle.position + Vector2i(1, 1), pattern)
-		if pattern.has_cell(Vector2i(3, 3)):
-			if pattern.get_cell_atlas_coords(Vector2i(3, 3)) == Vector2i(3, 1):
-				key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 4)))
+		room.set_pattern(0, obstacle.position + Vector2i(1, 1), pattern)
+		if pattern.has_cell(Vector2i(3, 4)):
+			if pattern.get_cell_atlas_coords(Vector2i(3, 4)) == Vector2i(3, 1):
+				key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 5)))
 		obstacles.append(obstacle)
 		iterations += 1
 
@@ -107,29 +100,14 @@ func generate_room(difficulty: int) -> TileMap:
 					var obstacle = get_pattern_rect(Vector2(x, y), half_pattern_size)
 					if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 						continue
-					room.set_pattern(1, obstacle.position + Vector2i(1, 1), pattern)
+					room.set_pattern(0, obstacle.position + Vector2i(1, 1), pattern)
 					obstacles.append(obstacle)
 		iterations += 1
-	
-	# Place some enemies
-	print("Placing Enemies")
-	var enemy_tiles: Array[Vector2i] = []
-	for i in range(difficulty):
-		var enemy_tile = Vector2i(randi_range(0, x_tiles), randi_range(0, y_tiles))
-		while obstacles.any(func(o): return o.has_point(enemy_tile)) || room_borders.any(func(b): return b.has_point(enemy_tile)) || enemy_tiles.find(enemy_tile) != -1:
-			enemy_tile = Vector2i(randi_range(0, x_tiles), randi_range(0, y_tiles))
-		enemy_tiles.append(enemy_tile)
-		var enemy = enemies[randi() % enemies.size()].instantiate()
-		enemy.name += str(i)
-		enemy.position = enemy_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-		room.add_child(enemy)
-		if enemy.has_method("set_target"):
-			enemy.call_deferred("set_target", player)
 	
 	# Place Keys
 	print("Placing Keys")
 	for key_tile in key_tiles:
-		key = load("res://scenes/items/key_light.tscn").instantiate()
+		var key = load("res://scenes/items/key_light.tscn").instantiate()
 		key.position = key_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 		print ("Key Tile: ", key_tile, "Key Position: ", key.position)
 		room.add_key(key)
@@ -138,6 +116,13 @@ func generate_room(difficulty: int) -> TileMap:
 	print("Adding Pause Menu")
 	var pause_menu = load("res://scenes/menus/pause_menu.tscn").instantiate()
 	room.add_child(pause_menu)
+
+	# Set up navigation
+	var navigation = NavigationRegion2D.new()
+	navigation.name = "Navigation"
+	navigation.navigation_polygon = load("res://assets/levels/navigation_polygon.tres")
+	room.add_child(navigation)
+	room.call_deferred("bake_after", 2)
 
 	return room
 
