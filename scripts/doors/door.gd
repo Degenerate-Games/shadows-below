@@ -6,6 +6,7 @@ func enter():
 	if not connected_room:
 		connected_room = get_parent().get_parent().generate_room()
 	connected_room.show()
+	connected_room.bake_after(2)
 	get_parent().hide()
 	var player = get_tree().get_first_node_in_group("player")
 	match name:
