@@ -68,7 +68,7 @@ func handle_aura_pulse():
 	var pulse = f_a
 	if timer_percentage >= -0.168192:
 		pulse = f_b
-	pulse = remap(pulse, 0, 40, 0, 1)
+	pulse = remap(pulse, 0, 40, 0.25, 1.25)
 	if timer_percentage > -0.1 and not pulsed:
 		pulsed = true
 		pulse_aura()
