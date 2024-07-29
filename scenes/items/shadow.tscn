@@ -96,6 +96,7 @@ animations = [{
 radius = 1.0
 
 [node name="Shadow" type="RigidBody2D" groups=["items"]]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 17
 can_sleep = false

@@ -11,6 +11,7 @@ var objective_idxs: Array[int]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tile_map = TileMap.new()
+	tile_map.y_sort_enabled = true
 	tile_map.tile_set = load("res://assets/levels/dirt/dirt_tileset.tres")
 	x_tiles = ceili(get_viewport().get_visible_rect().size.x / tile_map.tile_set.tile_size.x)
 	y_tiles = ceili(get_viewport().get_visible_rect().size.y / tile_map.tile_set.tile_size.y)
