@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ds5ca02qkhnxp"]
+[gd_scene load_steps=13 format=3 uid="uid://ds5ca02qkhnxp"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_8icis"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="2_1sqsw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://lxsi1s65a6bm" path="res://assets/sprites/Menu/quit_Up.png" id="8_l7vld"]
 [ext_resource type="Texture2D" uid="uid://dug7vqwetllpg" path="res://assets/sprites/Menu/Quit_Down.png" id="9_vsrb5"]
 [ext_resource type="Texture2D" uid="uid://dkylj0ss43wmg" path="res://assets/sprites/Menu/quit_Hover.png" id="10_x5duk"]
+[ext_resource type="AudioStream" uid="uid://dat2chcs2sekn" path="res://assets/audio/music/Menu/Menu-1.mp3" id="12_urkc2"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -90,6 +91,10 @@ texture_normal = ExtResource("8_l7vld")
 texture_pressed = ExtResource("9_vsrb5")
 texture_hover = ExtResource("10_x5duk")
 stretch_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_urkc2")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
