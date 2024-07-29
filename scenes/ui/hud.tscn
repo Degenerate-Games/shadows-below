@@ -95,3 +95,30 @@ texture_pressed = ExtResource("5_ubflk")
 shape = SubResource("CircleShape2D_yiqxs")
 action = "mixing_ui_down"
 visibility_mode = 1
+
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -15.0
+offset_right = -20.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 0.25)
+
+[node name="Background" type="ColorRect" parent="HealthBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.827451)
+
+[node name="Foreground" type="ColorRect" parent="HealthBar" groups=["health_bar"]]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.611765, 0, 0, 1)
