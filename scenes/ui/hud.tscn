@@ -19,7 +19,7 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_yiqxs"]
 radius = 7.0
 
-[node name="HUD" type="Control"]
+[node name="HUD" type="Control" groups=["HUD"]]
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 15
