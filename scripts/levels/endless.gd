@@ -1,9 +1,10 @@
 extends Node2D
 
+var difficulty: int = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	add_child(LevelGenerator.generate_room(5))
+	generate_room()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("reload"):
@@ -13,6 +14,12 @@ func _process(_delta):
 			add_child(LevelGenerator.generate_room(5))
 	if Input.is_action_just_pressed("bake"):
 		get_tree().call_group("navigation_region", "bake_navigation_polygon")
+
+func generate_room() -> Node2D:
+	var room = LevelGenerator.generate_room(difficulty)
+	add_child(room)
+	difficulty += 1
+	return room
 
 func set_aura_pulse_level(level: int):
 	var song_position = $AudioLayers/AudioLayers/CombatPads.get_playback_position()
