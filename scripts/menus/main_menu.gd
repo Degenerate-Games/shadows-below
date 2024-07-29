@@ -17,3 +17,8 @@ func _on_options_button_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_audio_stream_player_finished():
+	$AudioStreamPlayer.seek(0)
+	$AudioStreamPlayer._set_playing(true)
