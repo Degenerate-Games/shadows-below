@@ -111,6 +111,19 @@ func generate_room(difficulty: int) -> TileMap:
 		key.position = key_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 		print ("Key Tile: ", key_tile, "Key Position: ", key.position)
 		room.add_key(key)
+	
+	# Place doors
+	print("Placing Doors")
+	var door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
+	door.position = Vector2i(0, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(door.duplicate())
+	door.position = Vector2i(x_tiles - 1, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(door.duplicate())
+	door.rotate(PI / 2)
+	door.position = Vector2i(x_tiles / 2, 0) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(door.duplicate())
+
 
 	# Add pause menu
 	print("Adding Pause Menu")
