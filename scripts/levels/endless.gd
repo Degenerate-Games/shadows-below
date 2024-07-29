@@ -4,7 +4,7 @@ var difficulty: int = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_room()
+	add_child(generate_room())
 
 func _process(_delta):
 	if Input.is_action_just_pressed("reload"):
@@ -17,7 +17,6 @@ func _process(_delta):
 
 func generate_room() -> Node2D:
 	var room = LevelGenerator.generate_room(difficulty)
-	add_child(room)
 	difficulty += 1
 	return room
 
