@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://wnst66l3ja5k"]
+[gd_scene load_steps=16 format=3 uid="uid://wnst66l3ja5k"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_h4t6v"]
 [ext_resource type="Texture2D" uid="uid://bsg68icdrfnn5" path="res://assets/sprites/light2_idle.png" id="2_r6enf"]
@@ -81,6 +81,9 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6igf"]
 size = Vector2(15.0943, 15.0943)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_d20hg"]
+radius = 24.0
+
 [node name="EnemyB" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
 collision_mask = 19
@@ -115,4 +118,15 @@ process_callback = 0
 wait_time = 0.5
 autostart = true
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_d20hg")
+
+[node name="AuraPulseTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="AuraPulseTimer" to="." method="_on_aura_pulse_timer_timeout"]
