@@ -66,20 +66,25 @@ func set_aura_pulse_level(level: int):
 				$AudioLayers/CombatLead._set_playing(true)
 
 func _on_combat_pads_finished():
+	$AudioLayers/CombatPads.seek(0)
 	$AudioLayers/CombatPads.play()
 
 
 func _on_combat_drums_finished():
+	$AudioLayers/CombatDrums.seek(0)
 	$AudioLayers/CombatDrums.play()
 
 
 func _on_combat_bass_finished():
+	$AudioLayers/CombatBass.seek(0)
 	$AudioLayers/CombatBass.play()
 
 
 func _on_combat_sub_finished():
+	$AudioLayers/CombatSub.seek(0)
 	$AudioLayers/CombatSub.play()
 
 
 func _on_combat_lead_finished():
+	$AudioLayers/CombatLead.seek(0)
 	$AudioLayers/CombatLead.play()
