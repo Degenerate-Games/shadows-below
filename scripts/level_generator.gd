@@ -117,13 +117,17 @@ func generate_room(difficulty: int) -> TileMap:
 	var door = load("res://scenes/doors/door_a.tscn").instantiate()
 	room.room_complete.connect(door._on_room_complete)
 	door.position = Vector2i(0, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	door.name = "West Door"
 	room.add_child(door.duplicate())
 	door.position = Vector2i(x_tiles - 1, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	door.name = "East Door"
 	room.add_child(door.duplicate())
 	door.rotate(PI / 2)
 	door.position = Vector2i(x_tiles / 2, 0) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	door.name = "North Door"
 	room.add_child(door.duplicate())
 	door.position = Vector2i(x_tiles / 2, y_tiles - 6) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	door.name = "South Door"
 	room.add_child(door.duplicate())
 
 	# Add pause menu
