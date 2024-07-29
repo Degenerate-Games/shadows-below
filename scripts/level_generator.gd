@@ -63,7 +63,7 @@ func generate_room(difficulty: int) -> TileMap:
 
 	# Place the player
 	print("Placing Player")
-	var player = get_node("/root/Endless/Player")
+	var player = get_tree().get_first_node_in_group("player")
 	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	hud.get_node("ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
 	player.handle_color_change(hud.get_node("ColorMixingUI").get_color())
@@ -123,7 +123,8 @@ func generate_room(difficulty: int) -> TileMap:
 	door.rotate(PI / 2)
 	door.position = Vector2i(x_tiles / 2, 0) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	room.add_child(door.duplicate())
-
+	door.position = Vector2i(x_tiles / 2, y_tiles - 6) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(door.duplicate())
 
 	# Add pause menu
 	print("Adding Pause Menu")
@@ -133,6 +134,7 @@ func generate_room(difficulty: int) -> TileMap:
 	# Set up navigation
 	var navigation = NavigationRegion2D.new()
 	navigation.name = "Navigation"
+	navigation.add_to_group("navigation_region", true)
 	navigation.navigation_polygon = load("res://assets/levels/navigation_polygon.tres")
 	room.add_child(navigation)
 	room.call_deferred("bake_after", 2)
