@@ -30,4 +30,4 @@ func _on_key_unlocked():
 
 func bake_after(frames: int):
   await get_tree().create_timer(frames / Engine.max_fps).timeout
-  get_child(6).bake_navigation_polygon()
+  Global.get_first_child_in_group(self, "navigation_region").bake_navigation_polygon()
