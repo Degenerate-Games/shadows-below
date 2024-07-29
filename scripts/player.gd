@@ -35,7 +35,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	handle_aura_pulse()
+	update_aura_strength()
 	update_health_bar()
 
 func _physics_process(delta):
@@ -58,7 +58,7 @@ func handle_color_change(color):
 func _on_color_mixing_ui_color_changed(color):
 	handle_color_change(color)
 
-func handle_aura_pulse():
+func update_aura_strength():
 	if not aura:
 		return
 	var timer_percentage = aura_pulse_timer.time_left / aura_pulse_timer.wait_time
