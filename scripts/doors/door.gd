@@ -1,15 +1,31 @@
 extends Area2D
 
-var connected_room: Node2D
+var connected_room: PackedScene
 
 func enter():
+	var room
 	if not connected_room:
-		connected_room = get_parent().get_parent().generate_room()
-	connected_room.show()
-	connected_room.process_mode = PROCESS_MODE_INHERIT
-	connected_room.bake_after(2)
-	get_parent().hide()
-	get_parent().process_mode = PROCESS_MODE_DISABLED
+		room = get_parent().get_parent().generate_room()
+		connected_room = PackedScene.new()
+		connected_room.pack(get_parent().get_parent().generate_room())
+	if not room:
+		room = connected_room.instantiate()
+	get_parent().queue_free()
+	get_parent().get_parent().add_child(room)
+	var connected_door = null
+	await room.ready
+	match name:
+		"West Door":
+			connected_door = room.get_node("East Door")
+		"East Door":
+			connected_door = room.get_node("West Door")
+		"North Door":
+			connected_door = room.get_node("South Door")
+		"South Door":
+			connected_door = room.get_node("North Door")
+	connected_door.connected_room = PackedScene.new()
+	connected_door.connected_room.pack(get_parent())
+	
 	var player = get_tree().get_first_node_in_group("player")
 	match name:
 		"West Door":
