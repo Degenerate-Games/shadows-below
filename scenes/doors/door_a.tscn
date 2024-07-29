@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://chp8ikeeqqgly"]
+[gd_scene load_steps=4 format=3 uid="uid://chp8ikeeqqgly"]
 
 [ext_resource type="Script" path="res://scripts/doors/door.gd" id="1_m0pu8"]
+[ext_resource type="Texture2D" uid="uid://dhahrqu7wdsr8" path="res://assets/sprites/doors/temp_door_closed.png" id="2_m0uth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4jd05"]
 size = Vector2(32, 20)
@@ -12,5 +13,9 @@ script = ExtResource("1_m0pu8")
 shape = SubResource("RectangleShape2D_4jd05")
 disabled = true
 debug_color = Color(0.317647, 0.286275, 0.54902, 0.901961)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_m0uth")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

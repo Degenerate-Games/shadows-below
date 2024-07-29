@@ -131,6 +131,7 @@ func generate_room(difficulty: int) -> TileMap:
 		var key = load("res://scenes/items/key_light.tscn").instantiate()
 		key.position = key_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 		print ("Key Tile: ", key_tile, "Key Position: ", key.position)
+		key.key_unlocked.connect(room._on_key_unlocked)
 		room.add_key(key)
 	
 	# Place doors
@@ -139,14 +140,22 @@ func generate_room(difficulty: int) -> TileMap:
 	room.room_complete.connect(door._on_room_complete)
 	door.position = Vector2i(0, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	door.name = "West Door"
-	room.add_child(door.duplicate())
+	room.add_child(door)
+	door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
+	door.rotate(PI)
 	door.position = Vector2i(x_tiles - 1, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	door.name = "East Door"
-	room.add_child(door.duplicate())
+	room.add_child(door)
+	door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
 	door.rotate(PI / 2)
 	door.position = Vector2i(x_tiles / 2, 0) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	door.name = "North Door"
-	room.add_child(door.duplicate())
+	room.add_child(door)
+	door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
+	door.rotate(-PI / 2)
 	door.position = Vector2i(x_tiles / 2, y_tiles - 6) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 	door.name = "South Door"
 	room.add_child(door)
