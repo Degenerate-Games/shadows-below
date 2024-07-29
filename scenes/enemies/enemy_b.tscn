@@ -81,7 +81,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6igf"]
 size = Vector2(15.0943, 15.0943)
 
-[node name="EnemyB" type="CharacterBody2D"]
+[node name="EnemyB" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
 collision_mask = 19
 motion_mode = 1
@@ -109,7 +109,6 @@ shape = SubResource("RectangleShape2D_f6igf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 50.0
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
