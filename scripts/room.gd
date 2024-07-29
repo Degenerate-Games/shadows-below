@@ -2,6 +2,8 @@ extends TileMap
 
 var keys: Array[Node2D]
 
+signal room_complete
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
   pass
@@ -20,7 +22,7 @@ func remove_key(key: Node2D):
 
 func _on_key_unlocked():
   if keys.all(func (key: Node2D) : return key.unlocked):
-    pass # Unlock the doors
+    room_complete.emit()
   else:
     var locked_keys = keys.filter(func (key: Node2D) : return not key.unlocked)
     var locked_ratio = locked_keys.size() / keys.size()
@@ -28,4 +30,4 @@ func _on_key_unlocked():
 
 func bake_after(frames: int):
   await get_tree().create_timer(frames / Engine.max_fps).timeout
-  get_child(3).bake_navigation_polygon()
+  get_child(6).bake_navigation_polygon()
