@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var friction: float = 600 ## The rate at which the player slows down
 @export var aura_pulse_speeds: Array = [0.5, 1, 1.5, 2, 2.5] ## The speeds at which the aura will pulse
 @export_range(0, 4) var aura_pulse_speed_idx: float = 0 ## How many times per second the aura will pulse
-@export var max_health: float = 3 ## The maximum health the player can have
+@export var max_health: float = 5 ## The maximum health the player can have
 
 var animation_controller: AnimatedSprite2D
 var aura: PointLight2D
@@ -88,6 +88,8 @@ func interact():
 
 func take_damage(damage: float):
 	health -= damage
+	if health <= 0:
+		get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 func collect(item):
 	match item.collectible_type:
