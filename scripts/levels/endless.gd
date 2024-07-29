@@ -12,5 +12,4 @@ func _process(_delta):
 			room.queue_free()
 			add_child(LevelGenerator.generate_room(5))
 	if Input.is_action_just_pressed("bake"):
-		var navigation = get_child(-1).get_child(3)
-		navigation.bake_navigation_polygon()
+		get_tree().call_group("navigation_region", "bake_navigation_polygon")
