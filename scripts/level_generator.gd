@@ -50,10 +50,11 @@ func generate_room(difficulty: int) -> TileMap:
 
 	# Add UI to scene
 	print("Adding UI")
-	var hud = load("res://scenes/ui/hud.tscn").instantiate()
-	hud.name = "HUD"
-	hud.position = Vector2(0, 0)
-	room.add_child(hud)
+	var hud = get_tree().get_first_node_in_group("HUD")
+	# var hud = load("res://scenes/ui/hud.tscn").instantiate()
+	# hud.name = "HUD"
+	# hud.position = Vector2(0, 0)
+	# room.add_child(hud)
 	
 	# Fill the room with background tiles
 	print("Drawing Background")
