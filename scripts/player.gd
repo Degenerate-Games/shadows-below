@@ -4,7 +4,8 @@ extends CharacterBody2D
 @export var max_speed: float = 250 ## The maximum speed the player can move
 @export var acceleration: float = 1500 ## The rate at which the player can speed up
 @export var friction: float = 600 ## The rate at which the player slows down
-@export var aura_pulse_speed: float = .5 ## How many times per second the aura will pulse
+@export var aura_pulse_speeds: Array = [0.5, 1, 1.5, 2, 2.5] ## The speeds at which the aura will pulse
+@export_range(0, 4) var aura_pulse_speed_idx: float = 0 ## How many times per second the aura will pulse
 @export var max_health: float = 3 ## The maximum health the player can have
 
 var animation_controller: AnimatedSprite2D
@@ -24,7 +25,7 @@ func _ready():
 	animation_controller = $AnimatedSprite2D
 	aura = $PointLight2D
 	aura_pulse_timer = $AuraPulseTimer
-	aura_pulse_timer.wait_time = 1 / aura_pulse_speed
+	update_aura_pulse_timer()
 	aura_pulse_timer.start()
 	base_aura_energy = aura.energy
 	affected_enemies = []
@@ -102,13 +103,19 @@ func handle_shadow_collected(_item):
 	pass
 
 func handle_health_collected(_item):
+	health = min(health + 1, max_health)
 	pass
 
 func handle_powerup_collected(_item):
-	pass
+	aura_pulse_speed_idx = clamp(aura_pulse_speed_idx + 1, 0, aura_pulse_speeds.size() - 1)
+	update_aura_pulse_timer()
+	get_parent().set_aura_pulse_level(aura_pulse_speed_idx)
 
 func update_health_bar():
 	get_tree().get_first_node_in_group("health_bar").scale.x = remap(health, 0, max_health, 0, 1)
+
+func update_aura_pulse_timer():
+	aura_pulse_timer.wait_time = 1 / aura_pulse_speeds[aura_pulse_speed_idx]
 
 func pulse_aura():
 	damage_enemies()
