@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://byfssm2nhll32"
+path="res://.godot/imported/Menu - Track 5.wav-c62aa9b933bbfc2383776e7cb356d816.sample"
+
+[deps]
+
+source_file="res://assets/audio/music/Menu/Menu - Track 5.wav"
+dest_files=["res://.godot/imported/Menu - Track 5.wav-c62aa9b933bbfc2383776e7cb356d816.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
