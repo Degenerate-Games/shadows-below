@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b57uty48kj6qk"
+path="res://.godot/imported/Combat1_Pads.mp3-edf232d9716fa527332ef794c6321558.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Combat 1/Combat1_Pads.mp3"
+dest_files=["res://.godot/imported/Combat1_Pads.mp3-edf232d9716fa527332ef794c6321558.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

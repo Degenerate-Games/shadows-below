@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqsopoa3gk3el"
+path="res://.godot/imported/Combat1_SubBass.mp3-41f55d5b53b1dc059d6b7a07e764f48e.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Combat 1/Combat1_SubBass.mp3"
+dest_files=["res://.godot/imported/Combat1_SubBass.mp3-41f55d5b53b1dc059d6b7a07e764f48e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
