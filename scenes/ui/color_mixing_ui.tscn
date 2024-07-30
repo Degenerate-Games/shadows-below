@@ -1,9 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://rfo2dnxunaxo"]
+[gd_scene load_steps=15 format=3 uid="uid://rfo2dnxunaxo"]
 
-[ext_resource type="StyleBox" uid="uid://coel6wsy4o8gd" path="res://assets/themes/ui_highlight_box.tres" id="1_e2eri"]
 [ext_resource type="Script" path="res://scripts/ui/color_mixing_ui.gd" id="1_sx0vk"]
-[ext_resource type="Theme" uid="uid://y5x5gkjt7jvq" path="res://assets/themes/ui_text_theme.tres" id="1_sxyn4"]
-[ext_resource type="StyleBox" uid="uid://8sq7rwv4csx4" path="res://assets/themes/ui_highlight_box_empty.tres" id="3_sl2co"]
+[ext_resource type="Texture2D" uid="uid://cw3vqvbd5aosi" path="res://assets/sprites/Aura Gen/Aura_genny.png" id="5_nepri"]
+[ext_resource type="Texture2D" uid="uid://bkqooxknuw46u" path="res://assets/sprites/Aura Gen/red_1.png" id="6_a5f3u"]
+[ext_resource type="Texture2D" uid="uid://d023a24e5tas0" path="res://assets/sprites/Aura Gen/red_2.png" id="7_qeyqm"]
+[ext_resource type="Texture2D" uid="uid://bqknpul4020ni" path="res://assets/sprites/Aura Gen/red_3.png" id="8_5bmdy"]
+[ext_resource type="Texture2D" uid="uid://dnj03rmw3qsnd" path="res://assets/sprites/Aura Gen/green_1.png" id="9_oa2yh"]
+[ext_resource type="Texture2D" uid="uid://dv405xusk604c" path="res://assets/sprites/Aura Gen/green_2.png" id="10_r7hpm"]
+[ext_resource type="Texture2D" uid="uid://cb6xq35lpoyfb" path="res://assets/sprites/Aura Gen/green_3.png" id="11_qroy5"]
+[ext_resource type="Texture2D" uid="uid://dvlsayby5ipib" path="res://assets/sprites/Aura Gen/blue_1.png" id="12_imhto"]
+[ext_resource type="Texture2D" uid="uid://cmbd4jjn5d10v" path="res://assets/sprites/Aura Gen/blue_2.png" id="13_rxekd"]
+[ext_resource type="Texture2D" uid="uid://c8op5s7ovnuno" path="res://assets/sprites/Aura Gen/blue_3.png" id="14_emsxq"]
+[ext_resource type="Texture2D" uid="uid://dylsjt31lpif5" path="res://assets/sprites/Aura Gen/chargeOff.png" id="15_ygi8l"]
+[ext_resource type="Texture2D" uid="uid://dqpemb3dyndws" path="res://assets/sprites/Aura Gen/chargeOn.png" id="16_yjlw8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rshc4"]
 bg_color = Color(0.235294, 0.235294, 0.235294, 0.764706)
@@ -12,7 +21,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="ColorMixingUI" type="Panel" node_paths=PackedStringArray("red_panel", "green_panel", "blue_panel", "delay_timer")]
+[node name="ColorMixingUI" type="Panel" node_paths=PackedStringArray("delay_timer")]
 anchors_preset = -1
 anchor_left = 0.39
 anchor_top = 0.8
@@ -22,117 +31,199 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rshc4")
 script = ExtResource("1_sx0vk")
-highlight_box = ExtResource("1_e2eri")
-no_highlight_box = ExtResource("3_sl2co")
-red_panel = NodePath("MainContainer/RedHighlightPanel")
-green_panel = NodePath("MainContainer/GreenHighlightPanel")
-blue_panel = NodePath("MainContainer/BlueHighlightPanel")
 delay_timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
-[node name="MainContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
+[node name="NewUI" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = -4.59999
+offset_top = -10.0
+offset_right = 143.4
+offset_bottom = 72.0
 
-[node name="Spacer" type="Control" parent="MainContainer"]
+[node name="AuraDock" type="TextureRect" parent="NewUI"]
 layout_mode = 2
-size_flags_horizontal = 3
+texture = ExtResource("5_nepri")
 
-[node name="RedHighlightPanel" type="PanelContainer" parent="MainContainer"]
-layout_mode = 2
-focus_next = NodePath("../GreenHighlightPanel")
-focus_previous = NodePath("../BlueHighlightPanel")
-theme_override_styles/panel = ExtResource("1_e2eri")
+[node name="Red" type="Control" parent="NewUI/AuraDock"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Container" type="HFlowContainer" parent="MainContainer/RedHighlightPanel"]
-layout_mode = 2
-focus_next = NodePath("../../GreenHighlightPanel/Container")
-focus_previous = NodePath("../../BlueHighlightPanel/Container")
+[node name="1" type="TextureRect" parent="NewUI/AuraDock/Red"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_a5f3u")
 
-[node name="Label" type="Label" parent="MainContainer/RedHighlightPanel/Container"]
-layout_mode = 2
-theme = ExtResource("1_sxyn4")
-text = "Red"
+[node name="2" type="TextureRect" parent="NewUI/AuraDock/Red"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_qeyqm")
 
-[node name="Value" type="Label" parent="MainContainer/RedHighlightPanel/Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_sxyn4")
-text = "1"
-horizontal_alignment = 1
+[node name="3" type="TextureRect" parent="NewUI/AuraDock/Red"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_5bmdy")
 
-[node name="Spacer2" type="Control" parent="MainContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="Green" type="Control" parent="NewUI/AuraDock"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="GreenHighlightPanel" type="PanelContainer" parent="MainContainer"]
-layout_mode = 2
-focus_next = NodePath("../BlueHighlightPanel")
-focus_previous = NodePath("../RedHighlightPanel")
-theme_override_styles/panel = ExtResource("3_sl2co")
+[node name="1" type="TextureRect" parent="NewUI/AuraDock/Green"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_oa2yh")
 
-[node name="Container" type="HFlowContainer" parent="MainContainer/GreenHighlightPanel"]
-layout_mode = 2
-focus_next = NodePath("../../BlueHighlightPanel/Container")
-focus_previous = NodePath("../../RedHighlightPanel/Container")
-alignment = 1
+[node name="2" type="TextureRect" parent="NewUI/AuraDock/Green"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("10_r7hpm")
 
-[node name="Label" type="Label" parent="MainContainer/GreenHighlightPanel/Container"]
-layout_mode = 2
-theme = ExtResource("1_sxyn4")
-theme_override_colors/font_color = Color(0, 0.811765, 0, 1)
-text = "Green"
+[node name="3" type="TextureRect" parent="NewUI/AuraDock/Green"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("11_qroy5")
 
-[node name="Value" type="Label" parent="MainContainer/GreenHighlightPanel/Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_sxyn4")
-theme_override_colors/font_color = Color(0, 0.811765, 0, 1)
-text = "1"
-horizontal_alignment = 1
+[node name="Blue" type="Control" parent="NewUI/AuraDock"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Spacer3" type="Control" parent="MainContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="1" type="TextureRect" parent="NewUI/AuraDock/Blue"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("12_imhto")
 
-[node name="BlueHighlightPanel" type="PanelContainer" parent="MainContainer"]
-layout_mode = 2
-focus_next = NodePath("../RedHighlightPanel")
-focus_previous = NodePath("../GreenHighlightPanel")
-theme_override_styles/panel = ExtResource("3_sl2co")
+[node name="2" type="TextureRect" parent="NewUI/AuraDock/Blue"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("13_rxekd")
 
-[node name="Container" type="HFlowContainer" parent="MainContainer/BlueHighlightPanel"]
-layout_mode = 2
-focus_next = NodePath("../../RedHighlightPanel/Container")
-focus_previous = NodePath("../../GreenHighlightPanel/Container")
-alignment = 2
+[node name="3" type="TextureRect" parent="NewUI/AuraDock/Blue"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("14_emsxq")
 
-[node name="Label" type="Label" parent="MainContainer/BlueHighlightPanel/Container"]
-layout_mode = 2
-theme = ExtResource("1_sxyn4")
-theme_override_colors/font_color = Color(0, 0, 0.811765, 1)
-text = "Blue"
+[node name="Available" type="Control" parent="NewUI/AuraDock"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Value" type="Label" parent="MainContainer/BlueHighlightPanel/Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_sxyn4")
-theme_override_colors/font_color = Color(0, 0, 0.811765, 1)
-text = "1"
-horizontal_alignment = 1
+[node name="Off" type="Control" parent="NewUI/AuraDock/Available"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Spacer4" type="Control" parent="MainContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="AvailableOff1" type="TextureRect" parent="NewUI/AuraDock/Available/Off"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 35.0
+offset_right = 42.0
+offset_bottom = 75.0
+texture = ExtResource("15_ygi8l")
+stretch_mode = 3
+
+[node name="AvailableOff2" type="TextureRect" parent="NewUI/AuraDock/Available/Off"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 35.0
+offset_right = 68.0
+offset_bottom = 75.0
+texture = ExtResource("15_ygi8l")
+stretch_mode = 3
+
+[node name="AvailableOff3" type="TextureRect" parent="NewUI/AuraDock/Available/Off"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 35.0
+offset_right = 94.0
+offset_bottom = 75.0
+texture = ExtResource("15_ygi8l")
+stretch_mode = 3
+
+[node name="AvailableOff4" type="TextureRect" parent="NewUI/AuraDock/Available/Off"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 35.0
+offset_right = 120.0
+offset_bottom = 75.0
+texture = ExtResource("15_ygi8l")
+stretch_mode = 3
+
+[node name="AvailableOff5" type="TextureRect" parent="NewUI/AuraDock/Available/Off"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 35.0
+offset_right = 146.0
+offset_bottom = 75.0
+texture = ExtResource("15_ygi8l")
+stretch_mode = 3
+
+[node name="1" type="TextureRect" parent="NewUI/AuraDock/Available"]
+visible = false
+layout_mode = 0
+offset_left = 1.0
+offset_top = 34.0
+offset_right = 41.0
+offset_bottom = 74.0
+texture = ExtResource("16_yjlw8")
+stretch_mode = 3
+
+[node name="2" type="TextureRect" parent="NewUI/AuraDock/Available"]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = 34.0
+offset_right = 67.0
+offset_bottom = 74.0
+texture = ExtResource("16_yjlw8")
+stretch_mode = 3
+
+[node name="3" type="TextureRect" parent="NewUI/AuraDock/Available"]
+visible = false
+layout_mode = 0
+offset_left = 53.0
+offset_top = 34.0
+offset_right = 93.0
+offset_bottom = 74.0
+texture = ExtResource("16_yjlw8")
+stretch_mode = 3
+
+[node name="4" type="TextureRect" parent="NewUI/AuraDock/Available"]
+visible = false
+layout_mode = 0
+offset_left = 79.0
+offset_top = 34.0
+offset_right = 119.0
+offset_bottom = 74.0
+texture = ExtResource("16_yjlw8")
+stretch_mode = 3
+
+[node name="5" type="TextureRect" parent="NewUI/AuraDock/Available"]
+visible = false
+layout_mode = 0
+offset_left = 105.0
+offset_top = 34.0
+offset_right = 145.0
+offset_bottom = 74.0
+texture = ExtResource("16_yjlw8")
+stretch_mode = 3

@@ -1,19 +1,16 @@
 extends Panel
 
-var current_panel: PanelContainer
 
-@export_category("Highlight Box Themes")
-@export var highlight_box: StyleBox
-@export var no_highlight_box: StyleBox
-
-@export_category("Color Panels")
-@export var red_panel: PanelContainer
-@export var green_panel: PanelContainer
-@export var blue_panel: PanelContainer
+@export_category("Color Groups")
+@export var red_group: Control
+@export var green_group: Control
+@export var blue_group: Control
+@export var available_group: Control
 
 @export_category("Other")
 @export var delay_timer: Timer
 @export var available_charges: int
+@export var max_charges: int = 5
 
 signal color_changed
 
@@ -23,58 +20,119 @@ var blue_value: ColorValue = ColorValue.new(1, 3)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_panel = red_panel
+	red_group = get_node("NewUI/AuraDock/Red")
+	green_group = get_node("NewUI/AuraDock/Green")
+	blue_group = get_node("NewUI/AuraDock/Blue")
+	available_group = get_node("NewUI/AuraDock/Available")
 	color_changed.emit(get_color())
 	available_charges = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	update_ui()
+	available_charges = clamp(available_charges, 0, max_charges)
 	handle_input()
+	update_ui()
 
 func update_ui():
-	red_panel.get_node("./Container/Value").set_text(str(red_value.value))
-	green_panel.get_node("./Container/Value").set_text(str(green_value.value))
-	blue_panel.get_node("./Container/Value").set_text(str(blue_value.value))
+	match red_value.value:
+		0:
+			red_group.get_node("1").visible = false
+			red_group.get_node("2").visible = false
+			red_group.get_node("3").visible = false
+		1:
+			red_group.get_node("1").visible = true
+			red_group.get_node("2").visible = false
+			red_group.get_node("3").visible = false
+		2:
+			red_group.get_node("1").visible = true
+			red_group.get_node("2").visible = true
+			red_group.get_node("3").visible = false
+		3:
+			red_group.get_node("1").visible = true
+			red_group.get_node("2").visible = true
+			red_group.get_node("3").visible = true
+
+	match green_value.value:
+		0:
+			green_group.get_node("1").visible = false
+			green_group.get_node("2").visible = false
+			green_group.get_node("3").visible = false
+		1:
+			green_group.get_node("1").visible = true
+			green_group.get_node("2").visible = false
+			green_group.get_node("3").visible = false
+		2:
+			green_group.get_node("1").visible = true
+			green_group.get_node("2").visible = true
+			green_group.get_node("3").visible = false
+		3:
+			green_group.get_node("1").visible = true
+			green_group.get_node("2").visible = true
+			green_group.get_node("3").visible = true
+
+	match blue_value.value:
+		0:
+			blue_group.get_node("1").visible = false
+			blue_group.get_node("2").visible = false
+			blue_group.get_node("3").visible = false
+		1:
+			blue_group.get_node("1").visible = true
+			blue_group.get_node("2").visible = false
+			blue_group.get_node("3").visible = false
+		2:
+			blue_group.get_node("1").visible = true
+			blue_group.get_node("2").visible = true
+			blue_group.get_node("3").visible = false
+		3:
+			blue_group.get_node("1").visible = true
+			blue_group.get_node("2").visible = true
+			blue_group.get_node("3").visible = true
+
+	for i in range(1, max_charges + 1):
+		available_group.get_node(str(i)).visible = i <= available_charges
 
 func handle_input():
-	var mixing_ui_left = Input.is_action_just_pressed("mixing_ui_left")
-	var mixing_ui_right = Input.is_action_just_pressed("mixing_ui_right")
-	var mixing_ui_up = Input.is_action_pressed("mixing_ui_up")
-	var mixing_ui_down = Input.is_action_pressed("mixing_ui_down")
+	if not delay_timer.is_stopped():
+		return
 
-	var next_panel: PanelContainer = null
-	if mixing_ui_left:
-		next_panel = current_panel.get_node(current_panel.focus_previous)
-		next_panel.remove_theme_stylebox_override("panel")
-		next_panel.add_theme_stylebox_override("panel", highlight_box)
-		current_panel.remove_theme_stylebox_override("panel")
-		current_panel.add_theme_stylebox_override("panel", no_highlight_box)
-		current_panel = next_panel
-	elif mixing_ui_right:
-		next_panel = current_panel.get_node(current_panel.focus_next)
-		next_panel.remove_theme_stylebox_override("panel")
-		next_panel.add_theme_stylebox_override("panel", highlight_box)
-		current_panel.remove_theme_stylebox_override("panel")
-		current_panel.add_theme_stylebox_override("panel", no_highlight_box)
-		current_panel = next_panel
+	var changed = false
+	if Input.is_action_just_pressed("mixing_ui_red"):
+		if available_charges > 0 && red_value.value < 3:
+			red_value.add(1)
+			available_charges -= 1
+			changed = true
+		elif red_value.value == 3:
+			red_value.subtract(3)
+			available_charges += 3
+			changed = true
+	if Input.is_action_just_pressed("mixing_ui_green"):
+		if available_charges > 0 && green_value.value < 3:
+			green_value.add(1)
+			available_charges -= 1
+			changed = true
+		elif green_value.value == 3:
+			green_value.subtract(3)
+			available_charges += 3
+			changed = true
+	if Input.is_action_just_pressed("mixing_ui_blue"):
+		if available_charges > 0 && blue_value.value < 3:
+			blue_value.add(1)
+			available_charges -= 1
+			changed = true
+		elif blue_value.value == 3:
+			blue_value.subtract(3)
+			available_charges += 3
+			changed = true
+	if Input.is_action_just_pressed("mixing_ui_clear"):
+		available_charges += red_value.value + green_value.value + blue_value.value
+		red_value.value = 0
+		green_value.value = 0
+		blue_value.value = 0
+		changed = true
+
+
 	
-	var delta = 0
-	if mixing_ui_up && available_charges > 0:
-		available_charges -= 1
-		delta = 1
-	elif mixing_ui_down:
-		available_charges += 1
-		delta = -1
-	
-	if delta != 0 && delay_timer.is_stopped():
-		match current_panel:
-			red_panel:
-				red_value.add(delta)
-			green_panel:
-				green_value.add(delta)
-			blue_panel:
-				blue_value.add(delta)
+	if changed:
 		delay_timer.start()
 		color_changed.emit(get_color())
 		for node in get_tree().get_nodes_in_group("aura_powerup"):

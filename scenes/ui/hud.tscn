@@ -103,13 +103,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -60.0
+offset_left = -57.0
 offset_top = -15.0
-offset_right = -20.0
+offset_right = -17.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(3, 0.25)
+scale = Vector2(2.8, 0.25)
 
 [node name="Background" type="ColorRect" parent="HealthBar"]
 layout_mode = 0
