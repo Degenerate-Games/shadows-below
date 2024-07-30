@@ -105,7 +105,6 @@ collision_mask = 16
 can_sleep = false
 lock_rotation = true
 script = ExtResource("1_f3xvk")
-collectible_type = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
