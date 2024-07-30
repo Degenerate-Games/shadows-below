@@ -12,6 +12,8 @@ var base_aura_energy: float
 var pulsed: bool
 var touching_player: bool
 var target_scale: Vector2
+var min_scale: Vector2
+var max_scale: Vector2
 
 var aura: PointLight2D
 var aura_pulse_timer: Timer
@@ -30,6 +32,8 @@ func _ready():
 	damage_timer = $DamageTimer
 	navigation_agent = $NavigationAgent2D
 	power_remaining = total_power
+	min_scale = Vector2(0.3, 0.3)
+	max_scale = scale
 	target_scale = scale
 	
 	# Initialize the color values
@@ -51,12 +55,11 @@ func _process(_delta):
 		scale = lerp(scale, target_scale,remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
 
 func _physics_process(delta):
-	if navigation_agent.is_navigation_finished():
-		return
-
-	if not damage_timer.is_stopoed():
-		velocity = to_local(target.global_position - global_position).normalized() * max_speed
+	if not damage_timer.is_stopped():
+		velocity = (global_position - target.global_position).normalized() * max_speed
 	else:
+		if navigation_agent.is_navigation_finished():
+			return
 		var direction = to_local(navigation_agent.get_next_path_position()).normalized()
 		velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
 	move_and_slide()
@@ -80,7 +83,7 @@ func take_damage(damage: int):
 	# Otherwise, subtract the damage
 	power_remaining -= damage
 	damage_timer.start()
-	target_scale = scale * 0.75
+	target_scale = lerp(min_scale, max_scale, float(power_remaining) / total_power)
 	
 	
 func set_target(tgt):
@@ -142,3 +145,7 @@ func _on_area_2d_body_entered(body:Node2D):
 func _on_area_2d_body_exited(body:Node2D):
 	if body.is_in_group("player"):
 		touching_player = false
+
+
+func _on_damage_timer_timeout():
+	damage_timer.stop()
