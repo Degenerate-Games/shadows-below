@@ -92,7 +92,7 @@ collision_mask = 19
 motion_mode = 1
 script = ExtResource("1_o7fok")
 max_speed = 50
-total_power = 2
+total_power = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
