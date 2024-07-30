@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://do538bnebafup"]
 
-[ext_resource type="Script" path="res://scripts/items/shadow.gd" id="1_vbxln"]
+[ext_resource type="Script" path="res://scripts/items/health_powerup.gd" id="1_f3xvk"]
 [ext_resource type="Texture2D" uid="uid://xrpmda817ort" path="res://assets/sprites/Shadow_drop.png" id="2_x14nh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_af3q2"]
@@ -98,13 +98,14 @@ radius = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_61gth"]
 radius = 5.09902
 
-[node name="AuraPowerup" type="RigidBody2D" groups=["items"]]
+[node name="HealthPowerup" type="RigidBody2D" groups=["items"]]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 16
 can_sleep = false
 lock_rotation = true
-script = ExtResource("1_vbxln")
+script = ExtResource("1_f3xvk")
+collectible_type = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)

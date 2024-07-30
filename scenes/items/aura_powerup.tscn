@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://b81nwu66vrkt5"]
 
-[ext_resource type="Script" path="res://scripts/items/shadow.gd" id="1_wrv8g"]
+[ext_resource type="Script" path="res://scripts/items/aura_powerup.gd" id="1_ni70u"]
 [ext_resource type="Texture2D" uid="uid://xrpmda817ort" path="res://assets/sprites/Shadow_drop.png" id="2_7fotl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_af3q2"]
@@ -104,7 +104,8 @@ collision_layer = 4
 collision_mask = 16
 can_sleep = false
 lock_rotation = true
-script = ExtResource("1_wrv8g")
+script = ExtResource("1_ni70u")
+collectible_type = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 1, 0, 1)
