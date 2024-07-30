@@ -11,10 +11,12 @@ var blue: ColorValue
 var base_aura_energy: float
 var pulsed: bool
 var touching_player: bool
+var target_scale: Vector2
 
 var aura: PointLight2D
 var aura_pulse_timer: Timer
 var animation_controller: AnimatedSprite2D
+var damage_timer: Timer
 var navigation_agent: NavigationAgent2D
 
 # Called when the node enters the scene tree for the first time.
@@ -25,8 +27,10 @@ func _ready():
 	base_aura_energy = aura.energy
 	aura_pulse_timer = $AuraPulseTimer
 	animation_controller = $AnimatedSprite2D
+	damage_timer = $DamageTimer
 	navigation_agent = $NavigationAgent2D
 	power_remaining = total_power
+	target_scale = scale
 	
 	# Initialize the color values
 	red = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
@@ -43,13 +47,18 @@ func _ready():
 
 func _process(_delta):
 	update_aura_strength()
+	if not damage_timer.is_stopped():
+		scale = lerp(scale, target_scale,remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
 
 func _physics_process(delta):
 	if navigation_agent.is_navigation_finished():
 		return
 
-	var direction = to_local(navigation_agent.get_next_path_position()).normalized()
-	velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
+	if not damage_timer.is_stopoed():
+		velocity = to_local(target.global_position - global_position).normalized() * max_speed
+	else:
+		var direction = to_local(navigation_agent.get_next_path_position()).normalized()
+		velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
 	move_and_slide()
 	
 func take_damage(damage: int):
@@ -70,6 +79,8 @@ func take_damage(damage: int):
 		return
 	# Otherwise, subtract the damage
 	power_remaining -= damage
+	damage_timer.start()
+	target_scale = scale * 0.75
 	
 	
 func set_target(tgt):
