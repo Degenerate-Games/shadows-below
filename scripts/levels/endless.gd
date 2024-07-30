@@ -67,4 +67,4 @@ func _on_combat_sub_bass_finished():
 	$AudioLayers/CombatSubBass.play(0)
 
 func _on_combat_full_finished():
-	$AudioLayer/CombatFull.play(0)
+	$AudioLayers/CombatFull.play(0)
