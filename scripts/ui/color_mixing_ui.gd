@@ -77,6 +77,8 @@ func handle_input():
 				blue_value.add(delta)
 		delay_timer.start()
 		color_changed.emit(get_color())
+		for node in get_tree().get_nodes_in_group("aura_powerup"):
+			node.modulate = get_color()
 
 func get_color() -> Color:
 	return Color(red_value.normalize(), green_value.normalize(), blue_value.normalize())
