@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var max_speed: float = 250 ## The maximum speed the player can move
 @export var acceleration: float = 1500 ## The rate at which the player can speed up
 @export var friction: float = 600 ## The rate at which the player slows down
-@export var aura_pulse_speeds: Array = [0.5, 1, 1.5, 2, 2.5] ## The speeds at which the aura will pulse
+@export var aura_pulse_speeds: Array = [0.5, 1, 1.5, 2] ## The speeds at which the aura will pulse
 @export_range(0, 4) var aura_pulse_speed_idx: float = 0 ## How many times per second the aura will pulse
 @export var max_health: float = 5 ## The maximum health the player can have
 
