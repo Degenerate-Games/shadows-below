@@ -89,7 +89,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o8vl2"]
@@ -108,9 +108,10 @@ script = ExtResource("1_d6vme")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sh30f")
-animation = &"idle"
+animation = &"death"
 autoplay = "death"
-frame_progress = 0.918708
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o8vl2")
