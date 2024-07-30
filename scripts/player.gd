@@ -97,8 +97,8 @@ func collect(item):
 			handle_shadow_collected(item)
 		Global.COLLECTIBLE_TYPE.HEALTH:
 			handle_health_collected(item)
-		Global.COLLECTIBLE_TYPE.POWERUP:
-			handle_powerup_collected(item)
+		Global.COLLECTIBLE_TYPE.AURA:
+			handle_aura_collected(item)
 
 func handle_shadow_collected(_item):
 	shadow_collected.emit()
@@ -108,7 +108,7 @@ func handle_health_collected(_item):
 	health = min(health + 1, max_health)
 	pass
 
-func handle_powerup_collected(_item):
+func handle_aura_collected(_item):
 	aura_pulse_speed_idx = clamp(aura_pulse_speed_idx + 1, 0, aura_pulse_speeds.size() - 1)
 	update_aura_pulse_timer()
 	get_parent().set_aura_pulse_level(aura_pulse_speed_idx)
