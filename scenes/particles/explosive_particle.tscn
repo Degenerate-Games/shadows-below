@@ -23,10 +23,9 @@ scale_curve = SubResource("CurveTexture_shwlh")
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.0
 
-[node name="explosiveParticle" type="GPUParticles2D"]
+[node name="ExplosiveParticle" type="GPUParticles2D"]
 z_index = 1
 texture_filter = 1
-position = Vector2(297, 174)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_0xp0l")
 texture = ExtResource("1_k1sh1")

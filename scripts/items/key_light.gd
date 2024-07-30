@@ -32,6 +32,7 @@ func interact():
 	if key_power == 0:
 		$PointLight2D.enabled = false
 		unlocked = true
+		$ExplosiveParticle.emitting = true
 		emit_signal("key_unlocked")
 		return
 

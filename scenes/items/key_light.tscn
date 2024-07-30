@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6lexs8ov1w1b"]
+[gd_scene load_steps=7 format=3 uid="uid://c6lexs8ov1w1b"]
 
 [ext_resource type="Texture2D" uid="uid://dnxdiitp7oghy" path="res://assets/items/keyLight.png" id="1_3srjn"]
 [ext_resource type="Script" path="res://scripts/items/key_light.gd" id="1_qiyqs"]
+[ext_resource type="PackedScene" uid="uid://xfj8qwsm1lwe" path="res://scenes/particles/explosive_particle.tscn" id="3_j23o3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5nr2v"]
 radius = 9.8995
@@ -34,5 +35,8 @@ texture = SubResource("GradientTexture2D_lo4f1")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="ExplosiveParticle" parent="." instance=ExtResource("3_j23o3")]
+emitting = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
