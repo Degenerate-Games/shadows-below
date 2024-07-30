@@ -8,7 +8,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("reload"):
-		var room = get_child(-1)
+		var room = get_child( - 1)
 		if room.name.begins_with("Generated Room"):
 			room.queue_free()
 			add_child(LevelGenerator.generate_room(5))
@@ -25,72 +25,37 @@ func set_aura_pulse_level(level: int):
 	match level:
 		0:
 			$AudioLayers/CombatDrums.stop()
-			$AudioLayers/CombatBass.stop()
-			$AudioLayers/CombatSub.stop()
+			$AudioLayers/CombatSubBass.stop()
 			$AudioLayers/CombatLead.stop()
 			if not $AudioLayers/CombatPads.is_playing():
-				$AudioLayers/CombatPads.play()
+				$AudioLayers/CombatPads.play(0)
 		1:
-			$AudioLayers/CombatBass.stop()
-			$AudioLayers/CombatSub.stop()
+			$AudioLayers/CombatSubBass.stop()
 			$AudioLayers/CombatLead.stop()
 			if not $AudioLayers/CombatDrums.is_playing():
-				$AudioLayers/CombatDrums.seek(song_position)
-				$AudioLayers/CombatDrums._set_playing(true)
+				$AudioLayers/CombatDrums.play(song_position)
 		2:
-			$AudioLayers/CombatSub.stop()
 			$AudioLayers/CombatLead.stop()
 			if not $AudioLayers/CombatDrums.is_playing():
-				$AudioLayers/CombatDrums.seek(song_position)
-				$AudioLayers/CombatDrums._set_playing(true)
-			if not $AudioLayers/CombatBass.is_playing():
-				$AudioLayers/CombatBass.seek(song_position)
-				$AudioLayers/CombatBass._set_playing(true)
+				$AudioLayers/CombatDrums.play(song_position)
+			if not $AudioLayers/CombatSubBass.is_playing():
+				$AudioLayers/CombatSubBass.play(song_position)
 		3:
-			$AudioLayers/CombatLead.stop()
 			if not $AudioLayers/CombatDrums.is_playing():
-				$AudioLayers/CombatDrums.seek(song_position)
-				$AudioLayers/CombatDrums._set_playing(true)
-			if not $AudioLayers/CombatBass.is_playing():
-				$AudioLayers/CombatBass.seek(song_position)
-				$AudioLayers/CombatBass._set_playing(true)
-			if not $AudioLayers/CombatSub.is_playing():
-				$AudioLayers/CombatSub.seek(song_position)
-				$AudioLayers/CombatSub._set_playing(true)
-		4:
-			if not $AudioLayers/CombatDrums.is_playing():
-				$AudioLayers/CombatDrums.seek(song_position)
-				$AudioLayers/CombatDrums._set_playing(true)
-			if not $AudioLayers/CombatBass.is_playing():
-				$AudioLayers/CombatBass.seek(song_position)
-				$AudioLayers/CombatBass._set_playing(true)
-			if not $AudioLayers/CombatSub.is_playing():
-				$AudioLayers/CombatSub.seek(song_position)
-				$AudioLayers/CombatSub._set_playing(true)
+				$AudioLayers/CombatDrums.play(song_position)
+			if not $AudioLayers/CombatSubBass.is_playing():
+				$AudioLayers/CombatSubBass.play(song_position)
 			if not $AudioLayers/CombatLead.is_playing():
-				$AudioLayers/CombatLead.seek(song_position)
-				$AudioLayers/CombatLead._set_playing(true)
+				$AudioLayers/CombatLead.play(song_position)
 
 func _on_combat_pads_finished():
-	$AudioLayers/CombatPads.seek(0)
-	$AudioLayers/CombatPads.play()
-
+	$AudioLayers/CombatPads.play(0)
 
 func _on_combat_drums_finished():
-	$AudioLayers/CombatDrums.seek(0)
-	$AudioLayers/CombatDrums.play()
-
-
-func _on_combat_bass_finished():
-	$AudioLayers/CombatBass.seek(0)
-	$AudioLayers/CombatBass.play()
-
-
-func _on_combat_sub_finished():
-	$AudioLayers/CombatSub.seek(0)
-	$AudioLayers/CombatSub.play()
-
+	$AudioLayers/CombatDrums.play(0)
 
 func _on_combat_lead_finished():
-	$AudioLayers/CombatLead.seek(0)
-	$AudioLayers/CombatLead.play()
+	$AudioLayers/CombatLead.play(0)
+
+func _on_combat_sub_bass_finished():
+	$AudioLayers/CombatSubBass.play(0)
