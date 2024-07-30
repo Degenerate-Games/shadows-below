@@ -26,6 +26,7 @@ func generate_room() -> Node2D:
 	return room
 
 func set_aura_pulse_level(level: int):
+	return
 	var song_position = $AudioLayers/CombatPads.get_playback_position()
 	match level:
 		0:
@@ -64,3 +65,6 @@ func _on_combat_lead_finished():
 
 func _on_combat_sub_bass_finished():
 	$AudioLayers/CombatSubBass.play(0)
+
+func _on_combat_full_finished():
+	$AudioLayer/CombatFull.play(0)
