@@ -101,27 +101,27 @@ func handle_input():
 			red_value.add(1)
 			available_charges -= 1
 			changed = true
-		elif red_value.value == 3:
-			red_value.subtract(3)
-			available_charges += 3
+		elif red_value.value == 3 || available_charges == 0:
+			available_charges += red_value.value
+			red_value.value = 0
 			changed = true
 	if Input.is_action_just_pressed("mixing_ui_green"):
 		if available_charges > 0 && green_value.value < 3:
 			green_value.add(1)
 			available_charges -= 1
 			changed = true
-		elif green_value.value == 3:
-			green_value.subtract(3)
-			available_charges += 3
+		elif green_value.value == 3 || available_charges == 0:
+			available_charges += green_value.value
+			green_value.value = 0
 			changed = true
 	if Input.is_action_just_pressed("mixing_ui_blue"):
 		if available_charges > 0 && blue_value.value < 3:
 			blue_value.add(1)
 			available_charges -= 1
 			changed = true
-		elif blue_value.value == 3:
-			blue_value.subtract(3)
-			available_charges += 3
+		elif blue_value.value == 3 || available_charges == 0:
+			available_charges += blue_value.value
+			blue_value.value = 0
 			changed = true
 	if Input.is_action_just_pressed("mixing_ui_clear"):
 		available_charges += red_value.value + green_value.value + blue_value.value
