@@ -66,7 +66,7 @@ position = Vector2(-4, 0)
 texture_normal = ExtResource("4_73twt")
 texture_pressed = ExtResource("5_ubflk")
 shape = SubResource("CircleShape2D_5k4sh")
-action = "mixing_ui_left"
+action = "mixing_ui_red"
 visibility_mode = 1
 
 [node name="Up" type="TouchScreenButton" parent="DPad"]
@@ -75,7 +75,7 @@ rotation = 1.5708
 texture_normal = ExtResource("4_73twt")
 texture_pressed = ExtResource("5_ubflk")
 shape = SubResource("CircleShape2D_ww8iu")
-action = "mixing_ui_up"
+action = "mixing_ui_green"
 visibility_mode = 1
 
 [node name="Right" type="TouchScreenButton" parent="DPad"]
@@ -84,7 +84,7 @@ rotation = 3.14159
 texture_normal = ExtResource("4_73twt")
 texture_pressed = ExtResource("5_ubflk")
 shape = SubResource("CircleShape2D_fcsxw")
-action = "mixing_ui_right"
+action = "mixing_ui_blue"
 visibility_mode = 1
 
 [node name="Down" type="TouchScreenButton" parent="DPad"]
@@ -93,7 +93,7 @@ rotation = -1.5708
 texture_normal = ExtResource("4_73twt")
 texture_pressed = ExtResource("5_ubflk")
 shape = SubResource("CircleShape2D_yiqxs")
-action = "mixing_ui_down"
+action = "mixing_ui_clear"
 visibility_mode = 1
 
 [node name="HealthBar" type="Control" parent="."]
