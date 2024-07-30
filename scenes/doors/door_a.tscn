@@ -1,10 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://chp8ikeeqqgly"]
+[gd_scene load_steps=10 format=3 uid="uid://chp8ikeeqqgly"]
 
 [ext_resource type="Script" path="res://scripts/doors/door.gd" id="1_m0pu8"]
-[ext_resource type="Texture2D" uid="uid://dhahrqu7wdsr8" path="res://assets/sprites/doors/temp_door_closed.png" id="2_m0uth"]
+[ext_resource type="Texture2D" uid="uid://crdowscputxgv" path="res://assets/levels/dirt/Door_Sheet.png" id="2_py3na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4jd05"]
 size = Vector2(32, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytwv4"]
+atlas = ExtResource("2_py3na")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17mfk"]
+atlas = ExtResource("2_py3na")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvhiv"]
+atlas = ExtResource("2_py3na")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehsm6"]
+atlas = ExtResource("2_py3na")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m83o"]
+atlas = ExtResource("2_py3na")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xbdjl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytwv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17mfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvhiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehsm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m83o")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
 
 [node name="DoorA" type="Area2D" groups=["doors"]]
 script = ExtResource("1_m0pu8")
@@ -14,8 +57,9 @@ shape = SubResource("RectangleShape2D_4jd05")
 disabled = true
 debug_color = Color(0.317647, 0.286275, 0.54902, 0.901961)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -1.5708
-texture = ExtResource("2_m0uth")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_xbdjl")
+animation = &"open"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

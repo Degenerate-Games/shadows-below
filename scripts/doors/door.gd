@@ -39,7 +39,7 @@ func enter():
 
 func _on_room_complete():
 	print("Room Complete")
-	$Sprite2D.texture = load("res://assets/sprites/doors/temp_door_open.png")
+	$AnimatedSprite2D.play("open")
 	$CollisionShape2D.disabled = false
 
 func get_spawn_position(room: Node2D, spawn_name: String) -> Vector2:
