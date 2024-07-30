@@ -4,6 +4,11 @@ var difficulty: int = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var player = get_tree().get_first_node_in_group("player")
+	var hud = get_tree().get_first_node_in_group("HUD")
+	hud.get_node("ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
+	player.handle_color_change(hud.get_node("ColorMixingUI").get_color())
+	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
 	add_child(generate_room())
 
 func _process(_delta):

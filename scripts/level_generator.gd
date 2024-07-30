@@ -47,14 +47,6 @@ func generate_room(difficulty: int) -> TileMap:
 	room.name = "Generated Room: " + str(randi())
 	room.add_to_group("navigation", true)
 	room.set_script(load("res://scripts/room.gd"))
-
-	# Add UI to scene
-	print("Adding UI")
-	var hud = get_tree().get_first_node_in_group("HUD")
-	# var hud = load("res://scenes/ui/hud.tscn").instantiate()
-	# hud.name = "HUD"
-	# hud.position = Vector2(0, 0)
-	# room.add_child(hud)
 	
 	# Fill the room with background tiles
 	print("Drawing Background")
@@ -87,9 +79,6 @@ func generate_room(difficulty: int) -> TileMap:
 	print("Placing Player")
 	var player = get_tree().get_first_node_in_group("player")
 	player.position = player_spawn.position
-	hud.get_node("ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
-	player.handle_color_change(hud.get_node("ColorMixingUI").get_color())
-	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
 	
   # Place objectives
 	print("Placing Objectives")
