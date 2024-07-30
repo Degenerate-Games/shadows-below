@@ -54,9 +54,17 @@ func take_damage(damage: int):
 	var power_remaining = red.value + green.value + blue.value
 	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
-		var shadow = load("res://scenes/items/shadow.tscn").instantiate()
-		shadow.global_position = global_position
-		get_parent().add_child(shadow)
+		var r = randf()
+		var drop
+		if r < 0.3:
+			drop = load("res://scenes/items/shadow.tscn").instantiate()
+		elif r < 0.55:
+			drop = load("res://scenes/items/health_powerup.tscn").instantiate()
+		elif r < 0.65:
+			drop = load("res://scenes/items/aura_powerup.tscn").instantiate()
+		if drop:
+			drop.global_position = global_position
+			get_parent().add_child(drop)
 		queue_free()
 		return
 	# Otherwise, subtract the damage from a random color
