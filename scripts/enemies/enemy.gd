@@ -7,14 +7,22 @@ var target: Node2D
 var red: ColorValue
 var green: ColorValue
 var blue: ColorValue
+var base_aura_energy: float
+var pulsed: bool
+var touching_player: bool
 
-var point_light: PointLight2D
+var aura: PointLight2D
+var aura_pulse_timer: Timer
 var animation_controller: AnimatedSprite2D
 var navigation_agent: NavigationAgent2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	point_light = $PointLight2D
+	pulsed = false
+	touching_player = false
+	aura = $PointLight2D
+	base_aura_energy = aura.energy
+	aura_pulse_timer = $AuraPulseTimer
 	animation_controller = $AnimatedSprite2D
 	navigation_agent = $NavigationAgent2D
 	var power_remaining = total_power
@@ -28,8 +36,11 @@ func _ready():
 	
 	# Set the color of the point light
 	var color = Color(red.normalize(), green.normalize(), blue.normalize())
-	point_light.color = color
+	aura.color = color
 	animation_controller.self_modulate = color
+
+func _process(_delta):
+	update_aura_strength()
 
 func _physics_process(delta):
 	if navigation_agent.is_navigation_finished():
@@ -43,9 +54,17 @@ func take_damage(damage: int):
 	var power_remaining = red.value + green.value + blue.value
 	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
-		var shadow = load("res://scenes/items/shadow.tscn").instantiate()
-		shadow.global_position = global_position
-		get_parent().add_child(shadow)
+		var r = randf()
+		var drop
+		if r < 0.3:
+			drop = load("res://scenes/items/shadow.tscn").instantiate()
+		elif r < 0.55:
+			drop = load("res://scenes/items/health_powerup.tscn").instantiate()
+		elif r < 0.65:
+			drop = load("res://scenes/items/aura_powerup.tscn").instantiate()
+		if drop:
+			drop.global_position = global_position
+			get_parent().add_child(drop)
 		queue_free()
 		return
 	# Otherwise, subtract the damage from a random color
@@ -74,14 +93,52 @@ func create_path():
 	navigation_agent.target_position = target.global_position
 
 func get_color() -> Color:
-	return point_light.color
+	return aura.color
 
 func set_color(r: ColorValue, g: ColorValue, b: ColorValue):
 	red = r
 	green = g
 	blue = b
-	point_light.color = Color(red.normalize(), green.normalize(), blue.normalize())
-	animation_controller.self_modulate = point_light.color
+	aura.color = Color(red.normalize(), green.normalize(), blue.normalize())
+	animation_controller.self_modulate = aura.color
+
+func update_aura_strength():
+	if not aura:
+		return
+	var timer_percentage = aura_pulse_timer.time_left / aura_pulse_timer.wait_time
+	timer_percentage = remap(timer_percentage, 1, 0, -1, .1)
+	var f_a = 1 / pow(timer_percentage, 2)
+	var f_b = -1000 * pow(timer_percentage + .1, 2) + 40
+	var pulse = f_a
+	if timer_percentage >= -0.168192:
+		pulse = f_b
+	pulse = remap(pulse, 0, 40, 0.25, 1.25)
+	if timer_percentage > -0.1 and not pulsed:
+		pulsed = true
+		pulse_aura()
+	aura.energy = base_aura_energy * pulse
+
+func pulse_aura():
+	damage_player()
+
+func damage_player():
+	if not touching_player:
+		return
+	get_tree().call_group("player", "take_damage", 0.25)
 
 func _on_timer_timeout():
 	create_path()
+
+
+func _on_aura_pulse_timer_timeout():
+	pulsed = false
+
+
+func _on_area_2d_body_entered(body:Node2D):
+	if body.is_in_group("player"):
+		touching_player = true
+
+
+func _on_area_2d_body_exited(body:Node2D):
+	if body.is_in_group("player"):
+		touching_player = false

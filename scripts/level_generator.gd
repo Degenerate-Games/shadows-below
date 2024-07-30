@@ -11,6 +11,7 @@ var objective_idxs: Array[int]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tile_map = TileMap.new()
+	tile_map.y_sort_enabled = true
 	tile_map.tile_set = load("res://assets/levels/dirt/dirt_tileset.tres")
 	x_tiles = ceili(get_viewport().get_visible_rect().size.x / tile_map.tile_set.tile_size.x)
 	y_tiles = ceili(get_viewport().get_visible_rect().size.y / tile_map.tile_set.tile_size.y)
@@ -27,7 +28,10 @@ func _ready():
 	room_borders.append(Rect2i(x_tiles - 1, 0, x_tiles, y_tiles)) # Right
 	room_borders.append(Rect2i(0, y_tiles - 2, x_tiles, y_tiles)) # Bottom
 	room_borders.append(Rect2i(15, 17, 24, 21)) # Color UI
-	room_borders.append(Rect2i(17, 13, 22, 17)) # Player spawn
+	room_borders.append(Rect2i(0, y_tiles / 2 - 1, 2, y_tiles / 2 + 1)) # West Player Spawn
+	room_borders.append(Rect2i(x_tiles - 2, y_tiles / 2 - 1, x_tiles, y_tiles / 2 + 1)) # East Player Spawn
+	room_borders.append(Rect2i(x_tiles / 2 - 1, 0, x_tiles / 2 + 1, 2)) # North Player Spawn
+	room_borders.append(Rect2i(x_tiles / 2 - 1, y_tiles - 7, x_tiles / 2 + 1, y_tiles)) # South Player Spawn
 
 	obstacle_idxs = []
 	obstacle_idxs.append(1)
@@ -46,10 +50,11 @@ func generate_room(difficulty: int) -> TileMap:
 
 	# Add UI to scene
 	print("Adding UI")
-	var hud = load("res://scenes/ui/hud.tscn").instantiate()
-	hud.name = "HUD"
-	hud.position = Vector2(0, 0)
-	room.add_child(hud)
+	var hud = get_tree().get_first_node_in_group("HUD")
+	# var hud = load("res://scenes/ui/hud.tscn").instantiate()
+	# hud.name = "HUD"
+	# hud.position = Vector2(0, 0)
+	# room.add_child(hud)
 	
 	# Fill the room with background tiles
 	print("Drawing Background")
@@ -61,10 +66,27 @@ func generate_room(difficulty: int) -> TileMap:
 	print("Drawing Room Frame")
 	room.set_pattern(0, Vector2i(0, 0), tile_map.tile_set.get_pattern(0))
 
+	# Place player spawn points
+	print("Placing Player Spawns")
+	var player_spawn = Node2D.new()
+	player_spawn.add_to_group("player_spawn")
+	player_spawn.name = "West Spawn"
+	player_spawn.position = Vector2i(2, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(player_spawn.duplicate())
+	player_spawn.name = "East Spawn"
+	player_spawn.position = Vector2i(x_tiles - 3, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(player_spawn.duplicate())
+	player_spawn.name = "North Spawn"
+	player_spawn.position = Vector2i(x_tiles / 2, 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(player_spawn.duplicate())
+	player_spawn.name = "South Spawn"
+	player_spawn.position = Vector2i(x_tiles / 2, y_tiles - 8) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	room.add_child(player_spawn)
+
 	# Place the player
 	print("Placing Player")
 	var player = get_tree().get_first_node_in_group("player")
-	player.position = Vector2i(19, 15) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
+	player.position = player_spawn.position
 	hud.get_node("ColorMixingUI").color_changed.connect(player._on_color_mixing_ui_color_changed)
 	player.handle_color_change(hud.get_node("ColorMixingUI").get_color())
 	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
@@ -110,6 +132,7 @@ func generate_room(difficulty: int) -> TileMap:
 		var key = load("res://scenes/items/key_light.tscn").instantiate()
 		key.position = key_tile * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
 		print ("Key Tile: ", key_tile, "Key Position: ", key.position)
+		key.key_unlocked.connect(room._on_key_unlocked)
 		room.add_key(key)
 	
 	# Place doors
@@ -117,14 +140,26 @@ func generate_room(difficulty: int) -> TileMap:
 	var door = load("res://scenes/doors/door_a.tscn").instantiate()
 	room.room_complete.connect(door._on_room_complete)
 	door.position = Vector2i(0, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	room.add_child(door.duplicate())
+	door.name = "West Door"
+	room.add_child(door)
+	door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
+	door.rotate(PI)
 	door.position = Vector2i(x_tiles - 1, y_tiles / 2) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	room.add_child(door.duplicate())
+	door.name = "East Door"
+	room.add_child(door)
+	door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
 	door.rotate(PI / 2)
 	door.position = Vector2i(x_tiles / 2, 0) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	room.add_child(door.duplicate())
+	door.name = "North Door"
+	room.add_child(door)
+	door = load("res://scenes/doors/door_a.tscn").instantiate()
+	room.room_complete.connect(door._on_room_complete)
+	door.rotate(-PI / 2)
 	door.position = Vector2i(x_tiles / 2, y_tiles - 6) * tile_map.tile_set.tile_size + tile_map.tile_set.tile_size / 2
-	room.add_child(door.duplicate())
+	door.name = "South Door"
+	room.add_child(door)
 
 	# Add pause menu
 	print("Adding Pause Menu")

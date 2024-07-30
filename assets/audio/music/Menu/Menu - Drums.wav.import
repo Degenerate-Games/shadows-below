@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bc6md3n5vnrgg"
+path="res://.godot/imported/Menu - Drums.wav-5921563a8970d10c7ec226452ae5e86b.sample"
+
+[deps]
+
+source_file="res://assets/audio/music/Menu/Menu - Drums.wav"
+dest_files=["res://.godot/imported/Menu - Drums.wav-5921563a8970d10c7ec226452ae5e86b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

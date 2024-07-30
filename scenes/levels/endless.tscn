@@ -1,9 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://srhlqfih48tp"]
+[gd_scene load_steps=9 format=3 uid="uid://srhlqfih48tp"]
 
 [ext_resource type="Script" path="res://scripts/levels/endless.gd" id="1_11s4i"]
 [ext_resource type="PackedScene" uid="uid://b0no58d1y44c4" path="res://scenes/player.tscn" id="2_vx6l0"]
+[ext_resource type="AudioStream" uid="uid://bhevbsoqnpeha" path="res://assets/audio/music/Combat 1/Combat1 - Pads.wav" id="3_oqo5i"]
+[ext_resource type="AudioStream" uid="uid://dwm5hd8mhm8ya" path="res://assets/audio/music/Combat 1/Combat1 - Drums.wav" id="4_ju3g2"]
+[ext_resource type="AudioStream" uid="uid://xmj7pywl1vip" path="res://assets/audio/music/Combat 1/Combat1 - Bass.wav" id="5_rwqtp"]
+[ext_resource type="AudioStream" uid="uid://bmfc47clb6b44" path="res://assets/audio/music/Combat 1/Combat1 - Sub.wav" id="6_hyc3c"]
+[ext_resource type="AudioStream" uid="uid://bi1x6x17kkx73" path="res://assets/audio/music/Combat 1/Combat1 - Lead.wav" id="7_wa64a"]
+[ext_resource type="PackedScene" uid="uid://dwa1q74mmrncc" path="res://scenes/ui/hud.tscn" id="8_7q54e"]
 
 [node name="Endless" type="Node2D"]
 script = ExtResource("1_11s4i")
 
 [node name="Player" parent="." instance=ExtResource("2_vx6l0")]
+
+[node name="AudioLayers" type="Node" parent="."]
+
+[node name="CombatPads" type="AudioStreamPlayer" parent="AudioLayers"]
+stream = ExtResource("3_oqo5i")
+autoplay = true
+
+[node name="CombatDrums" type="AudioStreamPlayer" parent="AudioLayers"]
+stream = ExtResource("4_ju3g2")
+
+[node name="CombatBass" type="AudioStreamPlayer" parent="AudioLayers"]
+stream = ExtResource("5_rwqtp")
+
+[node name="CombatSub" type="AudioStreamPlayer" parent="AudioLayers"]
+stream = ExtResource("6_hyc3c")
+
+[node name="CombatLead" type="AudioStreamPlayer" parent="AudioLayers"]
+stream = ExtResource("7_wa64a")
+
+[node name="HUD" parent="." instance=ExtResource("8_7q54e")]
+top_level = true
+z_index = 100
+
+[connection signal="finished" from="AudioLayers/CombatPads" to="." method="_on_combat_pads_finished"]
+[connection signal="finished" from="AudioLayers/CombatDrums" to="." method="_on_combat_drums_finished"]
+[connection signal="finished" from="AudioLayers/CombatBass" to="." method="_on_combat_bass_finished"]
+[connection signal="finished" from="AudioLayers/CombatSub" to="." method="_on_combat_sub_finished"]
+[connection signal="finished" from="AudioLayers/CombatLead" to="." method="_on_combat_lead_finished"]
