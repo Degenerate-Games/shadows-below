@@ -161,7 +161,6 @@ func generate_room(difficulty: int) -> TileMap:
 	navigation.add_to_group("navigation_region", true)
 	navigation.navigation_polygon = load("res://assets/levels/navigation_polygon.tres")
 	room.add_child(navigation)
-	room.call_deferred("bake_after", 2)
 
 	return room
 
