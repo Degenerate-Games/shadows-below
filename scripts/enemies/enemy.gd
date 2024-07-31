@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var max_speed: int = 100
 @export var acceleration: int = 500
 @export_range(0, 9) var total_power: int = 8
+@export_range(0, 1) var push_back_scale: float = 1
 var power_remaining: int
 var target: Node2D
 var red: ColorValue
@@ -56,7 +57,7 @@ func _process(_delta):
 
 func _physics_process(delta):
 	if not damage_timer.is_stopped():
-		velocity = (global_position - target.global_position).normalized() * max_speed
+		velocity = (global_position - target.global_position).normalized() * max_speed * push_back_scale
 	else:
 		if navigation_agent.is_navigation_finished():
 			return

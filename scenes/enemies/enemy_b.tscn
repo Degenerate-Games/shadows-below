@@ -92,6 +92,7 @@ motion_mode = 1
 script = ExtResource("1_h4t6v")
 max_speed = 75
 total_power = 4
+push_back_scale = 0.6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
