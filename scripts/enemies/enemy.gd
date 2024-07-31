@@ -127,7 +127,7 @@ func pulse_aura():
 func damage_player():
 	if not touching_player:
 		return
-	get_tree().call_group("player", "take_damage", 0.25)
+	get_tree().call_group("player", "take_damage", 0.5)
 
 func _on_timer_timeout():
 	create_path()
