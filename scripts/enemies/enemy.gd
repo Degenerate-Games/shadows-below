@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var max_speed: int = 100
 @export var acceleration: int = 500
-@export_range(0, 8) var total_power: int = 8
+@export_range(0, 9) var total_power: int = 8
 var power_remaining: int
 var target: Node2D
 var red: ColorValue
@@ -73,7 +73,7 @@ func take_damage(damage: int):
 			drop = load("res://scenes/items/shadow.tscn").instantiate()
 		elif r < 0.55:
 			drop = load("res://scenes/items/health_powerup.tscn").instantiate()
-		elif r < 0.65:
+		elif r < 0.6:
 			drop = load("res://scenes/items/aura_powerup.tscn").instantiate()
 		if drop:
 			drop.global_position = global_position
