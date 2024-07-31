@@ -45,7 +45,13 @@ func _on_timer_timeout():
 	if spawn_count < 3:
 		spawn_enemy(1)
 	else:
-		spawn_enemy(randi_range(1, 2))
+		var rand = randf()
+		if rand < 0.45:
+			spawn_enemy(1)
+		elif rand < 0.9:
+			spawn_enemy(2)
+		else:
+			spawn_enemy(3)
 	spawn_count += 1
 
 func spawn_enemy(level: int):
@@ -55,6 +61,8 @@ func spawn_enemy(level: int):
 			enemy = load("res://scenes/enemies/enemy_a.tscn").instantiate()
 		2:
 			enemy = load("res://scenes/enemies/enemy_b.tscn").instantiate()
+		3:
+			enemy = load("res://scenes/enemies/enemy_c.tscn").instantiate()
 	enemy.global_position = global_position - Vector2(16, 16)
 	enemy.max_speed = 25 * (level + 1)
 	enemy.acceleration = 500
