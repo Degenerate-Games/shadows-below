@@ -11,14 +11,14 @@ func _ready():
 	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
 	add_child(generate_room())
 
-func _process(_delta):
-	if Input.is_action_just_pressed("reload"):
-		var room = get_child( - 1)
-		if room.name.begins_with("Generated Room"):
-			room.queue_free()
-			add_child(LevelGenerator.generate_room(5))
-	if Input.is_action_just_pressed("bake"):
-		get_tree().call_group("navigation_region", "bake_navigation_polygon")
+# func _process(_delta):
+# 	if Input.is_action_just_pressed("reload"):
+# 		var room = get_child( - 1)
+# 		if room.name.begins_with("Generated Room"):
+# 			room.queue_free()
+# 			add_child(LevelGenerator.generate_room(6))
+# 	if Input.is_action_just_pressed("bake"):
+# 		get_tree().call_group("navigation_region", "bake_navigation_polygon")
 
 func generate_room() -> Node2D:
 	var room = LevelGenerator.generate_room(difficulty)
