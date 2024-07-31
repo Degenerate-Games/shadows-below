@@ -75,6 +75,8 @@ func update_aura_strength():
 	aura.energy = base_aura_energy * pulse
 
 func damage_enemies():
+	if affected_enemies.size() > 0:
+		$Audio/DamageDealt.play(0)
 	for enemy in affected_enemies:
 		if not enemy.is_inside_tree():
 			affected_enemies.erase(enemy)

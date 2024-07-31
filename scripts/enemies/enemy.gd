@@ -66,7 +66,6 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func take_damage(damage: int):
-	$AudioStreamPlayer.play(0)
 	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
 		var r = randf()
@@ -80,8 +79,6 @@ func take_damage(damage: int):
 		if drop:
 			drop.global_position = global_position
 			get_parent().add_child(drop)
-		hide()
-		await $AudioStreamPlayer.finished
 		queue_free()
 		return
 	# Otherwise, subtract the damage
