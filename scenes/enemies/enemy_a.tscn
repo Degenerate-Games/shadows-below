@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b1wood0fcmyu4"]
+[gd_scene load_steps=17 format=3 uid="uid://b1wood0fcmyu4"]
 
 [ext_resource type="Texture2D" uid="uid://b0u655oc16fjh" path="res://assets/sprites/light1_idle.png" id="1_o4fy0"]
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_o7fok"]
+[ext_resource type="AudioStream" uid="uid://uwmp4hirc7v" path="res://assets/audio/sfx/enemyHit.mp3" id="3_gmu7l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wwx5"]
 atlas = ExtResource("1_o4fy0")
@@ -131,6 +132,9 @@ autostart = true
 
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.25
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gmu7l")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
