@@ -7,6 +7,7 @@ signal room_complete
 
 func _ready():
   Global.get_first_child_in_group(self, "navigation_region").bake_navigation_polygon()
+  remove_from_group("navigation")
 
 func add_key(key: Node2D):
   keys.append(key)
