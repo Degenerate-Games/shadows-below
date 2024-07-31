@@ -37,15 +37,16 @@ func _ready():
 	obstacle_idxs.append(1)
 	obstacle_idxs.append(2)
 	obstacle_idxs.append(3)
-	obstacle_idxs.append(9)
-	obstacle_idxs.append(10)
+	obstacle_idxs.append(6)
+	obstacle_idxs.append(7)
 
 	objective_idxs = []
 	objective_idxs.append(4)
 	objective_idxs.append(5)
-	objective_idxs.append(6)
-	# objective_idxs.append(7) needs work
 	objective_idxs.append(8)
+	objective_idxs.append(9)
+	objective_idxs.append(10)
+	objective_idxs.append(11)
 	
 
 func generate_room(difficulty: int) -> TileMap:
