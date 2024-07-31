@@ -191,7 +191,6 @@ texture = ExtResource("1_lpe33")
 3:1/0 = 0
 3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, 0, -5.33333, -4, -4, -5.33333, 0, -4, 4, 0, 5.33333, 4, 4, 5.33333, 0)
 4:1/0 = 0
 4:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rv8nq")
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)

@@ -23,23 +23,29 @@ func _ready():
 
 	# Initialize room borders
 	room_borders = []
-	room_borders.append(Rect2i(0, 0, x_tiles, 1)) # Top
-	room_borders.append(Rect2i(0, 0, 1, y_tiles)) # Left
-	room_borders.append(Rect2i(x_tiles - 1, 0, x_tiles, y_tiles)) # Right
-	room_borders.append(Rect2i(0, y_tiles - 2, x_tiles, y_tiles)) # Bottom
+	room_borders.append(Rect2i(0, 0, x_tiles, 2)) # Top
+	room_borders.append(Rect2i(0, 0, 2, y_tiles)) # Left
+	room_borders.append(Rect2i(x_tiles - 2, 0, x_tiles, y_tiles)) # Right
+	room_borders.append(Rect2i(0, y_tiles - 3, x_tiles, y_tiles)) # Bottom
 	room_borders.append(Rect2i(15, 17, 24, 21)) # Color UI
-	room_borders.append(Rect2i(0, y_tiles / 2 - 1, 2, y_tiles / 2 + 1)) # West Player Spawn
-	room_borders.append(Rect2i(x_tiles - 2, y_tiles / 2 - 1, x_tiles, y_tiles / 2 + 1)) # East Player Spawn
-	room_borders.append(Rect2i(x_tiles / 2 - 1, 0, x_tiles / 2 + 1, 2)) # North Player Spawn
-	room_borders.append(Rect2i(x_tiles / 2 - 1, y_tiles - 7, x_tiles / 2 + 1, y_tiles)) # South Player Spawn
+	room_borders.append(Rect2i(0, y_tiles / 2 - 2, 2, y_tiles / 2 + 2)) # West Player Spawn
+	room_borders.append(Rect2i(x_tiles - 3, y_tiles / 2 - 2, x_tiles, y_tiles / 2 + 2)) # East Player Spawn
+	room_borders.append(Rect2i(x_tiles / 2 - 2, 0, x_tiles / 2 + 2, 2)) # North Player Spawn
+	room_borders.append(Rect2i(x_tiles / 2 - 2, y_tiles - 8, x_tiles / 2 + 2, y_tiles)) # South Player Spawn
 
 	obstacle_idxs = []
 	obstacle_idxs.append(1)
 	obstacle_idxs.append(2)
 	obstacle_idxs.append(3)
+	obstacle_idxs.append(9)
+	obstacle_idxs.append(10)
 
 	objective_idxs = []
 	objective_idxs.append(4)
+	objective_idxs.append(5)
+	objective_idxs.append(6)
+	# objective_idxs.append(7) needs work
+	objective_idxs.append(8)
 	
 
 func generate_room(difficulty: int) -> TileMap:
@@ -93,9 +99,9 @@ func generate_room(difficulty: int) -> TileMap:
 		if obstacles.any(func(o): return o.intersects(obstacle)) || room_borders.any(func(b): return b.intersects(obstacle)):
 			continue
 		room.set_pattern(0, obstacle.position + Vector2i(1, 1), pattern)
-		if pattern.has_cell(Vector2i(3, 4)):
-			if pattern.get_cell_atlas_coords(Vector2i(3, 4)) == Vector2i(3, 1):
-				key_tiles.append(Vector2i(obstacle.position + Vector2i(4, 5)))
+		for cell in pattern.get_used_cells():
+			if pattern.get_cell_atlas_coords(cell) == Vector2i(3, 1):
+				key_tiles.append(obstacle.position + cell + Vector2i(1, 1))
 		obstacles.append(obstacle)
 		iterations += 1
 
