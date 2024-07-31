@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwa1q74mmrncc"]
+[gd_scene load_steps=12 format=3 uid="uid://dwa1q74mmrncc"]
 
 [ext_resource type="PackedScene" uid="uid://rfo2dnxunaxo" path="res://scenes/ui/color_mixing_ui.tscn" id="1_eg67d"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_6wdcc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://kbgg37vs570l" path="res://assets/ui/pause_button_pressed.png" id="4_5o5eb"]
 [ext_resource type="Texture2D" uid="uid://bkr2ona3y1u2k" path="res://assets/ui/d-pad.png" id="4_73twt"]
 [ext_resource type="Texture2D" uid="uid://cj1kt0i4s66jn" path="res://assets/ui/d-pad_pressed.png" id="5_ubflk"]
+[ext_resource type="Script" path="res://scripts/ui/LevelContainer.gd" id="7_f5y7q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5k4sh"]
 radius = 7.0
@@ -126,3 +127,19 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.611765, 0, 0, 1)
+
+[node name="LevelContainer" type="VFlowContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 68.0
+offset_bottom = 45.0
+script = ExtResource("7_f5y7q")
+
+[node name="Label" type="Label" parent="LevelContainer"]
+layout_mode = 2
+text = "Level: "
+
+[node name="Value" type="Label" parent="LevelContainer"]
+layout_mode = 2
+text = "1"

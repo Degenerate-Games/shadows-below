@@ -22,6 +22,7 @@ func _ready():
 
 func generate_room() -> Node2D:
 	var room = LevelGenerator.generate_room(difficulty)
+	get_tree().get_first_node_in_group("HUD").get_node("LevelContainer").set_level(difficulty - 4)
 	difficulty += 1
 	return room
 
