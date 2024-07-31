@@ -1,0 +1,138 @@
+[gd_scene load_steps=16 format=3 uid="uid://d1hdogc6puoae"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_tu6r2"]
+[ext_resource type="Texture2D" uid="uid://dy2mv22rnnd4l" path="res://assets/sprites/light3_idle.png" id="2_y1mji"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_meb0c"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kcgc"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm8pj"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ihit"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eviw"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yanj"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swr3w"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kac0h"]
+atlas = ExtResource("2_y1mji")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hlu3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_meb0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kcgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm8pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ihit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eviw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yanj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swr3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kac0h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_xy3b6"]
+offsets = PackedFloat32Array(0.506494, 0.688312)
+colors = PackedColorArray(1, 1, 1, 1, 0.329412, 0.329412, 0.329412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h6rlm"]
+gradient = SubResource("Gradient_xy3b6")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6igf"]
+size = Vector2(15.0943, 15.0943)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d20hg"]
+radius = 24.0
+
+[node name="EnemyC" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_tu6r2")
+max_speed = 30
+total_power = 9
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.667, 0.667)
+sprite_frames = SubResource("SpriteFrames_4hlu3")
+animation = &"idle"
+autoplay = "idle"
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.2, 0.2)
+energy = 0.3
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_h6rlm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(1.06, 1.06)
+shape = SubResource("RectangleShape2D_f6igf")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 50.0
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_d20hg")
+
+[node name="AuraPulseTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="AuraPulseTimer" to="." method="_on_aura_pulse_timer_timeout"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
