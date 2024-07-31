@@ -34,6 +34,7 @@ func interact():
 		unlocked = true
 		$ExplosiveParticle.emitting = true
 		emit_signal("key_unlocked")
+		$AudioSteamPlayer.play(0)
 		return
 
 func get_color() -> Color:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6lexs8ov1w1b"]
+[gd_scene load_steps=8 format=3 uid="uid://c6lexs8ov1w1b"]
 
 [ext_resource type="Texture2D" uid="uid://dnxdiitp7oghy" path="res://assets/items/keyLight.png" id="1_3srjn"]
 [ext_resource type="Script" path="res://scripts/items/key_light.gd" id="1_qiyqs"]
 [ext_resource type="PackedScene" uid="uid://xfj8qwsm1lwe" path="res://scenes/particles/explosive_particle.tscn" id="3_j23o3"]
+[ext_resource type="AudioStream" uid="uid://dqc5qs4uhu13m" path="res://assets/audio/sfx/lightDestroy.mp3" id="4_rjr54"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5nr2v"]
 radius = 9.8995
@@ -38,5 +39,8 @@ autostart = true
 
 [node name="ExplosiveParticle" parent="." instance=ExtResource("3_j23o3")]
 emitting = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rjr54")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
