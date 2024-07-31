@@ -82,7 +82,7 @@ fill_from = Vector2(0.5, 0.5)
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2pfb1"]
-radius = 127.142
+radius = 54.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
@@ -99,6 +99,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.5, 0.5)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_2ygnd")
 
