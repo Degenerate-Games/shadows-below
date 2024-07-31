@@ -1,7 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0no58d1y44c4"]
+[gd_scene load_steps=20 format=3 uid="uid://b0no58d1y44c4"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_envdg"]
 [ext_resource type="Texture2D" uid="uid://cf24sdexc2bd1" path="res://assets/sprites/shade_idle.png" id="2_d5y7b"]
+[ext_resource type="AudioStream" uid="uid://diwc70mdqqiua" path="res://assets/audio/sfx/pickupHealth.mp3" id="3_7c1x7"]
+[ext_resource type="AudioStream" uid="uid://d2jjuvhx572av" path="res://assets/audio/sfx/pickupAura.mp3" id="4_e6bhj"]
+[ext_resource type="AudioStream" uid="uid://74c868mibah0" path="res://assets/audio/sfx/pickupShadow.mp3" id="5_uidrs"]
+[ext_resource type="AudioStream" uid="uid://dipg8ls5stxbo" path="res://assets/audio/sfx/playerAuraHit_1.mp3" id="6_l53at"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j87w6"]
 atlas = ExtResource("2_d5y7b")
@@ -82,7 +86,7 @@ fill_from = Vector2(0.5, 0.5)
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2pfb1"]
-radius = 54.0
+radius = 81.0247
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
@@ -99,7 +103,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.7, 0.7)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_2ygnd")
 
@@ -119,6 +123,20 @@ gravity_direction = Vector2(0, 0)
 shape = SubResource("CircleShape2D_2pfb1")
 
 [node name="AuraPulseTimer" type="Timer" parent="."]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="PickupHealth" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_7c1x7")
+
+[node name="PickupAura" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_e6bhj")
+
+[node name="PickupShadow" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_uidrs")
+
+[node name="DamageTaken" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("6_l53at")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

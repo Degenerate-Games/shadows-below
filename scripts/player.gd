@@ -76,6 +76,9 @@ func update_aura_strength():
 
 func damage_enemies():
 	for enemy in affected_enemies:
+		if not enemy.is_inside_tree():
+			affected_enemies.erase(enemy)
+			continue
 		var enemy_color = enemy.get_color()
 		if enemy_color.r <= aura.color.r and enemy_color.g <= aura.color.g and enemy_color.b <= aura.color.b:
 			enemy.take_damage(1)
@@ -87,6 +90,7 @@ func interact():
 			interactable.interact()
 
 func take_damage(damage: float):
+	$Audio/DamageTaken.play(0)
 	health -= damage
 	if health <= 0:
 		get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
@@ -101,14 +105,17 @@ func collect(item):
 			handle_aura_collected(item)
 
 func handle_shadow_collected(_item):
+	$Audio/PickupShadow.play(0)
 	shadow_collected.emit()
 	pass
 
 func handle_health_collected(_item):
+	$Audio/PickupHealth.play(0)
 	health = min(health + 1, max_health)
 	pass
 
 func handle_aura_collected(_item):
+	$Audio/PickupAura.play(0)
 	aura_pulse_speed_idx = clamp(aura_pulse_speed_idx + 1, 0, aura_pulse_speeds.size() - 1)
 	update_aura_pulse_timer()
 	get_parent().set_aura_pulse_level(aura_pulse_speed_idx)
