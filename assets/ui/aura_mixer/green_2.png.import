@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv405xusk604c"
-path="res://.godot/imported/green_2.png-6d87a270f5615b738553197c89cce926.ctex"
+path="res://.godot/imported/green_2.png-4314b767a4ad7c047aeb08e69d1210a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Aura Gen/green_2.png"
-dest_files=["res://.godot/imported/green_2.png-6d87a270f5615b738553197c89cce926.ctex"]
+source_file="res://assets/ui/aura_mixer/green_2.png"
+dest_files=["res://.godot/imported/green_2.png-4314b767a4ad7c047aeb08e69d1210a1.ctex"]
 
 [params]
 

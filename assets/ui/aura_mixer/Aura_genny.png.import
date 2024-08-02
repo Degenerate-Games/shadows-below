@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cw3vqvbd5aosi"
-path="res://.godot/imported/Aura_genny.png-30fca03bf5025d5b98557be29d1d7482.ctex"
+path="res://.godot/imported/Aura_genny.png-d4e05e6f26532f36b61cf53dad98cbe0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Aura Gen/Aura_genny.png"
-dest_files=["res://.godot/imported/Aura_genny.png-30fca03bf5025d5b98557be29d1d7482.ctex"]
+source_file="res://assets/ui/aura_mixer/Aura_genny.png"
+dest_files=["res://.godot/imported/Aura_genny.png-d4e05e6f26532f36b61cf53dad98cbe0.ctex"]
 
 [params]
 

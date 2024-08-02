@@ -53,7 +53,7 @@ func generate_room(difficulty: int) -> TileMap:
 	var room = tile_map.duplicate()
 	room.name = "Generated Room: " + str(randi())
 	room.add_to_group("navigation", true)
-	room.set_script(load("res://scripts/room.gd"))
+	room.set_script(load("res://scripts/levels/room.gd"))
 	
 	# Fill the room with background tiles
 	print("Drawing Background")

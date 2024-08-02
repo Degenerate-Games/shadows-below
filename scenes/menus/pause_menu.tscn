@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjni8qecs1cia"]
 
 [ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="1_4345f"]
-[ext_resource type="Texture2D" uid="uid://csx4ipr2e1xr7" path="res://assets/sprites/Menu/Options_up.png" id="2_g7a6d"]
-[ext_resource type="Texture2D" uid="uid://ck13dp5yia7rg" path="res://assets/sprites/Menu/options_Down.png" id="3_32t1y"]
-[ext_resource type="Texture2D" uid="uid://c6ied4t7jcjdc" path="res://assets/sprites/Menu/options_Hover.png" id="4_07kcm"]
-[ext_resource type="Texture2D" uid="uid://lxsi1s65a6bm" path="res://assets/sprites/Menu/quit_Up.png" id="5_0fgtj"]
-[ext_resource type="Texture2D" uid="uid://dug7vqwetllpg" path="res://assets/sprites/Menu/Quit_Down.png" id="6_kjhbc"]
-[ext_resource type="Texture2D" uid="uid://dkylj0ss43wmg" path="res://assets/sprites/Menu/quit_Hover.png" id="7_ho57f"]
+[ext_resource type="Texture2D" uid="uid://csx4ipr2e1xr7" path="res://assets/ui/menu/Options_up.png" id="2_g7a6d"]
+[ext_resource type="Texture2D" uid="uid://ck13dp5yia7rg" path="res://assets/ui/menu/options_Down.png" id="3_32t1y"]
+[ext_resource type="Texture2D" uid="uid://c6ied4t7jcjdc" path="res://assets/ui/menu/options_Hover.png" id="4_07kcm"]
+[ext_resource type="Texture2D" uid="uid://lxsi1s65a6bm" path="res://assets/ui/menu/quit_Up.png" id="5_0fgtj"]
+[ext_resource type="Texture2D" uid="uid://dug7vqwetllpg" path="res://assets/ui/menu/Quit_Down.png" id="6_kjhbc"]
+[ext_resource type="Texture2D" uid="uid://dkylj0ss43wmg" path="res://assets/ui/menu/quit_Hover.png" id="7_ho57f"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqpemb3dyndws"
-path="res://.godot/imported/chargeOn.png-d2c6f0fbf103621e9bacf927f31a8481.ctex"
+path="res://.godot/imported/chargeOn.png-742e21d82134fe49e076a8aab4a449b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Aura Gen/chargeOn.png"
-dest_files=["res://.godot/imported/chargeOn.png-d2c6f0fbf103621e9bacf927f31a8481.ctex"]
+source_file="res://assets/ui/aura_mixer/chargeOn.png"
+dest_files=["res://.godot/imported/chargeOn.png-742e21d82134fe49e076a8aab4a449b9.ctex"]
 
 [params]
 

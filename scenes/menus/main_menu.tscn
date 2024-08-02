@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_8icis"]
 [ext_resource type="TileSet" uid="uid://ckaqj3x6ln0ft" path="res://assets/levels/dirt/dirt_tileset.tres" id="2_1sqsw"]
-[ext_resource type="Texture2D" uid="uid://dtiyf3oe0n07g" path="res://assets/sprites/Menu/Start_up.png" id="3_4nw3c"]
-[ext_resource type="Texture2D" uid="uid://dd8huxg310ywn" path="res://!!! DONT SHIP/logo_630p.png" id="3_vbm4p"]
-[ext_resource type="Texture2D" uid="uid://bcve2dimi3ybh" path="res://assets/sprites/Menu/Start_down.png" id="4_2m472"]
-[ext_resource type="Texture2D" uid="uid://dkji83lrhgtu5" path="res://assets/sprites/Menu/start_Hover.png" id="4_lqbj3"]
-[ext_resource type="Texture2D" uid="uid://csx4ipr2e1xr7" path="res://assets/sprites/Menu/Options_up.png" id="5_p6jty"]
-[ext_resource type="Texture2D" uid="uid://ck13dp5yia7rg" path="res://assets/sprites/Menu/options_Down.png" id="6_jdut4"]
-[ext_resource type="Texture2D" uid="uid://c6ied4t7jcjdc" path="res://assets/sprites/Menu/options_Hover.png" id="7_rg0o4"]
-[ext_resource type="Texture2D" uid="uid://lxsi1s65a6bm" path="res://assets/sprites/Menu/quit_Up.png" id="8_l7vld"]
-[ext_resource type="Texture2D" uid="uid://dug7vqwetllpg" path="res://assets/sprites/Menu/Quit_Down.png" id="9_vsrb5"]
-[ext_resource type="Texture2D" uid="uid://dkylj0ss43wmg" path="res://assets/sprites/Menu/quit_Hover.png" id="10_x5duk"]
+[ext_resource type="Texture2D" uid="uid://dtiyf3oe0n07g" path="res://assets/ui/menu/Start_up.png" id="3_4nw3c"]
+[ext_resource type="Texture2D" uid="uid://dd8huxg310ywn" path="res://assets/images/logo/logo_630p.png" id="3_krhmt"]
+[ext_resource type="Texture2D" uid="uid://bcve2dimi3ybh" path="res://assets/ui/menu/Start_down.png" id="4_2m472"]
+[ext_resource type="Texture2D" uid="uid://dkji83lrhgtu5" path="res://assets/ui/menu/start_Hover.png" id="4_lqbj3"]
+[ext_resource type="Texture2D" uid="uid://csx4ipr2e1xr7" path="res://assets/ui/menu/Options_up.png" id="5_p6jty"]
+[ext_resource type="Texture2D" uid="uid://ck13dp5yia7rg" path="res://assets/ui/menu/options_Down.png" id="6_jdut4"]
+[ext_resource type="Texture2D" uid="uid://c6ied4t7jcjdc" path="res://assets/ui/menu/options_Hover.png" id="7_rg0o4"]
+[ext_resource type="Texture2D" uid="uid://lxsi1s65a6bm" path="res://assets/ui/menu/quit_Up.png" id="8_l7vld"]
+[ext_resource type="Texture2D" uid="uid://dug7vqwetllpg" path="res://assets/ui/menu/Quit_Down.png" id="9_vsrb5"]
+[ext_resource type="Texture2D" uid="uid://dkylj0ss43wmg" path="res://assets/ui/menu/quit_Hover.png" id="10_x5duk"]
 [ext_resource type="AudioStream" uid="uid://dat2chcs2sekn" path="res://assets/audio/music/Menu/Menu-1.mp3" id="12_urkc2"]
 
 [node name="MainMenu" type="Control"]
@@ -48,7 +48,7 @@ offset_right = 472.5
 offset_bottom = 480.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_vbm4p")
+texture = ExtResource("3_krhmt")
 stretch_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

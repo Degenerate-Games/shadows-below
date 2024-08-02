@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-LevelGenerator="*res://scripts/level_generator.gd"
+LevelGenerator="*res://scripts/levels/level_generator.gd"
 
 [debug]
 

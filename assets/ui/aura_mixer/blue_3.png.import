@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8op5s7ovnuno"
-path="res://.godot/imported/blue_3.png-82a7d17b9a09d55949008f2aea159810.ctex"
+path="res://.godot/imported/blue_3.png-136e99650fe54fee0680a137215e4964.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Aura Gen/blue_3.png"
-dest_files=["res://.godot/imported/blue_3.png-82a7d17b9a09d55949008f2aea159810.ctex"]
+source_file="res://assets/ui/aura_mixer/blue_3.png"
+dest_files=["res://.godot/imported/blue_3.png-136e99650fe54fee0680a137215e4964.ctex"]
 
 [params]
 

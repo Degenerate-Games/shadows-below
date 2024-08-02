@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://b0no58d1y44c4"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_envdg"]
-[ext_resource type="Texture2D" uid="uid://cf24sdexc2bd1" path="res://assets/sprites/shade_idle.png" id="2_d5y7b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/shade_idle.png" id="2_d5y7b"]
 [ext_resource type="AudioStream" uid="uid://diwc70mdqqiua" path="res://assets/audio/sfx/pickupHealth.mp3" id="3_7c1x7"]
 [ext_resource type="AudioStream" uid="uid://d2jjuvhx572av" path="res://assets/audio/sfx/pickupAura.mp3" id="4_e6bhj"]
 [ext_resource type="AudioStream" uid="uid://74c868mibah0" path="res://assets/audio/sfx/pickupShadow.mp3" id="5_uidrs"]

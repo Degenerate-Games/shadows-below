@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dylsjt31lpif5"
-path="res://.godot/imported/chargeOff.png-06188d1c3df0bc52afbd356e7ce6ec89.ctex"
+path="res://.godot/imported/chargeOff.png-6b66ea58e3b7088f86305a6659176871.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Aura Gen/chargeOff.png"
-dest_files=["res://.godot/imported/chargeOff.png-06188d1c3df0bc52afbd356e7ce6ec89.ctex"]
+source_file="res://assets/ui/aura_mixer/chargeOff.png"
+dest_files=["res://.godot/imported/chargeOff.png-6b66ea58e3b7088f86305a6659176871.ctex"]
 
 [params]
 
