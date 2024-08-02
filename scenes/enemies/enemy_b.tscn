@@ -93,6 +93,7 @@ script = ExtResource("1_h4t6v")
 max_speed = 75
 total_power = 4
 push_back_scale = 0.6
+drop_rates = Array[float]([0.3, 0.3, 0.06])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

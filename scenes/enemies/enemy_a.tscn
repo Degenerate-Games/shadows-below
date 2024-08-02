@@ -93,6 +93,7 @@ motion_mode = 1
 script = ExtResource("1_o7fok")
 max_speed = 50
 total_power = 1
+drop_rates = Array[float]([0.2, 0.4, 0.03])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
