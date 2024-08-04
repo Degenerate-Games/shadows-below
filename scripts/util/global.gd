@@ -2,13 +2,6 @@ extends Resource
 
 class_name Global
 
-enum COLLECTIBLE_TYPE {
-	SHADOW,
-	HEALTH,
-	AURA,
-	POWERUP
-}
-
 static func get_first_child_in_group(parent: Node, group: String) -> Node:
 	for child in parent.get_children():
 		if child.is_in_group(group):
