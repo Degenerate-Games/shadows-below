@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var collectible_type: Global.COLLECTIBLE_TYPE = Global.COLLECTIBLE_TYPE.SHADOW
+@export var collectible_type: Item.ITEM_TYPE = Item.ITEM_TYPE.SHADOW
 
 func _ready():
 	contact_monitor = true
