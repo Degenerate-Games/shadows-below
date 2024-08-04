@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var acceleration: int = 500
 @export_range(0, 9) var total_power: int = 8
 @export_range(0, 1) var push_back_scale: float = 1
-@export var drop_rates: Array[float] ## Drop Rates for each drop type, see DROP_TYPE enum for indicies
+@export var drop_rates: DropRates
 var power_remaining: int
 var target: Node2D
 var red: ColorValue
@@ -54,7 +54,7 @@ func _ready():
 func _process(_delta):
 	update_aura_strength()
 	if not damage_timer.is_stopped():
-		scale = lerp(scale, target_scale,remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
+		scale = lerp(scale, target_scale, remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
 
 func _physics_process(delta):
 	if not damage_timer.is_stopped():
@@ -70,19 +70,12 @@ func take_damage(damage: int):
 	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
 		var r = randf()
-		var drop
-		if r < drop_rates[Global.COLLECTIBLE_TYPE.SHADOW]:
-			drop = load("res://scenes/items/shadow.tscn").instantiate()
-		r -= drop_rates[Global.COLLECTIBLE_TYPE.SHADOW]
-		if r < drop_rates[Global.COLLECTIBLE_TYPE.HEALTH]:
-			drop = load("res://scenes/items/health_powerup.tscn").instantiate()
-		r -= drop_rates[Global.COLLECTIBLE_TYPE.HEALTH]
-		if r < drop_rates[Global.COLLECTIBLE_TYPE.AURA]:
-			drop = load("res://scenes/items/aura_powerup.tscn").instantiate()
-		r -= drop_rates[Global.COLLECTIBLE_TYPE.AURA]
-		if drop:
-			drop.global_position = global_position
-			get_parent().add_child(drop)
+		for drop in drop_rates.drop_rates:
+			if r < drop.drop_rate:
+				var d = drop.scene.instantiate()
+				d.global_position = global_position
+				get_parent().add_child(d)
+			r = randf()
 		queue_free()
 		return
 	# Otherwise, subtract the damage
@@ -142,12 +135,12 @@ func _on_aura_pulse_timer_timeout():
 	pulsed = false
 
 
-func _on_area_2d_body_entered(body:Node2D):
+func _on_area_2d_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		touching_player = true
 
 
-func _on_area_2d_body_exited(body:Node2D):
+func _on_area_2d_body_exited(body: Node2D):
 	if body.is_in_group("player"):
 		touching_player = false
 
