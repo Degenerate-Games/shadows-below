@@ -123,7 +123,7 @@ func update_aura_strength():
 	pulse = remap(pulse, 0, 40, 0.25, remap(power_remaining, 0, total_power, .25, 1.25))
 	if timer_percentage > -0.1 and not pulsed:
 		pulsed = true
-	pulse_aura()
+		pulse_aura()
 	aura.energy = base_aura_energy * pulse
 
 func pulse_aura():
