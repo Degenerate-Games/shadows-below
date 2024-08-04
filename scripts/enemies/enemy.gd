@@ -84,7 +84,7 @@ func take_damage(damage: int):
 			drop.global_position = global_position
 			get_parent().add_child(drop)
 		queue_free()
-	return
+		return
 	# Otherwise, subtract the damage
 	power_remaining -= damage
 	damage_timer.start()
