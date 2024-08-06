@@ -113,11 +113,11 @@ func take_damage(damage: float):
 
 func collect(item):
 	match item.collectible_type:
-		Global.COLLECTIBLE_TYPE.SHADOW:
+		Item.ITEM_TYPE.SHADOW:
 			handle_shadow_collected(item)
-		Global.COLLECTIBLE_TYPE.HEALTH:
+		Item.ITEM_TYPE.HEALTH:
 			handle_health_collected(item)
-		Global.COLLECTIBLE_TYPE.AURA:
+		Item.ITEM_TYPE.AURA:
 			handle_aura_collected(item)
 
 func handle_shadow_collected(_item):
