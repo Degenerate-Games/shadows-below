@@ -112,10 +112,15 @@ bake={
 [layer_names]
 
 2d_physics/layer_1="Player"
+3d_physics/layer_1="Ground"
 2d_physics/layer_2="Enemies"
+3d_physics/layer_2="Wall"
 2d_physics/layer_3="Powerups"
+3d_physics/layer_3="Ceiling"
 2d_physics/layer_4="Interactables"
+3d_physics/layer_4="Player"
 2d_physics/layer_5="Terrain"
+3d_physics/layer_5="Enemy"
 
 [physics]
 
