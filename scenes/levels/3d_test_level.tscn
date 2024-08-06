@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://c40dyj0jy6ef" path="res://assets/materials/wall.tres" id="1_84ibq"]
 [ext_resource type="Material" uid="uid://yiilt4dmgyiv" path="res://assets/materials/light.tres" id="2_j2bni"]
 [ext_resource type="Material" uid="uid://ccy3bckurnj8p" path="res://assets/materials/dirt.tres" id="3_2vvk3"]
-[ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/3d_player.tscn" id="4_hgbm0"]
+[ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/player_3d.tscn" id="4_hgbm0"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i86i2"]
 
@@ -189,4 +189,4 @@ material_override = ExtResource("3_2vvk3")
 mesh = SubResource("PlaneMesh_tkw1n")
 skeleton = NodePath("../..")
 
-[node name="Player" parent="." instance=ExtResource("4_hgbm0")]
+[node name="Player3D" parent="." instance=ExtResource("4_hgbm0")]

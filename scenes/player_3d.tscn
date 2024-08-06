@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bycm4lkpx8o7e"]
 
-[ext_resource type="Script" path="res://scripts/3d_player.gd" id="1_u8r52"]
+[ext_resource type="Script" path="res://scripts/player_3d.gd" id="1_jr35w"]
 [ext_resource type="AudioStream" uid="uid://diwc70mdqqiua" path="res://assets/audio/sfx/pickupHealth.mp3" id="3_w8uqb"]
 [ext_resource type="AudioStream" uid="uid://d2jjuvhx572av" path="res://assets/audio/sfx/pickupAura.mp3" id="4_0wpfk"]
 [ext_resource type="AudioStream" uid="uid://74c868mibah0" path="res://assets/audio/sfx/pickupShadow.mp3" id="5_s0lhv"]
@@ -15,10 +15,10 @@ radius = 3.304
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sgx52"]
 
-[node name="Player" type="CharacterBody3D" groups=["player"]]
+[node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_mask = 30
 motion_mode = 1
-script = ExtResource("1_u8r52")
+script = ExtResource("1_jr35w")
 metadata/_edit_group_ = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
