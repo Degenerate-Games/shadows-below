@@ -28,6 +28,7 @@ var aura_pulse_timer: Timer
 var affected_enemies: Array[Node3D]
 var affected_interactables: Array[Node3D]
 var base_aura_energy: float
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var health: float
 var pulsed: bool
 
@@ -54,12 +55,16 @@ func _physics_process(delta):
 	handle_movement(delta)
 
 func handle_movement(delta):
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var y_velocity = velocity.y
+	if not is_on_floor():
+		y_velocity -= gravity * delta
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	input_dir = Vector3(input_dir.x, 0, input_dir.y)
 	if input_dir:
-		velocity = velocity.move_toward(input_dir.normalized() * max_speed, acceleration * delta)
+		velocity = velocity.move_toward(input_dir * max_speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, friction * delta)
+	velocity.y = y_velocity
 	move_and_slide()
 
 func handle_color_change(color):
