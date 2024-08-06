@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://bycm4lkpx8o7e"]
+
+[ext_resource type="Script" path="res://scripts/3d_player.gd" id="1_u8r52"]
+[ext_resource type="AudioStream" uid="uid://diwc70mdqqiua" path="res://assets/audio/sfx/pickupHealth.mp3" id="3_w8uqb"]
+[ext_resource type="AudioStream" uid="uid://d2jjuvhx572av" path="res://assets/audio/sfx/pickupAura.mp3" id="4_0wpfk"]
+[ext_resource type="AudioStream" uid="uid://74c868mibah0" path="res://assets/audio/sfx/pickupShadow.mp3" id="5_s0lhv"]
+[ext_resource type="AudioStream" uid="uid://dipg8ls5stxbo" path="res://assets/audio/sfx/playerAuraHit_1.mp3" id="6_2yuev"]
+[ext_resource type="AudioStream" uid="uid://uwmp4hirc7v" path="res://assets/audio/sfx/enemyHit.mp3" id="7_rnh20"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_votqm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ynd7n"]
+height = 1.0
+radius = 3.304
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sgx52"]
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_mask = 30
+motion_mode = 1
+script = ExtResource("1_u8r52")
+metadata/_edit_group_ = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+omni_range = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_votqm")
+
+[node name="Area2D" type="Area3D" parent="."]
+collision_mask = 14
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 10.0
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area2D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_ynd7n")
+
+[node name="AuraPulseTimer" type="Timer" parent="."]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="PickupHealth" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_w8uqb")
+
+[node name="PickupAura" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_0wpfk")
+
+[node name="PickupShadow" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_s0lhv")
+
+[node name="DamageTaken" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("6_2yuev")
+
+[node name="DamageDealt" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("7_rnh20")
+
+[node name="player" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_sgx52")
+
+[node name="Camera3D" type="Camera3D" parent="player"]
+transform = Transform3D(0.866025, -0.383022, 0.321394, 0, 0.642788, 0.766044, -0.5, -0.663414, 0.55667, 3, 10, 5)
+projection = 1
+size = 20.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="AuraPulseTimer" to="." method="_on_aura_pulse_timer_timeout"]
