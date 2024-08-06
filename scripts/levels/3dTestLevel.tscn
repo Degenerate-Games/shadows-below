@@ -1,0 +1,200 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvxya8ddaaw45"]
+
+[ext_resource type="Material" uid="uid://c40dyj0jy6ef" path="res://assets/materials/wall.tres" id="1_ettpj"]
+[ext_resource type="Material" uid="uid://yiilt4dmgyiv" path="res://assets/materials/light.tres" id="2_tdyot"]
+[ext_resource type="Material" uid="uid://ccy3bckurnj8p" path="res://assets/materials/dirt.tres" id="3_3h5ux"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i86i2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0yeka"]
+material = ExtResource("2_tdyot")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tkw1n"]
+lightmap_size_hint = Vector2i(7, 7)
+material = ExtResource("3_3h5ux")
+size = Vector2(1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qgb4d"]
+
+[node name="3dTestLevel" type="Node3D"]
+
+[node name="environment" type="Node" parent="."]
+
+[node name="Node" type="Node" parent="environment"]
+
+[node name="wall7" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 4, -7)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="wall8" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 2, -10, 4, -7)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="wall9" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 2, 10, 4, -7)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="wall10" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 4, 8)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="wall11" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 2, -10, 4, 8)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="wall12" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 2, 10, 4, 8)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="wall" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, -4.37114e-08, -2, 0, 1, -8.74228e-08, 0, 2, -5)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance3D" parent="environment/Node/wall"]
+transform = Transform3D(-4.37114e-09, 0.1, -4.37114e-09, -0.5, -2.18557e-08, 2.18557e-08, 1.09278e-08, 1.09278e-08, 0.25, -0.00123242, 0.542639, -0.5)
+mesh = SubResource("CapsuleMesh_0yeka")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="environment/Node/wall/light"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.67037e-22, 0, -1.67037e-22, 2, -0.566028, -2.23517e-08, 0)
+light_color = Color(1, 0.686275, 0.588235, 1)
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="wall2" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, -4.37114e-08, -2, 0, 1, -8.74228e-08, -10, 2, -5)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance3D" parent="environment/Node/wall2"]
+transform = Transform3D(-4.37114e-09, 0.1, -4.37114e-09, -0.5, -2.18557e-08, 2.18557e-08, 1.09278e-08, 1.09278e-08, 0.25, -0.00123242, 0.542639, -0.5)
+mesh = SubResource("CapsuleMesh_0yeka")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="environment/Node/wall2/light"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.67037e-22, 0, -1.67037e-22, 2, -0.566028, -2.23517e-08, 0)
+light_color = Color(1, 0.686275, 0.588235, 1)
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="wall3" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(5, 0, 0, 0, -4.37114e-08, -2, 0, 1, -8.74228e-08, 10, 2, -5)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance3D" parent="environment/Node/wall3"]
+transform = Transform3D(-4.37114e-09, 0.1, -4.37114e-09, -0.5, -2.18557e-08, 2.18557e-08, 1.09278e-08, 1.09278e-08, 0.25, -0.00123242, 0.542639, -0.5)
+mesh = SubResource("CapsuleMesh_0yeka")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="environment/Node/wall3/light"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.67037e-22, 0, -1.67037e-22, 2, -0.566028, -2.23517e-08, 0)
+light_color = Color(1, 0.686275, 0.588235, 1)
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="wall4" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(-5, 8.74228e-08, -7.64274e-15, 0, -4.37114e-08, -2, -4.37114e-07, -1, 8.74228e-08, 0, 2, 6)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance3D" parent="environment/Node/wall4"]
+transform = Transform3D(-4.37114e-09, 0.1, -4.37114e-09, -0.5, -2.18557e-08, 2.18557e-08, 1.09278e-08, 1.09278e-08, 0.25, -0.00123242, 0.542639, -0.5)
+mesh = SubResource("CapsuleMesh_0yeka")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="environment/Node/wall4/light"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.67037e-22, 0, -1.67037e-22, 2, -0.566028, -2.23517e-08, 0)
+light_color = Color(1, 0.686275, 0.588235, 1)
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="wall5" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(-5, 8.74228e-08, -7.64274e-15, 0, -4.37114e-08, -2, -4.37114e-07, -1, 8.74228e-08, 10, 2, 6)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance3D" parent="environment/Node/wall5"]
+transform = Transform3D(-4.37114e-09, 0.1, -4.37114e-09, -0.5, -2.18557e-08, 2.18557e-08, 1.09278e-08, 1.09278e-08, 0.25, -0.00123242, 0.542639, -0.5)
+mesh = SubResource("CapsuleMesh_0yeka")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="environment/Node/wall5/light"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.67037e-22, 0, -1.67037e-22, 2, -0.566028, -2.23517e-08, 0)
+light_color = Color(1, 0.686275, 0.588235, 1)
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="wall6" type="MeshInstance3D" parent="environment/Node"]
+transform = Transform3D(-5, 8.74228e-08, -7.64274e-15, 0, -4.37114e-08, -2, -4.37114e-07, -1, 8.74228e-08, -10, 2, 6)
+material_override = ExtResource("1_ettpj")
+cast_shadow = 2
+gi_mode = 2
+mesh = SubResource("PlaneMesh_i86i2")
+skeleton = NodePath("../..")
+
+[node name="light" type="MeshInstance3D" parent="environment/Node/wall6"]
+transform = Transform3D(-4.37114e-09, 0.1, -4.37114e-09, -0.5, -2.18557e-08, 2.18557e-08, 1.09278e-08, 1.09278e-08, 0.25, -0.00123242, 0.542639, -0.5)
+mesh = SubResource("CapsuleMesh_0yeka")
+skeleton = NodePath("../../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="environment/Node/wall6/light"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.67037e-22, 0, -1.67037e-22, 2, -0.566028, -2.23517e-08, 0)
+light_color = Color(1, 0.686275, 0.588235, 1)
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="ground" type="MeshInstance3D" parent="environment"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0.0337701, -2.38419e-07, -0.0188322)
+material_override = ExtResource("3_3h5ux")
+mesh = SubResource("PlaneMesh_tkw1n")
+skeleton = NodePath("../..")
+
+[node name="player" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_qgb4d")
+
+[node name="Camera3D" type="Camera3D" parent="player"]
+transform = Transform3D(0.866025, -0.383022, 0.321394, 0, 0.642788, 0.766044, -0.5, -0.663414, 0.55667, 3, 10, 5)
+projection = 1
+size = 20.0

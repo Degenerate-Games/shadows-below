@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ccy3bckurnj8p"]
+
+[ext_resource type="Texture2D" uid="uid://bfjn54sardmp2" path="res://assets/textures/dirt.png" id="1_1xklp"]
+[ext_resource type="Texture2D" uid="uid://dbww1ff247q1x" path="res://assets/textures/dirt_Bump.png" id="2_dsa7c"]
+
+[resource]
+shading_mode = 2
+albedo_texture = ExtResource("1_1xklp")
+metallic = 0.05
+metallic_specular = 1.0
+metallic_texture = ExtResource("2_dsa7c")
+metallic_texture_channel = 4
+roughness = 0.0
+roughness_texture = ExtResource("2_dsa7c")
+roughness_texture_channel = 4
+heightmap_scale = 10.0
+heightmap_texture = ExtResource("2_dsa7c")
+uv1_scale = Vector3(5, 5, 5)
+uv1_triplanar = true
+texture_filter = 0
