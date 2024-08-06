@@ -10,7 +10,7 @@ Select the appropriate description of this Pull Request and add it to the beginn
 
 # Description
 
-In this section you should refernce the issue that this Pull Request handles (e.g Closes #1) and/or include a short description of the purpose of this Pull Request.
+In this section you should reference the issue that this Pull Request handles (e.g Closes #1) and/or include a short description of the purpose of this Pull Request.
 
 # Checklists
 
