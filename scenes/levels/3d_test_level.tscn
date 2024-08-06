@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvxya8ddaaw45"]
+[gd_scene load_steps=9 format=3 uid="uid://cvxya8ddaaw45"]
 
 [ext_resource type="Material" uid="uid://c40dyj0jy6ef" path="res://assets/materials/wall.tres" id="1_84ibq"]
 [ext_resource type="Material" uid="uid://yiilt4dmgyiv" path="res://assets/materials/light.tres" id="2_j2bni"]
@@ -14,6 +14,9 @@ material = ExtResource("2_j2bni")
 lightmap_size_hint = Vector2i(7, 7)
 material = ExtResource("3_2vvk3")
 size = Vector2(1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rlgvl"]
+points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
 
 [node name="3dTestLevel" type="Node3D"]
 
@@ -183,10 +186,16 @@ light_color = Color(1, 0.686275, 0.588235, 1)
 omni_range = 10.0
 omni_attenuation = 0.25
 
-[node name="ground" type="MeshInstance3D" parent="environment"]
+[node name="Ground" type="StaticBody3D" parent="environment"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0.0337701, -2.38419e-07, -0.0188322)
+collision_mask = 24
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="environment/Ground"]
 material_override = ExtResource("3_2vvk3")
 mesh = SubResource("PlaneMesh_tkw1n")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="environment/Ground"]
+shape = SubResource("ConvexPolygonShape3D_rlgvl")
 
 [node name="Player3D" parent="." instance=ExtResource("4_hgbm0")]
