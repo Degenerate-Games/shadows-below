@@ -1,4 +1,4 @@
-pla# Contributing
+# Contributing
 
 We are currently not accepting external contributions, if you find a problem with the game feel free to [open an issue](https://github.com/Degenerate-Games/shadows-below/issues/new/choose) and one of our internal team members will take a loook at it!
 
@@ -27,17 +27,17 @@ From there simply follow the instructions in the template to make sure that ever
 
 New branches must be created when making changes as it is not possible to push directly to the `main` branch. There are two methods for creating branches:
 
-#### Preferred
+### Preferred
 
 If you are creating a branch to deal with a specific Issue use the `Development` section on the issue page and keep the default name.
 
-#### Other Situations
+### Other Situations
 
 If there is not an open Issue and it does not make sense to open an Issue the branche's name should be an all lowercase short summary of the goal of the branch with spaces replaced with dashes (`-`). For example when creating this file there was not an open issue so the branch `add-contributing-document` was created so that changes could be made before merging into the `main` branch.
 
 ## Commits and Commit Messages
 
-The changes made in a commit should typically be able to be summed up in less than 50 characters, of more space is needed be sure to separate the message into a summary and description in either GitHub Desktop or the CLI. Refrain from having commit messages to the effect of `Fixed a bunch of things` elect instead to explain each of those things in separate commits.
+The changes made in a commit should typically be able to be summed up in less than 50 characters, of more space is needed be sure to separate the message into a summary and description in either GitHub Desktop or the CLI. Refrain from having commit messages to the effect of `Fixed a bunch of things`, elect instead to explain each of those things in separate commits or, if that is not reasonable, a better explanation in the commit description.
 
 ## Code Styling and File names
 
