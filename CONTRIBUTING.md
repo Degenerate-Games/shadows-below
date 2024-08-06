@@ -11,7 +11,7 @@ Below are some style guidlines for various parts of the project, these are not a
 All issue titles should be as short and sweet as possible while maintaining coherence some examples are below.
 
 - ✅ [BUG] Crash when entering dungeon on level one
-- ❌ Game wont run
+- ❌ Game won't run
 - ✅ Create new test level for 3D sprites
 - ❌ Testing things
 
@@ -19,7 +19,7 @@ Issue bodies should contain more information about what is going wrong or what n
 
 ## Pull Requests
 
-Pull Request titles should follow in a similar vein as Issue titles however they are **required** to have a [SLUG] at the beginning categorizing the issue. The options will be given at the top of the Pull Request body when it is first created, copy one of those into the title and then delete the section that has them before submitting the Pull Request.  
+Pull Request titles should follow in a similar vein as Issue titles however they are **required** to have a [SLUG] at the beginning categorizing the pull request. These slugs will be used when creating patch notes and for general organy. The different options are given at the top of the Pull Request body when it is first created, copy one of those into the title and then delete the section that has them before submitting the Pull Request. If you feel that none of the existing slugs apply to your pull request, open an Issue!  
 
 From there simply follow the instructions in the template to make sure that everything is in order before requesting review.
 
@@ -33,11 +33,11 @@ If you are creating a branch to deal with a specific Issue use the `Development`
 
 ### Other Situations
 
-If there is not an open Issue and it does not make sense to open an Issue the branche's name should be an all lowercase short summary of the goal of the branch with spaces replaced with dashes (`-`). For example when creating this file there was not an open issue so the branch `add-contributing-document` was created so that changes could be made before merging into the `main` branch.
+If there is not an open Issue and it does not make sense to open an Issue the branch's name should be an all lowercase short summary of the goal of the branch, with spaces replaced with dashes (`-`). For example when creating this file there was not an open issue so the branch `add-contributing-document` was created so that changes could be made before merging into the `main` branch.
 
 ## Commits and Commit Messages
 
-The changes made in a commit should typically be able to be summed up in less than 50 characters, of more space is needed be sure to separate the message into a summary and description in either GitHub Desktop or the CLI. Refrain from having commit messages to the effect of `Fixed a bunch of things`, elect instead to explain each of those things in separate commits or, if that is not reasonable, a better explanation in the commit description.
+Typically the changes made in a commit can be summed up in less than 50 characters, if more space is needed be sure to separate the message into a summary and description in either GitHub Desktop or the CLI. Refrain from having commit messages to the effect of `Fixed a bunch of things`, elect instead to explain each of those things in separate commits or, if that is not reasonable, provide a better explanation in the commit description.
 
 ## Code Styling and File names
 
