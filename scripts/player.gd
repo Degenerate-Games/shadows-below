@@ -1,3 +1,17 @@
+#	Copyright 2024 Degenerate Games
+#
+#	Licensed under the Apache License, Version 2.0 (the "License");
+#	you may not use this file except in compliance with the License.
+#	You may obtain a copy of the License at
+#
+#		http://www.apache.org/licenses/LICENSE-2.0
+#
+#	Unless required by applicable law or agreed to in writing, software
+#	distributed under the License is distributed on an "AS IS" BASIS,
+#	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#	See the License for the specific language governing permissions and
+#	limitations under the License.
+
 extends CharacterBody2D
 
 @export_category("Player Variables")
@@ -99,11 +113,11 @@ func take_damage(damage: float):
 
 func collect(item):
 	match item.collectible_type:
-		Global.COLLECTIBLE_TYPE.SHADOW:
+		Item.ITEM_TYPE.SHADOW:
 			handle_shadow_collected(item)
-		Global.COLLECTIBLE_TYPE.HEALTH:
+		Item.ITEM_TYPE.HEALTH:
 			handle_health_collected(item)
-		Global.COLLECTIBLE_TYPE.AURA:
+		Item.ITEM_TYPE.AURA:
 			handle_aura_collected(item)
 
 func handle_shadow_collected(_item):

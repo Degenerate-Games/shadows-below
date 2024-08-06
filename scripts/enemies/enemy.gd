@@ -1,9 +1,24 @@
+#	Copyright 2024 Degenerate Games
+#
+#	Licensed under the Apache License, Version 2.0 (the "License");
+#	you may not use this file except in compliance with the License.
+#	You may obtain a copy of the License at
+#
+#		http://www.apache.org/licenses/LICENSE-2.0
+#
+#	Unless required by applicable law or agreed to in writing, software
+#	distributed under the License is distributed on an "AS IS" BASIS,
+#	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#	See the License for the specific language governing permissions and
+#	limitations under the License.
+
 extends CharacterBody2D
 
 @export var max_speed: int = 100
 @export var acceleration: int = 500
 @export_range(0, 9) var total_power: int = 8
 @export_range(0, 1) var push_back_scale: float = 1
+@export var drop_rates: DropRates
 var power_remaining: int
 var target: Node2D
 var red: ColorValue
@@ -36,7 +51,7 @@ func _ready():
 	min_scale = Vector2(0.3, 0.3)
 	max_scale = scale
 	target_scale = scale
-	
+  
 	# Initialize the color values
 	red = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
 	power_remaining -= red.value
@@ -44,7 +59,7 @@ func _ready():
 	power_remaining -= green.value
 	blue = ColorValue.new(min(power_remaining, 3), 3)
 	power_remaining = total_power
-	
+
 	# Set the color of the point light
 	var color = Color(red.normalize(), green.normalize(), blue.normalize())
 	aura.color = color
@@ -53,7 +68,7 @@ func _ready():
 func _process(_delta):
 	update_aura_strength()
 	if not damage_timer.is_stopped():
-		scale = lerp(scale, target_scale,remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
+		scale = lerp(scale, target_scale, remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
 
 func _physics_process(delta):
 	if not damage_timer.is_stopped():
@@ -64,29 +79,25 @@ func _physics_process(delta):
 		var direction = to_local(navigation_agent.get_next_path_position()).normalized()
 		velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
 	move_and_slide()
-	
+  
 func take_damage(damage: int):
 	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
 		var r = randf()
-		var drop
-		if r < 0.3:
-			drop = load("res://scenes/items/shadow.tscn").instantiate()
-		elif r < 0.55:
-			drop = load("res://scenes/items/health_powerup.tscn").instantiate()
-		elif r < 0.6:
-			drop = load("res://scenes/items/aura_powerup.tscn").instantiate()
-		if drop:
-			drop.global_position = global_position
-			get_parent().add_child(drop)
+		for drop in drop_rates.drop_rates:
+			if r < drop.drop_rate:
+				var d = drop.scene.instantiate()
+				d.global_position = global_position
+				get_parent().add_child(d)
+			r = randf()
 		queue_free()
 		return
 	# Otherwise, subtract the damage
 	power_remaining -= damage
 	damage_timer.start()
 	target_scale = lerp(min_scale, max_scale, float(power_remaining) / total_power)
-	
-	
+  
+  
 func set_target(tgt):
 	target = tgt
 	create_path()
@@ -138,12 +149,12 @@ func _on_aura_pulse_timer_timeout():
 	pulsed = false
 
 
-func _on_area_2d_body_entered(body:Node2D):
+func _on_area_2d_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		touching_player = true
 
 
-func _on_area_2d_body_exited(body:Node2D):
+func _on_area_2d_body_exited(body: Node2D):
 	if body.is_in_group("player"):
 		touching_player = false
 

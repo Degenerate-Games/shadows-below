@@ -1,7 +1,31 @@
-[gd_scene load_steps=16 format=3 uid="uid://d1hdogc6puoae"]
+[gd_scene load_steps=25 format=3 uid="uid://d1hdogc6puoae"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_tu6r2"]
+[ext_resource type="PackedScene" uid="uid://b81nwu66vrkt5" path="res://scenes/items/aura_powerup.tscn" id="2_mv1js"]
 [ext_resource type="Texture2D" uid="uid://dy2mv22rnnd4l" path="res://assets/sprites/emenies/light3_idle.png" id="2_y1mji"]
+[ext_resource type="Script" path="res://scripts/items/item.gd" id="3_3yktr"]
+[ext_resource type="PackedScene" uid="uid://do538bnebafup" path="res://scenes/items/health_powerup.tscn" id="4_1g6vx"]
+[ext_resource type="PackedScene" uid="uid://dwkxmxf0odygy" path="res://scenes/items/shadow.tscn" id="5_mpxop"]
+[ext_resource type="Script" path="res://scripts/items/drop_rates.gd" id="6_yhbdu"]
+
+[sub_resource type="Resource" id="Resource_2eh3h"]
+script = ExtResource("3_3yktr")
+scene = ExtResource("2_mv1js")
+drop_rate = 0.09
+
+[sub_resource type="Resource" id="Resource_fci34"]
+script = ExtResource("3_3yktr")
+scene = ExtResource("4_1g6vx")
+drop_rate = 0.2
+
+[sub_resource type="Resource" id="Resource_1iemh"]
+script = ExtResource("3_3yktr")
+scene = ExtResource("5_mpxop")
+drop_rate = 0.3
+
+[sub_resource type="Resource" id="Resource_4h03n"]
+script = ExtResource("6_yhbdu")
+drop_rates = Array[ExtResource("3_3yktr")]([SubResource("Resource_2eh3h"), SubResource("Resource_fci34"), SubResource("Resource_1iemh")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_meb0c"]
 atlas = ExtResource("2_y1mji")
@@ -93,6 +117,7 @@ script = ExtResource("1_tu6r2")
 max_speed = 30
 total_power = 9
 push_back_scale = 0.2
+drop_rates = SubResource("Resource_4h03n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
