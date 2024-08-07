@@ -28,6 +28,7 @@ var aura_pulse_timer: Timer
 var affected_enemies: Array[Node3D]
 var affected_interactables: Array[Node3D]
 var base_aura_energy: float
+var rope: Rope3D
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var health: float
 var pulsed: bool
@@ -38,6 +39,9 @@ signal shadow_collected
 func _ready():
 	aura = $OmniLight3D
 	aura_pulse_timer = $AuraPulseTimer
+	rope = $Rope3D
+	if rope.can_make():
+		rope.make()
 	update_aura_pulse_timer()
 	aura_pulse_timer.start()
 	base_aura_energy = aura.light_energy

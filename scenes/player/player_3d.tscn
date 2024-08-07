@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bycm4lkpx8o7e"]
+[gd_scene load_steps=13 format=3 uid="uid://bycm4lkpx8o7e"]
 
-[ext_resource type="Script" path="res://scripts/player_3d.gd" id="1_jr35w"]
+[ext_resource type="Script" path="res://scripts/player/player_3d.gd" id="1_jr35w"]
 [ext_resource type="AudioStream" uid="uid://diwc70mdqqiua" path="res://assets/audio/sfx/pickupHealth.mp3" id="3_w8uqb"]
 [ext_resource type="AudioStream" uid="uid://d2jjuvhx572av" path="res://assets/audio/sfx/pickupAura.mp3" id="4_0wpfk"]
 [ext_resource type="AudioStream" uid="uid://74c868mibah0" path="res://assets/audio/sfx/pickupShadow.mp3" id="5_s0lhv"]
 [ext_resource type="AudioStream" uid="uid://dipg8ls5stxbo" path="res://assets/audio/sfx/playerAuraHit_1.mp3" id="6_2yuev"]
+[ext_resource type="PackedScene" uid="uid://dr7d4n3xrpv7n" path="res://scenes/player/lantern.tscn" id="7_lqpdj"]
 [ext_resource type="AudioStream" uid="uid://uwmp4hirc7v" path="res://assets/audio/sfx/enemyHit.mp3" id="7_rnh20"]
+[ext_resource type="PackedScene" uid="uid://cxcrxm8x8terr" path="res://addons/rope3d/Rope3D.tscn" id="8_kgksh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_votqm"]
 
@@ -14,6 +16,8 @@ height = 1.0
 radius = 3.304
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sgx52"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_37md2"]
 
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 8
@@ -66,10 +70,34 @@ stream = ExtResource("7_rnh20")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_sgx52")
 
+[node name="RightArm" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.282843, -0.282843, 0, 0.282843, 0.282843, 0, 0.25, -0.5)
+mesh = SubResource("CapsuleMesh_37md2")
+
+[node name="LeftArm" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.282843, 0.282843, 0, -0.282843, 0.282843, 0, 0.25, 0.5)
+mesh = SubResource("CapsuleMesh_37md2")
+
+[node name="Hand" type="Node3D" parent="MeshInstance3D/LeftArm"]
+transform = Transform3D(2.5, 0, 0, 0, 1.76777, -1.76777, 0, 1.76777, 1.76777, 0, -0.976813, -0.0656443)
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.866025, -0.383022, 0.321394, 0, 0.642788, 0.766044, -0.5, -0.663414, 0.556671, 5, 14, 8)
 size = 20.0
 near = 0.001
+
+[node name="Rope3D" parent="." node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("8_kgksh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887122, 0.722132)
+segment_length = 0.001
+start_point = NodePath("../MeshInstance3D/LeftArm/Hand")
+end_point = NodePath("../LanternTop")
+radius = 0.01
+
+[node name="LanternTop" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.864845, 0.73113)
+
+[node name="Lantern" parent="LanternTop" instance=ExtResource("7_lqpdj")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [connection signal="area_entered" from="AuraArea" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="AuraArea" to="." method="_on_area_2d_area_exited"]
