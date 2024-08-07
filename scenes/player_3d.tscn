@@ -22,6 +22,7 @@ script = ExtResource("1_jr35w")
 metadata/_edit_group_ = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 omni_range = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -65,9 +66,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_sgx52")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.866025, -0.383022, 0.321394, 0, 0.642788, 0.766044, -0.5, -0.663414, 0.556671, 3, 11, 5)
+transform = Transform3D(0.866025, -0.383022, 0.321394, 0, 0.642788, 0.766044, -0.5, -0.663414, 0.556671, 5, 14, 8)
 projection = 1
 size = 20.0
+near = 0.001
 
 [connection signal="area_entered" from="AuraArea" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="AuraArea" to="." method="_on_area_2d_area_exited"]
