@@ -1,206 +1,310 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvxya8ddaaw45"]
+[gd_scene load_steps=11 format=3 uid="uid://cvxya8ddaaw45"]
 
 [ext_resource type="Material" uid="uid://c40dyj0jy6ef" path="res://assets/materials/wall.tres" id="1_84ibq"]
-[ext_resource type="Material" uid="uid://cc5t81jgneqls" path="res://assets/materials/dirtHalf.tres" id="2_8v3t5"]
+[ext_resource type="Material" path="res://assets/materials/dirtHalf.tres" id="2_8v3t5"]
 [ext_resource type="Material" uid="uid://ccy3bckurnj8p" path="res://assets/materials/dirt.tres" id="3_2vvk3"]
 [ext_resource type="ArrayMesh" uid="uid://c7bq1idnubnmy" path="res://assets/meshes/stoneWall.obj" id="4_0wrg2"]
 [ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/player_3d.tscn" id="4_hgbm0"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1n2sc"]
-material = ExtResource("2_8v3t5")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tkw1n"]
 lightmap_size_hint = Vector2i(7, 7)
 material = ExtResource("2_8v3t5")
 size = Vector2(1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_5swl7"]
-size = Vector3(3, 0.5, 3)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_s2jtb"]
+points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cqosh"]
-size = Vector3(30, 1, 22)
+[sub_resource type="PlaneMesh" id="PlaneMesh_1n2sc"]
+material = ExtResource("2_8v3t5")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hmk7h"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y0hmh"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8kd5h"]
-size = Vector3(70, 13, 3)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4g3kp"]
+points = PackedVector3Array(0.612328, -1e-06, -5.62036, 1.36208, -1e-06, -5.62036, 0, -1e-06, -5.00089, 0.612328, 5.89997, -5.62036, 1.36208, 5.89997, -5.62036, 1.97441, -1e-06, -5.00089, 0, 5.89997, -5.00089, 0, -1e-06, 4.99979, 0.705299, 6.01521, -5.42231, 0.499836, 6.1, -5.00089, 1.26911, 6.01521, -5.42231, 1.47457, 6.1, -5.00089, 1.97441, 5.89997, -5.00089, 1.9746, -1e-06, 2.39977, 0, 5.89997, 4.99979, 0.612328, -1e-06, 5.62036, 0.499836, 6.1, 4.99979, 1.47457, 6.1, 4.99979, 1.9746, 5.89997, 3.89948, 1.9746, 1.89998, 2.59892, 1.9746, -1e-06, 4.99979, 0.612328, 5.89997, 5.62036, 1.36208, -1e-06, 5.62036, 0.705299, 6.01521, 5.42121, 1.26911, 6.01521, 5.42121, 1.36208, 5.89997, 5.62036, 1.9746, 5.89997, 4.99979)
 
 [node name="3dTestLevel" type="Node3D"]
 
-[node name="environment" type="Node" parent="."]
+[node name="Environment" type="Node" parent="."]
 
-[node name="Node" type="Node" parent="environment"]
+[node name="Ground" type="Node" parent="Environment"]
 
-[node name="Ground" type="StaticBody3D" parent="environment"]
-collision_mask = 24
-
-[node name="ramp" type="MeshInstance3D" parent="environment/Ground"]
-transform = Transform3D(12.0741, 3.23524, 0, -3.23524, 12.0741, 0, 0, 0, 12.5, -12.9894, 2.95448, 0.0225582)
-mesh = SubResource("PlaneMesh_1n2sc")
-
-[node name="floor" type="MeshInstance3D" parent="environment/Ground"]
+[node name="Floor" type="StaticBody3D" parent="Environment/Ground"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+collision_mask = 24
+metadata/_edit_group_ = true
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Environment/Ground/Floor"]
 material_override = ExtResource("3_2vvk3")
 mesh = SubResource("PlaneMesh_tkw1n")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="floorCol" type="CollisionShape3D" parent="environment/Ground"]
-transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -6.25, 0)
-shape = SubResource("BoxShape3D_5swl7")
+[node name="FloorCollider" type="CollisionShape3D" parent="Environment/Ground/Floor"]
+shape = SubResource("ConvexPolygonShape3D_s2jtb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="environment/Ground"]
-transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -14.5, 2.8, -0.5)
-shape = SubResource("BoxShape3D_cqosh")
+[node name="Ramp" type="StaticBody3D" parent="Environment/Ground"]
+transform = Transform3D(12.0741, 3.23524, 0, -3.23524, 12.0741, 0, 0, 0, 12.5, -12.9894, 2.95448, 0.0225582)
+collision_mask = 24
+metadata/_edit_group_ = true
+
+[node name="RampMesh" type="MeshInstance3D" parent="Environment/Ground/Ramp"]
+mesh = SubResource("PlaneMesh_1n2sc")
+
+[node name="RampCollider" type="CollisionShape3D" parent="Environment/Ground/Ramp"]
+shape = SubResource("ConvexPolygonShape3D_y0hmh")
+
+[node name="Walls" type="Node" parent="Environment"]
+
+[node name="LitWall" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 5.916, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall2" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 5.916, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall2"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall2/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall2"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall3" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 5.916, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall3"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall3/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall3"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall4" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall4"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall4/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall4"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall5" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 5.916, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall5"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall5/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall5"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall6" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall6"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall6/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall6"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall7" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 5.916, -12.3763)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall7"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall7/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall7"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall8" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -12.3763)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall8"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall8/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall8"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall9" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13, 5.916, -12.3763)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall9"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall9/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall9"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall11" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 5.916, -12.376)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall11"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall11/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall11"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall12" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 5.916, -12.376)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall12"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall12/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall12"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="LitWall10" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13, 0, -12.3763)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall10"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallLight" type="OmniLight3D" parent="Environment/Walls/LitWall10/WallMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+light_energy = 3.0
+omni_range = 20.0
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/LitWall10"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="Wall" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/Wall"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="Wall2" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, 12.429)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall2"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/Wall2"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="Wall3" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 0, -12.376)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall3"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/Wall3"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
+
+[node name="Wall4" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 0, -12.376)
+metadata/_edit_group_ = true
+
+[node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall4"]
+material_override = ExtResource("1_84ibq")
+mesh = ExtResource("4_0wrg2")
+skeleton = NodePath("../../../..")
+
+[node name="WallCollider" type="CollisionShape3D" parent="Environment/Walls/Wall4"]
+shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="Player3D" parent="." instance=ExtResource("4_hgbm0")]
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3, 0)
-disable_mode = 2
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-physics_material_override = SubResource("PhysicsMaterial_hmk7h")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3, 10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 3, 10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11, 3, 10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, -10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, 3, -10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16, 9, 10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 9, -10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -27, 9, 10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -27, 9, -10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22, 3, 10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22, 3, -10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 3, -10)
-material_override = ExtResource("1_84ibq")
-mesh = ExtResource("4_0wrg2")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="RigidBody3D/MeshInstance3D6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
-light_energy = 3.0
-omni_range = 20.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 9, -11)
-shape = SubResource("BoxShape3D_8kd5h")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 11)
-shape = SubResource("BoxShape3D_8kd5h")
