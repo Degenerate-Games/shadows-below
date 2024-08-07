@@ -31,7 +31,7 @@ points = PackedVector3Array(0.612328, -1e-06, -5.62036, 1.36208, -1e-06, -5.6203
 
 [node name="Floor" type="StaticBody3D" parent="Environment/Ground"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
-collision_mask = 24
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="FloorMesh" type="MeshInstance3D" parent="Environment/Ground/Floor"]
@@ -44,7 +44,7 @@ shape = SubResource("ConvexPolygonShape3D_s2jtb")
 
 [node name="Ramp" type="StaticBody3D" parent="Environment/Ground"]
 transform = Transform3D(12.0741, 3.23524, 0, -3.23524, 12.0741, 0, 0, 0, 12.5, -12.9894, 2.95448, 0.0225582)
-collision_mask = 24
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="RampMesh" type="MeshInstance3D" parent="Environment/Ground/Ramp"]
@@ -57,6 +57,8 @@ shape = SubResource("ConvexPolygonShape3D_y0hmh")
 
 [node name="LitWall" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 5.916, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall"]
@@ -74,6 +76,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall2" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 5.916, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall2"]
@@ -91,6 +95,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall3" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 5.916, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall3"]
@@ -108,6 +114,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall4" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall4"]
@@ -125,6 +133,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall5" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 5.916, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall5"]
@@ -142,6 +152,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall6" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall6"]
@@ -159,6 +171,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall7" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 5.916, -12.3763)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall7"]
@@ -176,6 +190,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall8" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -12.3763)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall8"]
@@ -193,6 +209,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall9" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13, 5.916, -12.3763)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall9"]
@@ -210,6 +228,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall11" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 5.916, -12.376)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall11"]
@@ -227,6 +247,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall12" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 5.916, -12.376)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall12"]
@@ -244,6 +266,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="LitWall10" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13, 0, -12.3763)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/LitWall10"]
@@ -261,6 +285,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="Wall" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall"]
@@ -273,6 +299,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="Wall2" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, 12.429)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall2"]
@@ -285,6 +313,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="Wall3" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 0, -12.376)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall3"]
@@ -297,6 +327,8 @@ shape = SubResource("ConvexPolygonShape3D_4g3kp")
 
 [node name="Wall4" type="StaticBody3D" parent="Environment/Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 0, -12.376)
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="WallMesh" type="MeshInstance3D" parent="Environment/Walls/Wall4"]
