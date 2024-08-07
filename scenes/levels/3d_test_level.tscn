@@ -4,7 +4,7 @@
 [ext_resource type="Material" path="res://assets/materials/dirtHalf.tres" id="2_8v3t5"]
 [ext_resource type="Material" uid="uid://ccy3bckurnj8p" path="res://assets/materials/dirt.tres" id="3_2vvk3"]
 [ext_resource type="ArrayMesh" uid="uid://c7bq1idnubnmy" path="res://assets/meshes/stoneWall.obj" id="4_0wrg2"]
-[ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/player_3d.tscn" id="4_hgbm0"]
+[ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/player/player_3d.tscn" id="4_hgbm0"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tkw1n"]
 lightmap_size_hint = Vector2i(7, 7)
