@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dcubaepqrsoa2"]
+
+[ext_resource type="Texture2D" uid="uid://t5d554ajhveo" path="res://assets/textures/grids/redBox.png" id="1_d488e"]
+
+[resource]
+albedo_texture = ExtResource("1_d488e")
+uv1_triplanar = true
