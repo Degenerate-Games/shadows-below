@@ -1,11 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgww053qoe1qb"]
+[gd_scene load_steps=9 format=3 uid="uid://dgww053qoe1qb"]
 
 [ext_resource type="Material" uid="uid://d1ao2b8l3arqi" path="res://assets/materials/grids/blueGrid.tres" id="1_lqubw"]
 [ext_resource type="Material" uid="uid://3n7d3n5y6lt8" path="res://assets/materials/grids/greyGrid.tres" id="2_on3y8"]
 [ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/player_3d.tscn" id="3_3cw6b"]
 [ext_resource type="Material" uid="uid://dcubaepqrsoa2" path="res://assets/materials/grids/redGrid.tres" id="3_fxmlb"]
 
+[sub_resource type="Environment" id="Environment_m0qvq"]
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+glow_strength = 0.6
+glow_bloom = 0.5
+glow_blend_mode = 1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13wwq"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 23.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ya4p"]
+material = SubResource("StandardMaterial3D_13wwq")
+
+[sub_resource type="FogMaterial" id="FogMaterial_ukorq"]
+emission = Color(2.40654e-08, 0.351875, 0.211104, 1)
+edge_fade = 1.39288
+
 [node name="GreyBoxTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m0qvq")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -201,7 +227,71 @@ polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 1, 1, 6, -1.2, 0, -1.2)
 material = ExtResource("2_on3y8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, 0, 10.8796, 0)
+transform = Transform3D(-0.173648, -0.984808, 4.37114e-08, 7.5904e-09, 4.30473e-08, 1, -0.984808, 0.173648, 1.91069e-15, 0, 20, 0)
+light_energy = 0.1
 
 [node name="Player3D" parent="." instance=ExtResource("3_3cw6b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 20)
+omni_range = 6.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 20)
+omni_range = 6.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, -4)
+omni_range = 6.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, -4)
+omni_range = 6.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 7, -4)
+omni_range = 6.0
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 19)
+omni_range = 6.0
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3, 23)
+omni_range = 6.0
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 3, 23)
+omni_range = 6.0
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, 18)
+omni_range = 6.0
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, 10)
+omni_range = 6.0
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 3, 0)
+omni_range = 6.0
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3, -4)
+omni_range = 6.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, -5)
+mesh = SubResource("BoxMesh_2ya4p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, -5)
+mesh = SubResource("BoxMesh_2ya4p")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -2, 9)
+size = Vector3(14, 3, 31)
+material = SubResource("FogMaterial_ukorq")
