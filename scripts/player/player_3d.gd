@@ -39,9 +39,6 @@ signal shadow_collected
 func _ready():
 	aura = $OmniLight3D
 	aura_pulse_timer = $AuraPulseTimer
-	rope = $Rope3D
-	if rope.can_make():
-		rope.make()
 	update_aura_pulse_timer()
 	aura_pulse_timer.start()
 	base_aura_energy = aura.light_energy
