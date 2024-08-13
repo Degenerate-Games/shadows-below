@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://3n7d3n5y6lt8" path="res://assets/materials/grids/greyGrid.tres" id="1_xd1af"]
 [ext_resource type="Material" uid="uid://d1ao2b8l3arqi" path="res://assets/materials/grids/blueGrid.tres" id="2_6y52p"]
-[ext_resource type="PackedScene" uid="uid://bycm4lkpx8o7e" path="res://scenes/player_3d.tscn" id="4_yegci"]
+[ext_resource type="PackedScene" uid="uid://y3ntnmnn1s1l" path="res://scenes/player_3d.tscn" id="4_yegci"]
 
 [sub_resource type="Environment" id="Environment_m0qvq"]
 ssil_enabled = true
