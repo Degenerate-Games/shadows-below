@@ -22,7 +22,7 @@ extends CharacterBody3D
 @export_range(0, 4) var aura_pulse_speed_idx: float = 0 ## How many times per second the aura will pulse
 @export var max_health: float = 5 ## The maximum health the player can have
 
-var aura: OmniLight3D
+var aura: SpotLight3D
 var aura_pulse_timer: Timer
 
 var affected_enemies: Array[Node3D]
@@ -36,7 +36,7 @@ signal shadow_collected
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	aura = $OmniLight3D
+	aura = $SpotLight3D
 	aura_pulse_timer = $AuraPulseTimer
 	update_aura_pulse_timer()
 	aura_pulse_timer.start()
@@ -47,9 +47,9 @@ func _ready():
 	pulsed = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(_delta):
-	#update_aura_strength()
-	#update_health_bar()
+func _process(_delta):
+	update_aura_strength()
+	# update_health_bar()
 
 func _physics_process(delta):
 	handle_movement(delta)
