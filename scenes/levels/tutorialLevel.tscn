@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dt2ydsa0fblax"]
+[gd_scene load_steps=15 format=3 uid="uid://dt2ydsa0fblax"]
 
 [ext_resource type="Material" uid="uid://3n7d3n5y6lt8" path="res://assets/materials/grids/greyGrid.tres" id="1_xd1af"]
 [ext_resource type="Material" uid="uid://d1ao2b8l3arqi" path="res://assets/materials/grids/blueGrid.tres" id="2_6y52p"]
+[ext_resource type="PackedScene" uid="uid://kxg3p1p582jg" path="res://scenes/enemies/enemy_3d.tscn" id="4_krxy4"]
 [ext_resource type="PackedScene" uid="uid://y3ntnmnn1s1l" path="res://scenes/player_3d.tscn" id="4_yegci"]
 
 [sub_resource type="Environment" id="Environment_m0qvq"]
@@ -961,3 +962,6 @@ omni_range = 13.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53, -3, -166)
 size = Vector3(86, 10.8455, 143)
 material = SubResource("FogMaterial_5xuqj")
+
+[node name="Enemy3D" parent="." instance=ExtResource("4_krxy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.568031, -2.38419e-07, -1.07405)
