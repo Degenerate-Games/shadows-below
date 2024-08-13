@@ -26,8 +26,8 @@ gdscript/warnings/integer_division=0
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1024
+window/size/viewport_height=576
 window/stretch/mode="viewport"
 
 [dotnet]
@@ -128,11 +128,10 @@ bake={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1
 textures/vram_compression/import_etc2_astc=true
 global_illumination/gi/use_half_resolution=true
-environment/ssil/quality=0
-environment/glow/upscale_mode=0
-global_illumination/sdfgi/probe_ray_count=0
-global_illumination/sdfgi/frames_to_converge=0
-global_illumination/sdfgi/frames_to_update_lights=0
+textures/decals/filter=0
+textures/light_projectors/filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 0)
