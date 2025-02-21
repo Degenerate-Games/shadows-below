@@ -37,6 +37,7 @@ var animation_controller: AnimatedSprite2D
 var damage_timer: Timer
 var navigation_agent: NavigationAgent2D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pulsed = false
@@ -51,7 +52,7 @@ func _ready():
 	min_scale = Vector2(0.3, 0.3)
 	max_scale = scale
 	target_scale = scale
-  
+
 	# Initialize the color values
 	red = ColorValue.new(floor(randf_range(0, min(power_remaining, 3))), 3)
 	power_remaining -= red.value
@@ -65,21 +66,28 @@ func _ready():
 	aura.color = color
 	animation_controller.self_modulate = color
 
+
 func _process(_delta):
 	update_aura_strength()
 	if not damage_timer.is_stopped():
-		scale = lerp(scale, target_scale, remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1))
+		scale = lerp(
+			scale, target_scale, remap(damage_timer.time_left, 0, damage_timer.wait_time, 0, 1)
+		)
+
 
 func _physics_process(delta):
 	if not damage_timer.is_stopped():
-		velocity = (global_position - target.global_position).normalized() * max_speed * push_back_scale
+		velocity = (
+			(global_position - target.global_position).normalized() * max_speed * push_back_scale
+		)
 	else:
 		if navigation_agent.is_navigation_finished():
 			return
 		var direction = to_local(navigation_agent.get_next_path_position()).normalized()
 		velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
 	move_and_slide()
-  
+
+
 func take_damage(damage: int):
 	# If damage would kill this enemy, destroy it and spawn a shadow
 	if damage > power_remaining:
@@ -96,19 +104,22 @@ func take_damage(damage: int):
 	power_remaining -= damage
 	damage_timer.start()
 	target_scale = lerp(min_scale, max_scale, float(power_remaining) / total_power)
-  
-  
+
+
 func set_target(tgt):
 	target = tgt
 	create_path()
+
 
 func create_path():
 	if not target:
 		return
 	navigation_agent.target_position = target.global_position
 
+
 func get_color() -> Color:
 	return aura.color
+
 
 func set_color(r: ColorValue, g: ColorValue, b: ColorValue):
 	red = r
@@ -116,6 +127,7 @@ func set_color(r: ColorValue, g: ColorValue, b: ColorValue):
 	blue = b
 	aura.color = Color(red.normalize(), green.normalize(), blue.normalize())
 	animation_controller.self_modulate = aura.color
+
 
 func update_aura_strength():
 	if not aura:
@@ -133,13 +145,16 @@ func update_aura_strength():
 		pulse_aura()
 	aura.energy = base_aura_energy * pulse
 
+
 func pulse_aura():
 	damage_player()
+
 
 func damage_player():
 	if not touching_player:
 		return
 	get_tree().call_group("player", "take_damage", 0.5)
+
 
 func _on_timer_timeout():
 	create_path()

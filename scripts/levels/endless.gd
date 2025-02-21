@@ -16,6 +16,7 @@ extends Node2D
 
 var difficulty: int = 5
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
@@ -24,6 +25,7 @@ func _ready():
 	player.handle_color_change(hud.get_node("ColorMixingUI").get_color())
 	player.shadow_collected.connect(hud.get_node("ColorMixingUI")._on_shadow_collected)
 	add_child(generate_room())
+
 
 # func _process(_delta):
 # 	if Input.is_action_just_pressed("reload"):
@@ -34,11 +36,13 @@ func _ready():
 # 	if Input.is_action_just_pressed("bake"):
 # 		get_tree().call_group("navigation_region", "bake_navigation_polygon")
 
+
 func generate_room() -> Node2D:
 	var room = LevelGenerator.generate_room(difficulty)
 	get_tree().get_first_node_in_group("HUD").get_node("LevelContainer").set_level(difficulty - 4)
 	difficulty += 1
 	return room
+
 
 func set_aura_pulse_level(level: int):
 	return
@@ -69,17 +73,22 @@ func set_aura_pulse_level(level: int):
 			if not $AudioLayers/CombatLead.is_playing():
 				$AudioLayers/CombatLead.play(song_position)
 
+
 func _on_combat_pads_finished():
 	$AudioLayers/CombatPads.play(0)
+
 
 func _on_combat_drums_finished():
 	$AudioLayers/CombatDrums.play(0)
 
+
 func _on_combat_lead_finished():
 	$AudioLayers/CombatLead.play(0)
 
+
 func _on_combat_sub_bass_finished():
 	$AudioLayers/CombatSubBass.play(0)
+
 
 func _on_combat_full_finished():
 	$AudioLayers/CombatFull.play(0)

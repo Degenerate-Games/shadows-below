@@ -12,15 +12,16 @@
 #	See the License for the specific language governing permissions and
 #	limitations under the License.
 
+class_name Global
 extends Resource
 
-class_name Global
 
 static func get_first_child_in_group(parent: Node, group: String) -> Node:
 	for child in parent.get_children():
 		if child.is_in_group(group):
 			return child
 	return null
+
 
 static func get_children_in_group(parent: Node, group: String) -> Array[Node]:
 	var children = []

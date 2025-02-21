@@ -14,6 +14,8 @@
 
 extends Area2D
 
+signal key_unlocked
+
 @export_range(0, 9) var key_power: int = 3
 
 var red: ColorValue
@@ -23,23 +25,23 @@ var blue: ColorValue
 var unlocked = false
 var spawn_count = 0
 
-signal key_unlocked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var power_remaining = key_power
-	
+
 	# Initialize the color values
 	red = ColorValue.new(randi_range(0, min(power_remaining, 3)), 3)
 	power_remaining -= red.value
 	green = ColorValue.new(randi_range(0, min(power_remaining, 3)), 3)
 	power_remaining -= green.value
 	blue = ColorValue.new(min(power_remaining, 3), 3)
-	
+
 	# Set the color of the point light
 	var color = Color(red.normalize(), green.normalize(), blue.normalize())
 	$PointLight2D.color = color
 	$Sprite2D.self_modulate = color
+
 
 func interact():
 	key_power -= 1
@@ -51,8 +53,10 @@ func interact():
 		$AudioStreamPlayer.play(0)
 		return
 
+
 func get_color() -> Color:
 	return Color(red.normalize(), green.normalize(), blue.normalize())
+
 
 func _on_timer_timeout():
 	if unlocked:
@@ -68,6 +72,7 @@ func _on_timer_timeout():
 		else:
 			spawn_enemy(3)
 	spawn_count += 1
+
 
 func spawn_enemy(level: int):
 	var enemy: Node2D

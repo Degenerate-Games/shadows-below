@@ -19,6 +19,7 @@ extends Control
 func _ready():
 	$VBoxContainer/StartButton.grab_focus()
 
+
 func _on_start_button_pressed():
 	var mode_select = load("res://scenes/menus/mode_select.tscn").instantiate()
 	add_child(mode_select)

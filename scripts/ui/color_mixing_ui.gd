@@ -14,6 +14,7 @@
 
 extends Panel
 
+signal color_changed
 
 @export_category("Color Groups")
 @export var red_group: Control
@@ -26,11 +27,10 @@ extends Panel
 @export var available_charges: int
 @export var max_charges: int = 5
 
-signal color_changed
-
 var red_value: ColorValue = ColorValue.new(1, 3)
 var green_value: ColorValue = ColorValue.new(1, 3)
 var blue_value: ColorValue = ColorValue.new(1, 3)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,11 +41,13 @@ func _ready():
 	color_changed.emit(get_color())
 	available_charges = 0
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	available_charges = clamp(available_charges, 0, max_charges)
 	handle_input()
 	update_ui()
+
 
 func update_ui():
 	match red_value.value:
@@ -105,6 +107,7 @@ func update_ui():
 	for i in range(1, max_charges + 1):
 		available_group.get_node(str(i)).visible = i <= available_charges
 
+
 func handle_input():
 	if not delay_timer.is_stopped():
 		return
@@ -144,19 +147,24 @@ func handle_input():
 		blue_value.value = 0
 		changed = true
 
-
-	
 	if changed:
 		delay_timer.start()
 		color_changed.emit(get_color())
 		for node in get_tree().get_nodes_in_group("aura_powerup"):
 			node.modulate = get_color()
 
+
 func get_color() -> Color:
 	return Color(red_value.normalize(), green_value.normalize(), blue_value.normalize())
 
+
 func get_inverse_color() -> Color:
-	return Color(red_value.invert().normalize(), green_value.invert().normalize(), blue_value.invert().normalize())
+	return Color(
+		red_value.invert().normalize(),
+		green_value.invert().normalize(),
+		blue_value.invert().normalize()
+	)
+
 
 func _on_shadow_collected():
 	available_charges += 1
