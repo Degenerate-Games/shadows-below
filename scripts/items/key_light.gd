@@ -49,7 +49,7 @@ func interact():
 		$PointLight2D.enabled = false
 		unlocked = true
 		$ExplosiveParticle.emitting = true
-		emit_signal("key_unlocked")
+		key_unlocked.emit()
 		$AudioStreamPlayer.play(0)
 		return
 
